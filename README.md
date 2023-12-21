@@ -9,10 +9,10 @@ LuxeAssist specializes in providing high-quality personal and professional servi
 
 ## project members :
 
-Reef Zayed Alnofaiey (leader)
-Ebtesam Yousef Alshamrani
-Sarah Khalid Alhatlan
-Lama Abdullah Alothemen
+- Reef Zayed Alnofaiey (leader)
+- Ebtesam Yousef Alshamrani
+- Sarah Khalid Alhatlan
+- Lama Abdullah Alothemen
 
 
 
