@@ -2,7 +2,38 @@
 {% block title %} Contact {% endblock %}
 {% block content %}
 
+<section class="container">
 
-<h2>hi</h2>
+    <h1>Contact</h1>
+
+    <div class="row">
+
+    <div class="col-6">
+
+    <form action="{% url 'main:contact_view'  %}" method="POST">
+        {% csrf_token %}  
+       
+        <label >Content:</label>
+        <textarea  class="form-control" name="content"></textarea>
+         
+        {% for key, value in type.choices %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="{{key}}" value="{{value}}">
+                <label class="form-check-label" for="{{key}}">
+                {{value}}
+              </label>
+            </div>
+        {% endfor %}
+
+        
+        <input class="btn btn-primary mt-2" type="submit" value=" Send" />
+ 
+     </form>
+   </div> 
+ 
+</div> 
+</section>
+
+
 
 {% endblock %}
