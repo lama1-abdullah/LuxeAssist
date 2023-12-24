@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
+from .models import Payment
 
 # Create your views here.
 def home_view(request: HttpRequest):
@@ -15,3 +16,4 @@ def about_view(request: HttpRequest):
 def contact_view(request: HttpRequest):
 
     return render(request, "main/contact.html")
+
