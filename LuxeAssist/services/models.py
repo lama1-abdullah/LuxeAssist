@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 
 
 class TypeService(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    image=models.ImageField(upload_to="image/", default="image/default_TypeService.jpg")
+    image=models.ImageField(upload_to="image/", default="image/default_TypeService.jpeg")
     title=models.CharField(max_length=256,default="")
     description=models.TextField(default="")
 
