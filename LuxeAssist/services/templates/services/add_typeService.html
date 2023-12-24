@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Add Type Services {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <h5>Welcome</h5>
+    <div class="row">
+
+        <div class="col-5">
+            <form  action="{% url 'services:add_typeService_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+
+                <label>Image</label>
+                <input class="form-control" name="image" type="file"  accept="image/*"/>
+
+                <label>Title Service:</label>
+                <input class="form-control" name="title" type="text" minlength="4" required />
+
+                <label>Description:</label>
+                <input class="form-control" name="description" type="text" minlength="10" required />
+
+
+                <input class="btn btn-primary" type="submit" value="Add Service" />
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
