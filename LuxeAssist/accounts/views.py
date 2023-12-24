@@ -15,20 +15,18 @@ def register_page_view(request:HttpRequest):
             # Create a new user
             user = User.objects.create_user(
                 username=request.POST["username"],
+                first_name = request.POST["first_name"], 
+                last_name = request.POST["last_name"],
                 email=request.POST["email"],
                 password=request.POST["password"],
             )
+            user.save()
 
-            # Create a corresponding profile
             profile = Profile(
                 user=user,
-                avatar=request.FILES.get("avatar", ''),
-                city=request.POST.get("city", ''),
-                address=request.POST.get("address", ''),
-                phone_number=request.POST.get("phone_number", ''),
-                gender=request.POST.get("gender", ''),
-                nationality=request.POST.get("nationality", ''),
-                about=request.POST.get("about")
+                city=request.POST["city"],
+                address=request.POST["address"],
+                phone_number=request.POST["phone_number"],
             )
 
             profile.save()
@@ -39,9 +37,8 @@ def register_page_view(request:HttpRequest):
         except Exception as e:
             message = f"something went wrong {e}"
 
-    gender_choices = Profile.GENDER_CHOICES
 
-    return render(request, "accounts/register.html", {"message": message, "gender": gender_choices})
+    return render(request, "accounts/register.html", {"message": message})
 
 
 def login_page_view(request: HttpRequest):
@@ -62,7 +59,7 @@ def login_page_view(request: HttpRequest):
            message = "Please provide correct username and password"
 
 
-    return render(request, "accounts/login.html", {"message" : message , "gender":gender})
+    return render(request, "accounts/login.html", {"message" : message})
 
 
 def logout_page_view(request: HttpRequest):
@@ -76,11 +73,11 @@ def logout_page_view(request: HttpRequest):
 
 def user_profile_page_view(request: HttpRequest , user_id):
     try:
-        user = User.objects.get(id = user_id)
-    
+        user =User.objects.get(id = user_id)
+        
     except:
         return render(request ,"main/user_not_found.html")
-    
+        
     return render(request,"accounts/profile.html",{"user":user})
     
 
@@ -106,9 +103,9 @@ def update_profile_page_view(request: HttpRequest):
                 profile.city= request.POST["city"],
                 profile.address= request.POST["address"],
                 profile.phone_number= request.POST["phone_number"],
-                profile.gender = request.POST["gender"],
-                profile.nationality = request.POST["nationality"]
-                profile.about = request.POST["about"]
+                # profile.gender = request.POST["gender"],
+                # profile.nationality = request.POST["nationality"]
+                # profile.about = request.POST["about"]
                 profile.save()
 
                 return redirect("accounts:user_profile_page_view", user_id = request.user.id)
