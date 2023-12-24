@@ -9,9 +9,7 @@ from .models import TypeService
 def add_typeService_view(request:HttpRequest):
 
     if request.method=="POST":
-        new_service=TypeService(title=request.POST["title"],description=request.POST["description"])
-        if "image" in request.FILES:
-            new_service.image=request.FILES["image"]
+        new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
         new_service.save()
         return redirect("services:home_services_view")
         
