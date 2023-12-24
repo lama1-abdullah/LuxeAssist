@@ -1,0 +1,124 @@
+from django.shortcuts import render , redirect
+from django.http import HttpRequest , HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate , login , logout
+from .models import Profile
+from django.db import IntegrityError
+
+# Create your views here.
+
+def register_page_view(request:HttpRequest):
+    message = None
+
+    if request.method == "POST":
+        try:
+            # Create a new user
+            user = User.objects.create_user(
+                username=request.POST["username"],
+                email=request.POST["email"],
+                password=request.POST["password"],
+            )
+
+            # Create a corresponding profile
+            profile = Profile(
+                user=user,
+                avatar=request.FILES.get("avatar", ''),
+                city=request.POST.get("city", ''),
+                address=request.POST.get("address", ''),
+                phone_number=request.POST.get("phone_number", ''),
+                gender=request.POST.get("gender", ''),
+                nationality=request.POST.get("nationality", ''),
+                about=request.POST.get("about")
+            )
+
+            profile.save()
+
+            return redirect("accounts:login_page_view")
+        except IntegrityError as e:
+            message = f"Please select another username"
+        except Exception as e:
+            message = f"something went wrong {e}"
+
+    gender_choices = Profile.GENDER_CHOICES
+
+    return render(request, "accounts/register.html", {"message": message, "gender": gender_choices})
+
+
+def login_page_view(request: HttpRequest):
+    message = None
+
+    gender = Profile.GENDER_CHOICES
+
+    if request.method == "POST":
+        #firt : authenticate the user data
+        user = authenticate(request,username = request.POST["username"], password = request.POST["password"])
+
+        if user:
+            #second: login the user
+            login(request, user)
+            return redirect("main:home_view")
+        
+        else:
+           message = "Please provide correct username and password"
+
+
+    return render(request, "accounts/login.html", {"message" : message , "gender":gender})
+
+
+def logout_page_view(request: HttpRequest):
+    
+    #log out the user
+    if request.user.is_authenticated:
+        logout(request)    
+
+    return redirect("accounts:login_page_view")
+    
+
+def user_profile_page_view(request: HttpRequest , user_id):
+    try:
+        user = User.objects.get(id = user_id)
+    
+    except:
+        return render(request ,"main/user_not_found.html")
+    
+    return render(request,"accounts/profile.html",{"user":user})
+    
+
+def update_profile_page_view(request: HttpRequest):
+   message = None
+
+   if request.method == "POST":
+        
+        try:
+                
+            if request.user.is_authenticated:
+                user: User = request.user
+                user.first_name = request.POST["first_name"]
+                user.last_name = request.POST["last_name"]
+                user.email=request.POST["email"]
+                user.save()
+
+                profile : Profile = request.user.profile
+
+                if "avatar" in request.FILES:
+                    profile.avatar = request.FILES["avatar"]
+
+                profile.city= request.POST["city"],
+                profile.address= request.POST["address"],
+                profile.phone_number= request.POST["phone_number"],
+                profile.gender = request.POST["gender"],
+                profile.nationality = request.POST["nationality"]
+                profile.about = request.POST["about"]
+                profile.save()
+
+                return redirect("accounts:user_profile_page_view", user_id = request.user.id)
+                
+            else:
+                return redirect("accounts:login_page_view")
+
+        except Exception as e:
+            message = f"A typing error occurred {e}"
+
+            
+   return render(request, "accounts/update.html", {"message" : message})
+            
