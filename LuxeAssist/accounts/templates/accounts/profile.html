@@ -5,59 +5,50 @@
 
 {% block content %}
 <div class = "wrapper pages-content">
-<div class = "container">
+    <div class = "container">
 
-    <div class="row content d-flex flex-column align-items-center">
-        <h1 class = "mt-5">Profile</h1>
+        <div class="row content d-flex flex-column align-items-center">
+            <h1 class = "mt-5">Profile</h1>
 
-        <div class="col-3 review d-flex flex-column mb-5 w-50 align-items-center">
-        <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" />
+            <div class="col-3 review d-flex flex-column mb-5 w-50 align-items-center">
+            <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" />
 
-        <h2>Name:</h2>
-        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+            <h2>Name:</h2>
+            <h4>{{ user.first_name }} {{ user.last_name }}</h4>
 
-        <h2>Email:</h2>
-        <h4>{{ user.email }}</h4>
+            <h2>Email:</h2>
+            <h4>{{ user.email }}</h4>
 
-        <h2>City:</h2>
-        <h4>{{ user.profile.city}}</h4>
+            <h2>City:</h2>
+            <h4>{{ user.profile.city}}</h4>
 
-        <h2>Address:</h2>
-        <h4>{{ user.profile.address}}</h4>
+            <h2>Address:</h2>
+            <h4>{{ user.profile.address}}</h4>
 
-        <h2>Phone Number:</h2>
-        <h4>{{ user.profile.phone_number}}</h4>
+            <h2>Phone Number:</h2>
+            <h4>{{ user.profile.phone_number}}</h4>
 
-        <!-- <div class="mb-3">
-            <label for="gender" class="align-self-start"><h2>Gender:</h2></label>
-            <select name="gender" id="gender" class="form-select">
-                <option value="Male"> Male </option>
-                <option value="Female"> Female </option>
-                <option value="Other"> Other </option>
-            </select>
-        </div> -->
-        
-        <div class="mb-3">
-            <label for="gender" class="align-self-start"><h2>Gender:</h2></label>
-            <select name="gender" id="gender" class="form-select">
-                <option value="Male" {% if user.profile.gender == 'Male' %}selected{% endif %}> Male </option>
-                <option value="Female" {% if user.profile.gender == 'Female' %}selected{% endif %}> Female </option>
-                <option value="Other" {% if user.profile.gender == 'Other' %}selected{% endif %}> Other </option>
-            </select>
+            <div class="mb-3">
+                <label for="gender" class="align-self-start"><h2>Gender:</h2></label>
+                <select name="gender" id="gender" class="form-select">
+                    <option value="Male"> Male </option>
+                    <option value="Female"> Female </option>
+                    <option value="Other"> Other </option>
+                </select>
+            </div> 
+            
+            
+            <h2>Nationality:</h2>
+            <h4>{{ user.profile.nationality }}</h4>
+
+            <h2>Talk About Your Self:</h2>
+            <h4>{{ user.profile.about }}</h4>
+
+            <a href="{% url 'accounts:update_profile_page_view' %}" class="btn btn-secondary mt-3 mb-3 ">Update</a>
+            </div>
         </div>
-        
-        
-        <h2>Nationality:</h2>
-        <h4>{{ user.profile.nationality }}</h4>
 
-        <h2>Talk About Your Self:</h2>
-        <h4>{{ user.profile.about }}</h4>
 
-        <a href="{% url 'accounts:update_profile_page_view' user_id=user.id %}" class="btn btn-secondary mt-3 mb-3 ">Update</a>
-        </div>
     </div>
-
-
-</div>
 </div>
 {% endblock %}
