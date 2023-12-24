@@ -8,5 +8,4 @@ urlpatterns = [
    path("about/", views.about_view, name="about_view"),
    path("contact/", views.contact_view, name="contact_view"),
    path("payment/", views.payment_view, name="payment_view"),
-   
 ]
