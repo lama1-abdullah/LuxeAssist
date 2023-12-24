@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} detail  {% endblock %}
+{% block content  %}
+
+<div class = "container">
+    <div class = "row">
+        <div class = "col">
+            {{request.service.title}}
+            {{request.date}}
+            {{request.note}}
+            {{request.request_price}}
+        </div>
+
+    </div>
+    <div class = "row">
+        <div class = "col-4">
+            <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
+        </div>
+        <div class = "col-4">
+            <a class="dropdown-item" href="{% url 'request:cancel_request_view' request.id %}">Update</a>
+        </div>
+        <div class = "col-4">
+            <a class="dropdown-item" href="">Payment</a>
+        </div>
+        
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Price</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you want to update Price? {{ service.title }} 
+
+            <form action="{% url 'request:addRequest' service.id %}" method="POST" >
+                {% csrf_token %}
+                <label class =" mt-2">New Price:</label>
+                    <input class="form-control" name="orderTime" type="datetime-local" />
+                    <input type="submit" value="Update Price" class="btn btn-dark mt-2"/>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+</div>   
+ 
+    
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} All Requests  {% endblock %}
+{% block content  %}
+
+   
+      <h1>All Requests</h1>
+        <div class="row ">
+            {% if requests.count == 0 %}
+             <div class="alert alert-info">No order yet.</div>
+            {% endif %}
+             
+        </div>
+            
+           
+              
+              
+              
+              {% for request in requests %}
+            
+                  {{request.service.title}}
+                  {{request.service.description}}
+                  {{request.user.first_name}} {{request.user.last_name}}
+                  {{request.status}}
+                  
+                
+              {% endfor %}
+            
+     
+       
+   
+
+
+    
+
+{% endblock %}
