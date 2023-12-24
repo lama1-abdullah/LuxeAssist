@@ -9,18 +9,19 @@
     <div class="row">
 
     <div class="col-6">
+      
 
-    <form action="{% url 'main:payment_view'  %}" method="POST">
+    <form action="{% url 'main:payment_view' request.id %}" method="POST">
         {% csrf_token %}  
         <label>Full name:</label>
         <input class="form-control" type="text" name="full_name" placeholder="Full Name" required minlength="4" />
 
         
         <label>Method:</label>
-        <input class="form-control" type="number" name="method_card" placeholder="Method" required minlength="4" />
+        <input class="form-control" type="text" name="method_card" placeholder="Method" required minlength="4" />
         
         <label>Number:</label>
-        <input class="form-control" type="number" name="number_card" placeholder="Name" required minlength="4" />
+        <input class="form-control" type="text" name="number_card" placeholder="Name" required minlength="4" />
          
         <label >Expiration Date:</label>
         <input  class="form-control" name="expiration_date" type="date" />
