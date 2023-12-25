@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from django.http import HttpRequest , HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate , login , logout
 from .models import Profile
 from django.db import IntegrityError
@@ -18,10 +18,19 @@ def register_page_view(request:HttpRequest):
 
             profile = Profile(user=user, city=request.POST["city"], address=request.POST["address"], phone_number=request.POST["phone_number"])
             profile.save()
+
+            if "user" in request.GET:
+               #add to group
+               group_concerge, created = Group.objects.get_or_create(name="conceirge")
+
+               user.groups.add(group_concerge)
+
+
             return redirect("accounts:login_page_view")
         except IntegrityError as e:
            message = f"Please select another username"
         except Exception as e:
+          print(e)
           message = f"something went wrong {e}"
 
 

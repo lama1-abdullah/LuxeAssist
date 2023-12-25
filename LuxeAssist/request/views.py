@@ -26,7 +26,7 @@ def user_requests_view(request: HttpRequest):
       #  return render(request, "")
     
 
-def concierge_requests_view(request: HttpRequest):
+def concierge_requests_view(request: HttpRequest): 
    # try:
         
        requests = Request.objects.filter(user = request.user)
