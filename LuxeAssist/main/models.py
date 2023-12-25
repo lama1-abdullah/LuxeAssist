@@ -5,9 +5,12 @@ from request.models import  Request
 
 
 class Payment(models.Model):
+   categories= models.TextChoices("categories", ["Bank Card" ,"pay made ","App pay"])
+
+
    user=models.ForeignKey(User, on_delete=models.CASCADE)
-   request=models.ForeignKey(Request, on_delete=models.CASCADE)
-   method_card= models.CharField(max_length=2048)
+   requests=models.ForeignKey(Request, on_delete=models.CASCADE)
+   method_card= models.CharField(max_length=70, choices=categories.choices,default="Cultural")
    full_name= models.CharField(max_length=2048)
    number_card= models.PositiveIntegerField()
    expiration_date =models.DateField()

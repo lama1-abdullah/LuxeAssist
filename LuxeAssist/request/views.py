@@ -48,18 +48,28 @@ def admin_requests_view(request: HttpRequest):
        # return render(request, "")
    
 
-def request_details_view(request: HttpRequest):
+def request_details_view(request: HttpRequest,requset_id):
     
-    return render(request ,"request/request_details_view.html")
+    requests = Request.objects.get(id =requset_id) 
+
+
+    return render(request ,"request/request_details_view.html", {"requests":requests})
 
 
 def cancel_request_view(request: HttpRequest, requset_id):
     ## try:
-            request = Request.objects.get(id = requset_id)
-            request.delete()
-            return redirect("service:")
+            requests = Request.objects.get(id = requset_id)
+            requests.delete()
+            return redirect("services:home_services_view")
         
      ##except  Exception as e:
 
         ## return render(request, "")
 
+def update_price_view(request:HttpRequest, requests_id):
+
+    requests = Request.objects.get(id = requests_id)  
+    if request.method == "POST":
+        requests.request_price = request.POST["request_price"]
+        requests.save()
+        return redirect("request:request_details_view", requset_id = requests.id)

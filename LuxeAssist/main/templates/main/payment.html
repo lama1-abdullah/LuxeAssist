@@ -11,14 +11,19 @@
     <div class="col-6">
       
 
-    <form action="{% url 'main:payment_view'  %}" method="POST">
+    <form action="{% url 'main:payment_view' requests.id %}" method="POST">
         {% csrf_token %}  
         <label>Full name:</label>
         <input class="form-control" type="text" name="full_name" placeholder="Full Name" required minlength="4" />
 
-        
-        <label>Method:</label>
-        <input class="form-control" type="text" name="method_card" placeholder="Method" required minlength="4" />
+        {% for key , value in categories.choices %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="method_card" id="{{key}}" value="{{value}}">
+                        <label class="form-check-label" for="{{key}}">
+                            {{value}}
+                        </label>
+                    </div>
+                {% endfor %}
         
         <label>Number:</label>
         <input class="form-control" type="text" name="number_card" placeholder="Name" required minlength="4" />
