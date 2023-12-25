@@ -11,7 +11,7 @@
     <div class="col-6">
       
 
-    <form action="{% url 'main:payment_view' request.id %}" method="POST">
+    <form action="{% url 'main:payment_view'  %}" method="POST">
         {% csrf_token %}  
         <label>Full name:</label>
         <input class="form-control" type="text" name="full_name" placeholder="Full Name" required minlength="4" />
