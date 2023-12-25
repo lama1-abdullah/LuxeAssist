@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} All Type Services {% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+    <h3>Update </h3>
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <form action="{% url 'services:update_typeService_view' typeService.id %}"method="POST">
+                {% csrf_token %}
+              
+               
+                <label>Image</label>
+                <input class="form-control" name="image" type="file"  accept="image/*"/>
+
+                <label>Title Service:</label>
+                <input class="form-control" name="title" type="text" minlength="4" required />
+
+                <label>Description:</label>
+                <input class="form-control" name="description" type="text" minlength="10" required />
+
+
+                <input class="btn btn-primary" type="submit" value="Update Service" />
+            </form>
+
+{% endblock %}

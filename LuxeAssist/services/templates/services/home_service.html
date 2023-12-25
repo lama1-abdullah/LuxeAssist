@@ -13,7 +13,7 @@
         <div class="col-5">
             {% for service in typeService %}
                 <img src="{{service.image.url}}"/>
-                <h4>{{service.title}}</h4>
+                <a href="{% url 'services:details_typeService_view' service.id %}" ><h4>{{service.title}}</h4></a>
                 <h4>{{service.description}}</h4>
             {% endfor %}
         </div>
