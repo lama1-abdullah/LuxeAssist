@@ -18,7 +18,7 @@ def add_Request_view(request:HttpRequest, service_id):
 def user_requests_view(request: HttpRequest):
    # try:
         
-    requests = Request.objects.get(user= request.user)
+    requests = Request.objects.filter(user= request.user)
 
     return render(request, 'request/user_requests_view.html', {"requests" : requests})
     #except Exception as e:
@@ -29,9 +29,9 @@ def user_requests_view(request: HttpRequest):
 def concierge_requests_view(request: HttpRequest):
    # try:
         
-       request = Request.objects.filter(user = request.user)
+       requests = Request.objects.filter(user = request.user)
 
-       return render(request, 'request/concierge_requests_view.html', {"requests" : request})
+       return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
     #except Exception as e:
 
        # return render(request, "")
@@ -39,17 +39,19 @@ def concierge_requests_view(request: HttpRequest):
 
 def admin_requests_view(request: HttpRequest):
   # try: 
-      request = Request.objects.order_by('-createdAt')
+      requests = Request.objects.order_by('-date')
      
      
-      return render(request ,"request/admin_requests_view.html" , {"requests" : request})
+      return render(request ,"request/admin_requests_view.html" , {"requests" : requests})
    #except Exception as e:
 
        # return render(request, "")
    
 
 def request_details_view(request: HttpRequest):
-    pass 
+    
+    return render(request ,"request/request_details_view.html")
+
 
 def cancel_request_view(request: HttpRequest, requset_id):
     ## try:
