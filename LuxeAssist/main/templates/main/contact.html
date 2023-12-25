@@ -6,17 +6,17 @@
 
     <h1>Contact</h1>
 
-    <div class="row">
+    <div class="card-Contact">
+      
 
-    <div class="col-6">
 
-    <form action="{% url 'main:contact_view'  %}" method="POST">
+    <form action="{% url 'main:contact_view' %}" method="POST"  enctype="multipart/form-data">
         {% csrf_token %}  
        
         <label >Content:</label>
         <textarea  class="form-control" name="content"></textarea>
          
-        {% for key, value in type.choices %}
+        {% for key, value in categories.choices  %}
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="type" id="{{key}}" value="{{value}}">
                 <label class="form-check-label" for="{{key}}">
@@ -24,16 +24,12 @@
               </label>
             </div>
         {% endfor %}
-
-        
         <input class="btn btn-primary mt-2" type="submit" value=" Send" />
  
-     </form>
-   </div> 
+      </form>
+    </div> 
  
-</div> 
+  </div> 
+</div>
 </section>
-
-
-
 {% endblock %}
