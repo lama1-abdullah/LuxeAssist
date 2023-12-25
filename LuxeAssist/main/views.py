@@ -46,6 +46,5 @@ def payment_view(request: HttpRequest ,request_id):
 
 def not_found_view(request: HttpRequest):
 
-   
-    return render(request, "main/user_not_found.html")
+   return render(request, "main/user_not_found.html")
 
