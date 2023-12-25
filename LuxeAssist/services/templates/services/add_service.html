@@ -8,17 +8,17 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row mt-5">
 
         <div class="col-5">
-            <form action="{% url 'services:add_service_view' service.id %}" method="POST" class="d-flex flex-column gap-2">
+            <form action="{% url 'services:add_service_view' services.id %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 
                 <label>Title</label>
                 <input class="form-control" name="title" type="text" required minlength="4"/>
                 
                 <label>Description</label>
-                <input class="form-control" name="description_Servic" type="text" required minlength="10"/>
+                <input class="form-control" name="description" type="text" required minlength="10"/>
 
                 <label>Image</label>
                 <input class="form-control" name="image" type="file"  accept="image/*"/>
@@ -26,6 +26,8 @@
                 <label>Initial price</label>
                 <input class="form-control" name="initial_price" type="text" required />
                 
+
+                <input class="btn btn-primary" type="submit" value="Add Service" />
             </form>
 
         </div>

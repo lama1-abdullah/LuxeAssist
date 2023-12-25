@@ -20,13 +20,25 @@
         Edit  
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'services:delete_stable_views' typeService.id %}">Delete</a></li>
+        <li><a class="dropdown-item" href="{% url 'services:delete_services_views' typeService.id %}">Delete</a></li>
         <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' typeService.id %}">Update</a></li>
-       
+        <li><a class="dropdown-item" href="{% url 'services:add_service_view' typeService.id %}">Add consierge services</a></li>
       </ul>
     </div>
     
 
+    <div class="row">
+        <div class="col-5">
+            {% for services in services %}
+            <img src="{{services.image.url}}"/>
+                <a href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
+                <h4>{{services.description}}</h4>
+                <h5>{{services.initial_price}}</h5>
+            {% endfor %}
+
+
+        </div>
+    </div>
 </div>
 
 

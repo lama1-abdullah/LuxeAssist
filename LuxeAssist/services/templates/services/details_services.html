@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}  Services {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <img src="{{service.image.url}}"  width="600px" height="400px"/>
+            <h2>{{service.title}}</h2>
+            <h5>{{service.description}}</h5>
+            <h5>initial price: {{service.initial_price}}</h5>
+        </div>
+    </div>
+
+    
+    <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
+
+
+    <div class="dropdown p-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Edit  
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="">Delete</a></li>
+        <li><a class="dropdown-item" href="">Update</a></li>
+        <li><a class="dropdown-item" href="">Add consierge services</a></li>
+      </ul>
+    </div>
+    
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Order</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you want to request this service? {{ service.name }}
+
+            <form action="{% url 'request:add_Request_view' service.id %}" method="POST" >
+                {% csrf_token %}
+                    <label class =" mt-2">order time:</label>
+                    <input class="form-control" name="date" type="datetime-local" />
+
+                    <label class =" mt-2">note:</label>
+                    <textarea class="form-control" name="note"></textarea>
+
+                    <label>price</label>
+                    <input class="form-control" name="request_price" type="text" required />
+
+                    <input type="submit" value="Order" class="btn btn-dark mt-2"/>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+           
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
