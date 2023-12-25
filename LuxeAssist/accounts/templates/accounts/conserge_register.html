@@ -5,7 +5,7 @@
 {% block content %}
 <div class = "wrapper pages-content">
 <div class="row content d-flex flex-column align-items-center">
-    <h1>Register Page</h1>
+    <h1>Concerge Register Page</h1>
     <h3>Sign Up</h3>
     {% if message %}
     <div class="alert alert-danger" role="alert">
@@ -15,7 +15,7 @@
     <div class="col-6">
        
 
-        <form class="d-flex flex-column gap-1"  action="{% url 'accounts:register_page_view' %}" method="POST" enctype="multipart/form-data" >
+        <form class="d-flex flex-column gap-1"  action="{% url 'accounts:register_page_view' %}?user=concerge" method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
 
             <label class="align-self-start">User Name:</label>
@@ -45,7 +45,6 @@
 
 
             <input class="btn btn-secondary mt-3 mb-3" type="submit" value="Sign Up" />
-            <h6>Sign up as<a href="{% url 'accounts:conserge_register_page_view' %}">Conserge</a></h6>
         </form>
 
     </div>
