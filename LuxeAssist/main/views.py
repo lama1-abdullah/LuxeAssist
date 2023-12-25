@@ -18,30 +18,33 @@ def about_view(request: HttpRequest):
 
 def contact_view(request: HttpRequest):
 
-     if request.method=="POST":
+    if request.method=="POST":
 
-        contact=Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
+        contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
         contact.save()
+
         return redirect("main:home_view")
     
-     return render(request, "main/contact.html",{"contact":contact}) 
+    return render(request, "main/contact.html", {"categories": Contact.categories}) 
 
 
 
+def payment_view(request: HttpRequest ,request_id):
 
-
-def payment_view(request: HttpRequest):
-
-   # try:
-    #request=Request.objects.get(id=request_id)
+  #try:
+   # request=Request.objects.get(id=request_id)
+    
     if request.method=="POST":
         new_payment=Payment( request=request ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"],cvv=request.POST["cvv"])
         new_payment.save()
         return redirect("main:home_view")
-    #except:
+  #except:
         #return render(request, "main/user_not_found.html")
 
+    return render(request, "main/payment.html") 
 
-    return render(request, "main/payment.html",{"request":request}) 
 
+def not_found_view(request: HttpRequest):
+
+   return render(request, "main/user_not_found.html")
 
