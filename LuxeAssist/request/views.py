@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import Request
+from .models import Request 
 from services.models import Service
+from .models import RequestComment 
+
 
 
 def add_Request_view(request:HttpRequest, service_id):
@@ -48,19 +50,22 @@ def admin_requests_view(request: HttpRequest):
        # return render(request, "")
    
 
-def request_details_view(request: HttpRequest,requset_id):
+def request_details_view(request: HttpRequest,requsets_id):
     
-    requests = Request.objects.get(id =requset_id) 
+    requests = Request.objects.get(id =requsets_id)
 
+    if request.method == "POST":
+        new_Request = RequestComment(user = request.user, service = requests.service, comment = request.POST["comment"])
+        new_Request.save()
 
     return render(request ,"request/request_details_view.html", {"requests":requests})
 
 
 def cancel_request_view(request: HttpRequest, requset_id):
     ## try:
-            requests = Request.objects.get(id = requset_id)
-            requests.delete()
-            return redirect("services:home_services_view")
+    requests = Request.objects.get(id = requset_id)
+    requests.delete()
+    return redirect("services:home_services_view")
         
      ##except  Exception as e:
 
@@ -78,6 +83,8 @@ def update_price_view(request:HttpRequest, requests_id):
 def request_detailsConcierge_view(request: HttpRequest,requset_id):
      
      requests = Request.objects.get(id =requset_id)
+
+   
      return render(request ,"request/request_detailsConcierge_view.html", {"requests":requests , "status_type": Request.status_type})
 
 
