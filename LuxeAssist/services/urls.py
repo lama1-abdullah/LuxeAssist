@@ -13,5 +13,8 @@ urlpatterns = [
     path('add/<typeservices_id>/',views.add_service_view , name="add_service_view"),
     path('details/<service_id>/', views.details_service_view, name="details_service_view"),
     path('update/<service_id>/', views.update_service_view, name="update_service_view"),
-    path('concierge/delete/<service_id>/',views.delete_servicesConcierge_views, name="delete_servicesConcierge_views")
+    path('concierge/delete/<service_id>/',views.delete_servicesConcierge_views, name="delete_servicesConcierge_views"),
+    path('all/services/provider/', views.all_servicesProvider_view , name="all_servicesProvider_view"),
+    path('activate/user/<user_id>/',views.activate_conceirge_viwe, name = "activate_conceirge_viwe"),
+    path('deactivate/user/<user_id>/',views.deactivate_conceirge_viwe, name = "deactivate_conceirge_viwe")
 ]
