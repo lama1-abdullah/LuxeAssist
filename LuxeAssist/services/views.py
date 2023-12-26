@@ -49,7 +49,7 @@ def update_typeService_view(request:HttpRequest,typeService_id):
         typeService.image=request.FILES["image"]
         typeService.save()
 
-        return redirect("services:details_typeService_view",typeService_id=typeService.id)
+        return redirect("services:details_typeService_view",typeService_id=typeService.id) 
         
 
         
@@ -57,7 +57,7 @@ def update_typeService_view(request:HttpRequest,typeService_id):
 
 
 
-# ****************************************error in delete_stable_views and add_service_view***************************************************
+
 def delete_services_views(request:HttpRequest, typeService_id):
 
     typeService= TypeService.objects.get(id = typeService_id)
@@ -85,4 +85,25 @@ def details_service_view(request:HttpRequest, service_id):
 
 
 
-        
+def update_service_view(request:HttpRequest, service_id):
+
+    service=Service.objects.get(id=service_id)
+
+    
+    if request.method=="POST":
+
+        service.title=request.POST["title"]
+        service.description=request.POST["description"]
+        service.image=request.FILES["image"] 
+        service.initial_price=request.POST["initial_price"]
+        service.save()
+
+        return redirect("services:details_typeService_view",typeService_id=service.id)
+    
+    return render(request,"services/update_service.html",{"service": service })
+
+def delete_servicesConcierge_views(request:HttpRequest, service_id):
+
+    service=Service.objects.get(id=service_id)
+    service.delete()
+    return redirect("services:home_services_view")

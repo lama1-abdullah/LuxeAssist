@@ -16,10 +16,10 @@
     </div>
     <div class = "row">
         <div class = "col-4">
-            <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
+            <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Approve</a><br>
         </div>
         <div class = "col-4">
-            <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
+            <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Reject</a>
         </div>
         <div class = "col-4">
             <a class="dropdown-item" href="">Payment</a>
@@ -55,10 +55,7 @@
         </div>
         </div>
     </div>
-</div>  
-
-
-
+</div>   
  
     
 
