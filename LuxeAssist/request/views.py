@@ -73,3 +73,4 @@ def update_price_view(request:HttpRequest, requests_id):
         requests.request_price = request.POST["request_price"]
         requests.save()
         return redirect("request:request_details_view", requset_id = requests.id)
+    
