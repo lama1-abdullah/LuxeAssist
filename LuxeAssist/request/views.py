@@ -83,7 +83,26 @@ def update_price_view(request:HttpRequest, requests_id):
 def request_detailsConcierge_view(request: HttpRequest,requset_id):
      
      requests = Request.objects.get(id =requset_id)
-     return render(request ,"request/request_detailsConcierge_view.html", {"requests":requests})
 
+   
+     return render(request ,"request/request_detailsConcierge_view.html", {"requests":requests , "status_type": Request.status_type})
+
+
+def add_status_view(request: HttpRequest, requests_id):
+    requests = Request.objects.get(id = requests_id)  
+    if request.method == "POST":
+        requests.status = request.POST["status"]
+        requests.save()
+        return redirect("request:request_detailsConcierge_view",requset_id = requests.id )
+    
+def new_requestConcierge_view(request: HttpRequest , requset_id):
+
+    requests = Request.objects.get(id = requset_id) 
+
+    return render (request, "request/new_requestConcierge_view.html", {"requests": requests})
+
+
+
+    
 
 
