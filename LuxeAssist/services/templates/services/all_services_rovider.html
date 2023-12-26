@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} All Services Provider {% endblock %}
+
+
+{% block content %}
+{% for user in coceirge_users %}
+ <div class="card" style="width: 18rem;">
+   <div class="card-body">
+      {% if user.is_active %} <h3>Active</h3> {% else %} <h3>Not Active</h3> {% endif %}
+     <h5 class="card-title">Name:{{user.first_name}}</h5>
+     <h5 class="card-title">Email:{{user.email}}</h5>
+     <h5 class="card-title">Phone Number:</h5>
+     <a href="{% url 'services:activate_conceirge_viwe' user.id %}" class="btn btn-primary">Activate</a>
+     <a href="{% url 'services:deactivate_conceirge_viwe' user.id %}" class="btn btn-primary">Deactivate</a>
+   </div>
+ </div>
+ {% endfor %}
+{% endblock %}

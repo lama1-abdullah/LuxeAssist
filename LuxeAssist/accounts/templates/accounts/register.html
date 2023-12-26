@@ -15,7 +15,7 @@
     <div class="col-6">
        
 
-        <form class="d-flex flex-column gap-1"  action="{% url 'accounts:register_page_view' %}" method="POST" enctype="multipart/form-data" >
+        <form class="d-flex flex-column gap-1"  action="{% if 'user' in request.GET %}{% url 'accounts:register_page_view' %}?user=coneirge{% else %}{% url 'accounts:register_page_view' %}{%endif%}" method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
 
             <label class="align-self-start">User Name:</label>
@@ -45,7 +45,7 @@
 
 
             <input class="btn btn-secondary mt-3 mb-3" type="submit" value="Sign Up" />
-            <h6>Sign up as<a href="{% url 'accounts:register_page_view' %}?user=concerge">Conserge</a></h6>
+            <h6>Sign up as<a href="{% url 'accounts:register_page_view' %}?user=conceirge">Conserge</a></h6>
         </form>
 
     </div>

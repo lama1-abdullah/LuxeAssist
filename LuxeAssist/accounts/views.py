@@ -24,6 +24,8 @@ def register_page_view(request:HttpRequest):
                group_concerge, created = Group.objects.get_or_create(name="conceirge")
 
                user.groups.add(group_concerge)
+               user.is_active = False
+               user.save()
 
 
             return redirect("accounts:login_page_view")

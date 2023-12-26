@@ -1,7 +1,8 @@
 from django.shortcuts import render , redirect
 from django.http import HttpRequest, HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from .models import TypeService , Service
+from accounts.models import Profile
 # Create your views here.
 
 
@@ -107,3 +108,29 @@ def delete_servicesConcierge_views(request:HttpRequest, service_id):
     service=Service.objects.get(id=service_id)
     service.delete()
     return redirect("services:home_services_view")
+
+
+def all_servicesProvider_view (request:HttpRequest):
+
+
+    coceirge_users = User.objects.filter(groups__name="conceirge")
+
+
+    return render(request,"services/all_services_rovider.html", {"coceirge_users": coceirge_users})
+
+
+def activate_conceirge_viwe(request:HttpRequest,user_id):
+    
+    user =  User.objects.get(id = user_id)
+    user.is_active = True
+    user.save()
+    
+    return redirect("services:all_servicesProvider_view")
+
+
+def deactivate_conceirge_viwe(request:HttpRequest,user_id):
+    
+    user =  User.objects.get(id = user_id)
+    user.is_active = False
+    user.save()
+    return redirect("services:all_servicesProvider_view")
