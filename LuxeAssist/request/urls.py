@@ -13,6 +13,4 @@ urlpatterns = [
     path('cancel/request/<requset_id>/', views.cancel_request_view, name="cancel_request_view"),
     path('update/request/<requests_id>/', views.update_price_view, name="update_price_view")
     
-    
-    
 ]
