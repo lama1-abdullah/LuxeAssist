@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User,Group
-from .models import TypeService , Service
+from .models import TypeService , Service, Review
 from accounts.models import Profile
 # Create your views here.
 
@@ -81,8 +81,14 @@ def add_service_view(request:HttpRequest,typeservices_id):
 def details_service_view(request:HttpRequest, service_id):
 
     service=Service.objects.get(id=service_id)
+    if request.method=="POST":
+        
+        reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
+        reviews.save()
+
+        reviews=Review.objects.filter(services=service)
    
-    return render(request , "services/details_services.html",{"service":service})
+    return render(request , "services/details_services.html",{"service":service , "reviews":reviews})
 
 
 
