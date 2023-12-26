@@ -74,3 +74,8 @@ def update_price_view(request:HttpRequest, requests_id):
         requests.save()
         return redirect("request:request_details_view", requset_id = requests.id)
     
+    
+def request_detailsConcierge_view(request: HttpRequest,requset_id):
+     
+     requests = Request.objects.get(id =requset_id)
+     return render(request ,"request/request_detailsConcierge_view.html", {"requests":requests})
