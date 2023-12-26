@@ -14,6 +14,4 @@ urlpatterns = [
     path('update/request/<requests_id>/', views.update_price_view, name="update_price_view"),
     path('details/request/Concierge/<requset_id>/', views.request_detailsConcierge_view, name= "request_detailsConcierge_view"),
     
-    
-    
 ]
