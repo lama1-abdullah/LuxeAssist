@@ -21,9 +21,7 @@
         <div class = "col-4">
             <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Reject</a>
         </div>
-        <div class = "col-4">
-            <a class="dropdown-item" href="">Payment</a>
-        </div>
+        
         
     </div>
 
@@ -31,30 +29,7 @@
 
 
 
-    <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Price</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Do you want to update Price? {{ service.title }} 
 
-            <form action="{% url 'request:update_price_view' requests.id %}" method="POST" >
-                {% csrf_token %}
-                <label class =" mt-2">New Price:</label>
-                <input class="form-control" name="request_price" type="text" required />
-                    <input type="submit" value="Update Price" class="btn btn-dark mt-2"/>
-            </form>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            
-            </div>
-        </div>
-        </div>
-    </div>
 </div>   
  
     
