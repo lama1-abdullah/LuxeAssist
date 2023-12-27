@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User,Group
-from .models import TypeService , Service
+from .models import TypeService , Service, Review
 from accounts.models import Profile
 # Create your views here.
 
@@ -81,8 +81,13 @@ def add_service_view(request:HttpRequest,typeservices_id):
 def details_service_view(request:HttpRequest, service_id):
 
     service=Service.objects.get(id=service_id)
+    if request.method=="POST":
+        reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
+        reviews.save()
+
+    reviews=Review.objects.filter(services=service)
    
-    return render(request , "services/details_services.html",{"service":service})
+    return render(request , "services/details_services.html",{"service":service , "reviews":reviews})
 
 
 
@@ -134,3 +139,12 @@ def deactivate_conceirge_viwe(request:HttpRequest,user_id):
     user.is_active = False
     user.save()
     return redirect("services:all_servicesProvider_view")
+
+def user_reviews_view(request:HttpRequest):
+
+    user_reviews = Review.objects.filter(user = request.user)
+    return render(request , 'services/user_reviews.html', {"reviews":user_reviews})
+
+def conceirge_services_view(request:HttpRequest):
+    service = Service.objects.filter(user = request.user)
+    return render(request , 'services/conceirge_services.html', {"service":service})
