@@ -13,7 +13,7 @@ class Request(models.Model):
 
 class RequestComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    requests= models.ForeignKey(Request, on_delete=models.CASCADE)
     comment = models.TextField()
 
 

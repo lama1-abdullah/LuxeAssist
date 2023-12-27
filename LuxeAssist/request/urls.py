@@ -12,7 +12,6 @@ urlpatterns = [
     path('details/request/<requsets_id>/', views.request_details_view, name= "request_details_view"),
     path('cancel/request/<requset_id>/', views.cancel_request_view, name="cancel_request_view"),
     path('update/request/<requests_id>/', views.update_price_view, name="update_price_view"),
-    path('details/request/Concierge/<requset_id>/', views.request_detailsConcierge_view, name= "request_detailsConcierge_view"),
     path('update/status/<requests_id>/', views.add_status_view, name="add_status_view"),
     path('new/request/<requset_id>', views.new_requestConcierge_view, name="new_requestConcierge_view")
     

@@ -56,10 +56,12 @@ def request_details_view(request: HttpRequest,requsets_id):
     requests = Request.objects.get(id =requsets_id)
 
     if request.method == "POST":
-        new_Request = RequestComment(user = request.user, service = requests.service, comment = request.POST["comment"])
+        new_Request = RequestComment(user = request.user, requests = requests, comment = request.POST["comment"])
         new_Request.save()
+    requestComment=RequestComment.objects.filter(requests = requests)
 
-    return render(request ,"request/request_details_view.html", {"requests":requests})
+
+    return render(request ,"request/request_details_view.html", {"requests":requests , "requestComment": requestComment})
 
 
 def cancel_request_view(request: HttpRequest, requset_id):
@@ -79,14 +81,6 @@ def update_price_view(request:HttpRequest, requests_id):
         requests.request_price = request.POST["request_price"]
         requests.save()
         return redirect("request:request_details_view", requset_id = requests.id)
-    
-    
-def request_detailsConcierge_view(request: HttpRequest,requset_id):
-     
-     requests = Request.objects.get(id =requset_id)
-
-   
-     return render(request ,"request/request_detailsConcierge_view.html", {"requests":requests , "status_type": Request.status_type})
 
 
 def add_status_view(request: HttpRequest, requests_id):
@@ -94,7 +88,7 @@ def add_status_view(request: HttpRequest, requests_id):
     if request.method == "POST":
         requests.status = request.POST["status"]
         requests.save()
-        return redirect("request:request_detailsConcierge_view",requset_id = requests.id )
+        return redirect("request:request_details_view",requsets_id = requests.id )
     
 def new_requestConcierge_view(request: HttpRequest , requset_id):
 
