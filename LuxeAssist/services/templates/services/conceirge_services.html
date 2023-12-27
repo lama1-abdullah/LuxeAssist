@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} All Services {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row mt-5">
+       {% for service in service %}
+       <img src="{{service.image.url}}"  width="600px" height="400px"/>
+       <h2>{{service.title}}</h2>
+       <h5>{{service.description}}</h5>
+       <h5>initial price: {{service.initial_price}}</h5>
+       {% endfor %}
+    </div>
+
+    <div class="dropdown p-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Edit  
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete</a></li>
+          <li><a class="dropdown-item" href="{% url 'services:update_service_view' service.id %}">Update</a></li>
+        </ul>
+      </div>
+      
+
+</div>
+
+{% endblock %}
+
