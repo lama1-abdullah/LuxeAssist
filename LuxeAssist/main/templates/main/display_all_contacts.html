@@ -4,16 +4,33 @@
 
 {% block content %}
 
-<h1>Contact List</h1>
-<ul>
-    {% for contact in contacts %}
-        <li>
-            <strong>Name:</strong> {{ contact.name }}<br>
-            <strong>Email:</strong> {{ contact.email }}<br>
-            <strong>Contact Type:</strong> {{ type.content }}<br>
-            <strong>Content:</strong> {{ contact.content }}<br>
-        </li>
-    {% endfor %}
-</ul>
+<h1>All Contacts</h1>
 
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Type</th>
+                <th scope="col">Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.user.username }}</td>
+                    <td>{{ contact.user.email }}</td>
+                    <td>{{ contact.type }}</td>
+                    <td>{{ contact.content }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Include Bootstrap JS and Popper.js (Optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

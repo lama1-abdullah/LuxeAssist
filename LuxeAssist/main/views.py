@@ -50,6 +50,15 @@ def not_found_view(request: HttpRequest):
 
 
 
-def display_all_contacts_view(request):
+def display_all_contacts_view(request:HttpRequest):
+
     contacts = Contact.objects.all()
     return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+
+    # if request.user.is_staff:
+    #     # User is a staff
+    #     contacts = Contact.objects.all()
+    #     return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+    # else:
+    #     # User is not a staff 
+    #     return render(request, "main/user_not_found.html")
