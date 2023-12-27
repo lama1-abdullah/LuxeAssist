@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %} All Contact Page {% endblock %}
+
+{% block content %}
+
+<h1>Contact List</h1>
+<ul>
+    {% for contact in contacts %}
+        <li>
+            <strong>Name:</strong> {{ contact.name }}<br>
+            <strong>Email:</strong> {{ contact.email }}<br>
+            <strong>Contact Type:</strong> {{ type.content }}<br>
+            <strong>Content:</strong> {{ contact.content }}<br>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

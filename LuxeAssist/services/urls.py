@@ -16,5 +16,7 @@ urlpatterns = [
     path('concierge/delete/<service_id>/',views.delete_servicesConcierge_views, name="delete_servicesConcierge_views"),
     path('all/services/provider/', views.all_servicesProvider_view , name="all_servicesProvider_view"),
     path('activate/user/<user_id>/',views.activate_conceirge_viwe, name = "activate_conceirge_viwe"),
-    path('deactivate/user/<user_id>/',views.deactivate_conceirge_viwe, name = "deactivate_conceirge_viwe")
+    path('deactivate/user/<user_id>/',views.deactivate_conceirge_viwe, name = "deactivate_conceirge_viwe"),
+    path('all/services/admin/', views.all_services_admin_view , name="all_services_admin_view"),
+    path('delete/services/admin/', views.delete_services_admin_views , name="delete_services_admin_views")
 ]

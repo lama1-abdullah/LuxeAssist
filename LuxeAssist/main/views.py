@@ -48,3 +48,8 @@ def not_found_view(request: HttpRequest):
 
    return render(request, "main/user_not_found.html")
 
+
+
+def display_all_contacts_view(request):
+    contacts = Contact.objects.all()
+    return render(request, "main/display_all_contacts.html", {"contacts": contacts})

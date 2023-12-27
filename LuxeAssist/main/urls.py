@@ -8,6 +8,7 @@ urlpatterns = [
    path("about/", views.about_view, name="about_view"),
    path("contact/", views.contact_view, name="contact_view"),
    path("payment/<requests_id>/", views.payment_view, name="payment_view"),
-   path("not/", views.not_found_view, name="not_found_view")
+   path("not/", views.not_found_view, name="not_found_view"),
+   path("display/all/contact/",views.display_all_contacts_view, name = "display_all_contacts_view")
 
 ]

@@ -134,3 +134,17 @@ def deactivate_conceirge_viwe(request:HttpRequest,user_id):
     user.is_active = False
     user.save()
     return redirect("services:all_servicesProvider_view")
+
+
+def all_services_admin_view(request:HttpRequest):
+    all_services = Service.objects.all()
+
+    return render (request,"services/all_services_admin.html",{"all_services":all_services})
+
+
+def delete_services_admin_views(request:HttpRequest, service_id):
+
+    service=Service.objects.get(id=service_id)
+    service.delete()
+    return redirect("services:all_services_admin_view")
+
