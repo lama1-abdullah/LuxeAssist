@@ -97,7 +97,10 @@ def new_requestConcierge_view(request: HttpRequest , requset_id):
     return render (request, "request/new_requestConcierge_view.html", {"requests": requests})
 
 
-
+def delete_request_admin_view(request: HttpRequest, requset_id):
+    requsets=Request.objects.get(id=requset_id)
+    requsets.delete()
+    return redirect("request:admin_requests_view")
     
 
 

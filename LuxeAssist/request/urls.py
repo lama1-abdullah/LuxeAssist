@@ -13,6 +13,7 @@ urlpatterns = [
     path('cancel/request/<requset_id>/', views.cancel_request_view, name="cancel_request_view"),
     path('update/request/<requests_id>/', views.update_price_view, name="update_price_view"),
     path('update/status/<requests_id>/', views.add_status_view, name="add_status_view"),
-    path('new/request/<requset_id>/', views.new_requestConcierge_view, name="new_requestConcierge_view")
+    path('new/request/<requset_id>/', views.new_requestConcierge_view, name="new_requestConcierge_view"),
+    path('delete/request/admin/<requset_id>/',views.delete_request_admin_view, name="delete_request_admin_view")
     
 ]

@@ -38,7 +38,7 @@
               <a class="nav-link text-white" href="{% url 'main:contact_view' %}">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">none</a>
+              <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
             </li>
           </ul>
           {% if request.user.is_authenticated %}

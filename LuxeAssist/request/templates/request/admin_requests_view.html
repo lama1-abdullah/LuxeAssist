@@ -15,17 +15,20 @@
             
            
               
+           
               
-              
-              {% for request in requests %}
-            
-                  {{request.service.title}}
-                  {{request.service.description}}
-                  {{request.user.first_name}} {{request.user.last_name}}
-                  {{request.status}}
-                  
+            {% for request in requests %}
+            <hr>
+                <div class="col-5 p-3">
+                 <a href="{% url 'services:details_service_view' request.service.id %}" ><h4> service {{request.service.title}}</h4></a>
+                  <h4>user: {{request.user.first_name}} {{request.user.last_name}}</h4>
+                  <h4>Note: {{request.note}}</h4>
+                  <h4> Date Time :{{request.date}}</h4>
+                  <h4> Status :{{request.status}}</h4>
+                  <a href="{% url 'request:delete_request_admin_view' request.id %}" class="btn btn-primary">Delete</a>
+                </div>    
                 
-              {% endfor %}
+            {% endfor %}
             
      
        
