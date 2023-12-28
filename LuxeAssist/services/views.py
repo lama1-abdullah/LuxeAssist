@@ -51,7 +51,7 @@ def delete_services_views(request:HttpRequest, typeService_id):
 
     typeService= TypeService.objects.get(id = typeService_id)
     typeService.delete()
-    return redirect("services:home_services_view")
+    return redirect("main:home_view")
 
 def add_service_view(request:HttpRequest):
 
@@ -103,7 +103,7 @@ def delete_servicesConcierge_views(request:HttpRequest, service_id):
 
     service=Service.objects.get(id=service_id)
     service.delete()
-    return redirect("services:home_services_view")
+    return redirect("main:home_view")
 
 
 def all_servicesProvider_view (request:HttpRequest):

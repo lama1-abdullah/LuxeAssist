@@ -9,15 +9,27 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-4">
+        <div class="col-6">
 
             
             
             <a href="{% url 'request:request_details_view' requests.id %}" >{{requests.service.title}}</a>
-                {{requests.date}}
-                {{requests.request_price}} 
-                {{requests.note}}   
-                
+                <h3>{{requests.date}}</h3>
+                <h3>{{requests.request_price}} </h3>
+                <h3>{{requests.note}} </h3>  
+                <div class = "row">
+                    <div class="col-2">
+                        
+                        <form class="d-flex flex-column gap-1"action="{% url 'request:add_status_view' requests.id %}" method="POST">
+                            {% csrf_token %}
+                           
+                            <input TYPE="submit" Name="status" Value="Approve">
+                            <input TYPE="submit" Name="status" Value="Cancle">
+                            
+                    
+                                
+                        </form>
+                    </div>
            
 
         </div>
