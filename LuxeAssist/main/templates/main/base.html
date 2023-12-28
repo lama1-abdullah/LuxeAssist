@@ -54,7 +54,7 @@
               <li><a class="dropdown-item" href="{% url 'accounts:user_profile_page_view' user.id %}">Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:update_profile_page_view' %}">Update Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
-             
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All request consierge</a></li>
               <li><a class="dropdown-item" href="{%url 'accounts:logout_page_view' %}">LogOut</a></li>
         {% else %}
               <li><a class="dropdown-item" href="{% url 'accounts:login_page_view' %}">Sign Up</a></li>
