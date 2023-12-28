@@ -40,7 +40,7 @@
 
             <div class = "col-4">
                 {% if requests.status == "Approve" %}
-                <a class="dropdown-item" href="">Payment</a>
+                <a class="dropdown-item" href="{% url 'main:payment_view' requests.id %}">Payment</a>
                 {% endif %}
             </div>
             

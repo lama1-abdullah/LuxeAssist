@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from.models import Payment , Contact
 from request.models import Request
+
 from services.models import Service
+
+
+from services.models import TypeService
 
 
 
@@ -11,7 +15,9 @@ from services.models import Service
 def home_view(request: HttpRequest):
     
 
-    return render(request, "main/home.html")
+    typeServices=TypeService.objects.all()
+
+    return render(request, "main/home.html" , {"typeServices":typeServices})
 
 
 def about_view(request: HttpRequest):
@@ -27,8 +33,10 @@ def contact_view(request: HttpRequest):
         contact.save()
 
         return redirect("main:home_view")
+    user_contact= Contact.objects.filter(user= request.user)
     
-    return render(request, "main/contact.html", {"categories": Contact.categories}) 
+    return render(request, "main/contact.html", {"categories": Contact.categories ,"user_contact" : user_contact}) 
+
 
 
 
