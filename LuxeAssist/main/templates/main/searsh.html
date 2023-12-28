@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block title %} All  {% endblock %}
+
+{% block content %}
+
+<section class="container pt-4">
+
+    <div class="d-flex justify-content-between">
+    
+    <h1>Search results for service`{{ request.GET.search }}` ({{ services.count }})</h1>
+    
+        <div class="container row">
+            
+        {%for service in services %}
+          <div class="card1"style="width:  16rem;">
+           <div class="card-img" style="width:15rem;">
+            <img class="card-img-top" src="{{service.image.url}}" alt="Card image cap">
+            </div>
+            <div class="card-body">
+            <p class="card-text">{{service.title}}</p>
+        </div> 
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+</section>
+{% endblock %}

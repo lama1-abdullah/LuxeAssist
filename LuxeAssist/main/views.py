@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from.models import Payment , Contact
 from request.models import Request
+
+from services.models import Service
+
+
 from services.models import TypeService
+
 
 
 
 # Create your views here.
 def home_view(request: HttpRequest):
+    
 
     typeServices=TypeService.objects.all()
 
@@ -56,6 +62,17 @@ def not_found_view(request: HttpRequest):
 
 
 def display_all_contacts_view(request:HttpRequest):
+    # contacts = Contact.objects.all()
+    # return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+    message = None
+    if request.user.is_staff:
+        # User is a staff
+        contacts = Contact.objects.all()
+        return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+    else:
+        # User is not a staff 
+        return render(request, "main/user_not_found.html")
+  
 
     contacts = Contact.objects.all()
     return render(request, "main/display_all_contacts.html", {"contacts": contacts})
@@ -67,3 +84,19 @@ def display_all_contacts_view(request:HttpRequest):
     # else:
     #     # User is not a staff 
     #     return render(request, "main/user_not_found.html")
+
+
+def search_view(request: HttpRequest):
+    
+    if "search" in request.GET:
+
+        keyword = request.GET["search"]
+        services = Service.objects.filter(title__contains=keyword)
+        print("dddd")
+        
+    else:
+        services = Service.objects.all()
+
+    print(services)
+    return render(request, "main/searsh.html", {"services" : services })
+
