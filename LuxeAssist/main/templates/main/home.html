@@ -15,49 +15,26 @@
 
           <h3>introduction</h3>
       </div>
-<div class="container row">
-      <div class="card1"style="width:  16rem;">
-       <div class="card-img" style="width:  15rem;">
-        <img class="card-img-top" src="/static/images/banner-img.jpg" alt="Card image cap">
-        </div>
-        <div class="card-body">
-        <p class="card-text">Travel</p>
-        </div>
-    </div>
-    <div class="card1"style="width:  16rem;">
-        <div class="card-img" style="width:  15rem;">
-         <img class="card-img-top" src="/static/images/banner-img.jpg" alt="Card image cap">
-         </div>
-         <div class="card-body">
-         <p class="card-text">Travel</p>
-         </div>
-     </div>
-     <div class="card1"style="width:  16rem;">
-        <div class="card-img" style="width:  15rem;">
-         <img class="card-img-top" src="/static/images/banner-img.jpg" alt="Card image cap">
-         </div>
-         <div class="card-body">
-         <p class="card-text">Travel</p>
-         </div>
-     </div>
-     <div class="card1"style="width:  16rem;">
-        <div class="card-img" style="width:  15rem;">
-         <img class="card-img-top" src="/static/images/banner-img.jpg" alt="Card image cap">
-         </div>
-         <div class="card-body">
-         <p class="card-text">Travel</p>
-         </div>
-     </div>
-     <div class="card1"style="width:  16rem;">
-        <div class="card-img" style="width:  15rem;">
-         <img class="card-img-top" src="/static/images/banner-img.jpg" alt="Card image cap">
-         </div>
-         <div class="card-body">
-         <p class="card-text">Travel</p>
-         </div>
-     </div>
 
+<div class="container row">
+    <div class="col-3">
+        <a class="btn btn-primary" href="{% url 'services:add_typeService_view' %}"> Add Service</a>
+    </div> 
+    <h4>All Our services</h4>
+    {% for service in typeServices %}
+        <div class="card1"style="width:16rem;">
+            <div class="card-img" style="width:15rem;">
+                <img class="card-img-top" src="{{service.image.url}}" alt="Card image cap">
+            </div>
+                <div class="card-body">
+                    <a href="{% url 'services:details_typeService_view' service.id %}" ><p class="card-text">{{service.title}}</p></a>
+                    <p>{{service.description}}</p>
+                </div>
+        </div>
+    {% endfor %}
+</div>
      
 </section>      
 
 {% endblock %}
+

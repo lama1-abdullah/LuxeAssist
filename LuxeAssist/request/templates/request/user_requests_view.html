@@ -13,19 +13,25 @@
              
         </div>
             
+        <section class="container">
+
+            <h4>All services</h4>
+            <div class="row">
+                <div class="col-5">
+                    {% for request in requests %}
+                    <hr>
+                        <h4> {{request.user.first_name}} {{request.user.last_name}}</h4>
+                        <a href="{% url 'request:request_details_view' request.id %}" ><h4> {{request.service.title}}</h4></a>
+                        <h4>{{request.service.description}}</h4>
+                        <h4> {{request.status}}</h4>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
            
+             
               
-              
-              
-              {% for request in requests %}
-            
-                  {{request.service.title}}
-                  {{request.service.description}}
-                  {{request.user.first_name}} {{request.user.last_name}}
-                  {{request.status}}
-                  
-                
-              {% endfor %}
+    
             
      
        
