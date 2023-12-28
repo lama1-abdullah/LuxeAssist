@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate , login , logout
 from .models import Profile
 from django.db import IntegrityError
+from services.models import Review
 
 # Create your views here.
 
@@ -70,11 +71,12 @@ def logout_page_view(request: HttpRequest):
 def user_profile_page_view(request: HttpRequest , user_id):
     try:
       user = User.objects.get(id = user_id)
+      user_reviews = Review.objects.filter(user = request.user)
         
     except:
        return render(request ,"main/user_not_found.html")
         
-    return render(request,"accounts/profile.html",{"user":user})
+    return render(request,"accounts/profile.html",{"user":user , "reviews":user_reviews})
     
 
 def update_profile_page_view(request: HttpRequest):
@@ -94,10 +96,10 @@ def update_profile_page_view(request: HttpRequest):
             if "avatar" in request.FILES:
                 profile.avatar = request.FILES["avatar"]
 
-            profile.city= request.POST["city"],
-            profile.address= request.POST["address"],
-            profile.phone_number= request.POST["phone_number"],
-            profile.gender = request.POST["gender"],
+            profile.city= request.POST["city"]
+            profile.address= request.POST["address"]
+            profile.phone_number= request.POST["phone_number"]
+            profile.gender = request.POST["gender"]
             profile.nationality = request.POST["nationality"]
             profile.about = request.POST["about"]
             profile.save()

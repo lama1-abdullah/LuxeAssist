@@ -3,12 +3,21 @@ from django.http import HttpRequest, HttpResponse
 from.models import Payment , Contact
 from request.models import Request
 
+from services.models import Service
+
+
+from services.models import TypeService
+
+
 
 
 # Create your views here.
 def home_view(request: HttpRequest):
+    
 
-    return render(request, "main/home.html")
+    typeServices=TypeService.objects.all()
+
+    return render(request, "main/home.html" , {"typeServices":typeServices})
 
 
 def about_view(request: HttpRequest):
@@ -24,8 +33,10 @@ def contact_view(request: HttpRequest):
         contact.save()
 
         return redirect("main:home_view")
+    user_contact= Contact.objects.filter(user= request.user)
     
-    return render(request, "main/contact.html", {"categories": Contact.categories}) 
+    return render(request, "main/contact.html", {"categories": Contact.categories ,"user_contact" : user_contact}) 
+
 
 
 
@@ -62,4 +73,30 @@ def display_all_contacts_view(request:HttpRequest):
         # User is not a staff 
         return render(request, "main/user_not_found.html")
   
+
+    contacts = Contact.objects.all()
+    return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+
+    # if request.user.is_staff:
+    #     # User is a staff
+    #     contacts = Contact.objects.all()
+    #     return render(request, "main/display_all_contacts.html", {"contacts": contacts})
+    # else:
+    #     # User is not a staff 
+    #     return render(request, "main/user_not_found.html")
+
+
+def search_view(request: HttpRequest):
+    
+    if "search" in request.GET:
+
+        keyword = request.GET["search"]
+        services = Service.objects.filter(title__contains=keyword)
+        print("dddd")
+        
+    else:
+        services = Service.objects.all()
+
+    print(services)
+    return render(request, "main/searsh.html", {"services" : services })
 

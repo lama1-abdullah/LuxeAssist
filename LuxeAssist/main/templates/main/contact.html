@@ -7,9 +7,6 @@
     <h1>Contact</h1>
 
     <div class="card-Contact">
-      
-
-
     <form action="{% url 'main:contact_view' %}" method="POST"  enctype="multipart/form-data">
         {% csrf_token %}  
        
@@ -31,5 +28,30 @@
  
   </div> 
 </div>
+</section>
+
+
+
+<h4>All contact</h4>
+<div class="row ">
+    {% if user_contact.count == 0 %}
+     <div class="alert alert-info">No contact yet.</div>
+    {% endif %}
+     
+</div>
+    
+<section class="container">
+
+    <div class="row">
+        <div class="col-5">
+            {% for contact in user_contact %}
+            <hr>
+                <h4> {{contact.user.first_name}} {{contact.user.last_name}}</h4>
+                <h4> {{contact.type}}</h4>
+                <h4>{{contact.content}}</h4>
+               
+            {% endfor %}
+        </div>
+    </div>
 </section>
 {% endblock %}

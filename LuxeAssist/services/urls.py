@@ -10,7 +10,7 @@ urlpatterns = [
     path('type/details/<typeService_id>/',views.details_typeService_view, name="details_typeService_view"),
     path('update/type/<typeService_id>/',views.update_typeService_view, name="update_typeService_view"),
     path('delete/<typeService_id>/', views.delete_services_views,name="delete_services_views"),
-    path('add/<typeservices_id>/',views.add_service_view , name="add_service_view"),
+    path('add/',views.add_service_view , name="add_service_view"),
     path('details/<service_id>/', views.details_service_view, name="details_service_view"),
     path('update/<service_id>/', views.update_service_view, name="update_service_view"),
     path('concierge/delete/<service_id>/',views.delete_servicesConcierge_views, name="delete_servicesConcierge_views"),
@@ -19,7 +19,6 @@ urlpatterns = [
     path('deactivate/user/<user_id>/',views.deactivate_conceirge_viwe, name = "deactivate_conceirge_viwe"),
     path('all/services/admin/', views.all_services_admin_view , name="all_services_admin_view"),
     path('delete/services/admin/', views.delete_services_admin_views , name="delete_services_admin_views"),
-    path('all/reviews', views.user_reviews_view, name = "user_reviews_view"),
     path('all/service/concierge/', views.conceirge_services_view, name = "conceirge_services_view" ),
 
 ]

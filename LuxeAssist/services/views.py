@@ -12,7 +12,7 @@ def add_typeService_view(request:HttpRequest):
     if request.method=="POST":
         new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
         new_service.save()
-        return redirect("services:home_services_view")
+        return redirect("main:home_view")
         
     return render(request,"services/add_typeService.html")
 
@@ -65,18 +65,21 @@ def delete_services_views(request:HttpRequest, typeService_id):
     typeService.delete()
     return redirect("services:home_services_view")
 
-def add_service_view(request:HttpRequest,typeservices_id):
+def add_service_view(request:HttpRequest):
 
-    typeservices=TypeService.objects.get(id=typeservices_id)
+
+
+    service_types = TypeService.objects.all()
 
     if request.method== "POST":
+        typeservices=TypeService.objects.get(id=request.POST["type"])
         new_service=Service(user=request.user, type_service=typeservices , title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"] , initial_price=request.POST["initial_price"])
         new_service.save()
 
         return redirect("services:details_typeService_view", typeService_id=typeservices.id)
 
     
-    return render(request , "services/add_service.html", {"services":typeservices})
+    return render(request , "services/add_service.html", { "service_types" : service_types})
 
 def details_service_view(request:HttpRequest, service_id):
 
@@ -104,7 +107,7 @@ def update_service_view(request:HttpRequest, service_id):
         service.initial_price=request.POST["initial_price"]
         service.save()
 
-        return redirect("services:details_typeService_view",typeService_id=service.id)
+        return redirect("services:details_service_view",service_id=service.id)
     
     return render(request,"services/update_service.html",{"service": service })
 
@@ -155,10 +158,7 @@ def delete_services_admin_views(request:HttpRequest, service_id):
     return redirect("services:all_services_admin_view")
 
 
-def user_reviews_view(request:HttpRequest):
 
-    user_reviews = Review.objects.filter(user = request.user)
-    return render(request , 'services/user_reviews.html', {"reviews":user_reviews})
 
 def conceirge_services_view(request:HttpRequest):
     service = Service.objects.filter(user = request.user)

@@ -9,8 +9,6 @@
     <div class="row">
 
     <div class="col-6">
-      
-
     <form action="{% url 'main:payment_view' requests.id %}" method="POST">
         {% csrf_token %}  
         <label>Full name:</label>

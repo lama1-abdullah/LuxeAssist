@@ -38,9 +38,31 @@
               <a class="nav-link text-white" href="{% url 'main:contact_view' %}">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'accounts:login_page_view' %}">Sign up</a>
+              <a class="nav-link text-white" href="#">none</a>
             </li>
           </ul>
+          {% if request.user.is_authenticated %}
+          <div>
+            <img class="rounded-circle avatar p-2" width="50px" src="{{ request.user.profile.avatar.url }}" />
+          </div>
+          <li class="nav-item dropdown d-flex p-2 justify-content-center">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome {{ request.user.username }}
+            </a> 
+            <ul class="dropdown-menu">
+          
+              <li><a class="dropdown-item" href="{% url 'accounts:user_profile_page_view' user.id %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:update_profile_page_view' %}">Update Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
+             
+              <li><a class="dropdown-item" href="{%url 'accounts:logout_page_view' %}">LogOut</a></li>
+        {% else %}
+              <li><a class="dropdown-item" href="{% url 'accounts:login_page_view' %}">Sign Up</a></li>
+        {% endif%}
+              
+            </ul>
+          </li>
+     
         </div>
         <div id="google_translate_element"></div>
       </div>

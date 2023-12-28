@@ -9,14 +9,11 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to="image/" , default="image/default.png",blank=True)
     city = models.CharField(max_length=255 , default="Riyadh")
     address = models.CharField(max_length=255 , default="Riyadh")
-    phone_number = models.IntegerField()
+    phone_number = models.CharField (max_length=255, default="0")
 
-    GENDER_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other'),
-    ]
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='O')
+    GENDER_CHOICES =models.TextChoices("GENDER_CHOICES", ["Male","Female","Other"])
+    
+    gender = models.CharField(max_length=256, choices=GENDER_CHOICES.choices, default='')
 
     nationality = models.CharField(max_length=255 , default="Saudi")
     about = models.TextField()

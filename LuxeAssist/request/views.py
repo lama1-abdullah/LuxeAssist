@@ -68,7 +68,7 @@ def cancel_request_view(request: HttpRequest, requset_id):
     ## try:
     requests = Request.objects.get(id = requset_id)
     requests.delete()
-    return redirect("services:home_services_view")
+    return redirect("main:home_view")
         
      ##except  Exception as e:
 
@@ -80,7 +80,7 @@ def update_price_view(request:HttpRequest, requests_id):
     if request.method == "POST":
         requests.request_price = request.POST["request_price"]
         requests.save()
-        return redirect("request:request_details_view", requset_id = requests.id)
+        return redirect("request:request_details_view", requsets_id = requests.id)
 
 
 def add_status_view(request: HttpRequest, requests_id):
