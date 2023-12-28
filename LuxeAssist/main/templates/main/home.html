@@ -7,14 +7,15 @@
     <h1>Contact</h1>
     
     <div class="card">
-       <h1>Phrase</h1> 
-        <h4>WHAT ARE YOU LOOKING FOR? </h4>
-         <div class="input-group rounded w-50">
-            <input type="search" class="form-control rounded " placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-          </div>
-
+        <h1>Phrase</h1> 
+         <h4>WHAT ARE YOU LOOKING FOR? </h4>
+          <div class="input-group rounded w-50">
+             <form role="search" action="{% url 'main:search_view' %}" method="GET">  
+                 <input name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+             </form>
+         </div>
           <h3>introduction</h3>
-      </div>
+    </div>
 
 <div class="container row">
     <div class="col-3">
