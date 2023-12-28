@@ -17,18 +17,6 @@ def add_typeService_view(request:HttpRequest):
     return render(request,"services/add_typeService.html")
 
 
-
-
-def home_services_view(request:HttpRequest):
-
-    typeServices=TypeService.objects.all()
-
-    return render(request, 'services/home_service.html', {"typeService":typeServices})
-
-
-
-
-
 def details_typeService_view(request:HttpRequest, typeService_id):
 
     typeServices=TypeService.objects.get(id=typeService_id)
