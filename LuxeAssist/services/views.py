@@ -65,18 +65,21 @@ def delete_services_views(request:HttpRequest, typeService_id):
     typeService.delete()
     return redirect("services:home_services_view")
 
-def add_service_view(request:HttpRequest,typeservices_id):
+def add_service_view(request:HttpRequest):
 
-    typeservices=TypeService.objects.get(id=typeservices_id)
+
+
+    service_types = TypeService.objects.all()
 
     if request.method== "POST":
+        typeservices=TypeService.objects.get(id=request.POST["type"])
         new_service=Service(user=request.user, type_service=typeservices , title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"] , initial_price=request.POST["initial_price"])
         new_service.save()
 
         return redirect("services:details_typeService_view", typeService_id=typeservices.id)
 
     
-    return render(request , "services/add_service.html", {"services":typeservices})
+    return render(request , "services/add_service.html", { "service_types" : service_types})
 
 def details_service_view(request:HttpRequest, service_id):
 
