@@ -11,6 +11,7 @@ urlpatterns = [
    path("payment/<requests_id>/", views.payment_view, name="payment_view"),
    path("not/", views.not_found_view, name="not_found_view"),
    path("display/all/contact/",views.display_all_contacts_view, name = "display_all_contacts_view"),
-   path('adminn/page/',views.admin_page_view, name="admin_page_view")
+   path('adminn/page/',views.admin_page_view, name="admin_page_view"),
+   path("success/payment/",views.success_payment_view, name="success_payment_view" )
 
 ]
