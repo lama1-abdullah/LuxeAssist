@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} User Not found  {% endblock %}
+{% block content  %}
+
+<div class ="wrapper pages-content">
+    <div class = "row content d-flex flex-column align-items-center ">
+ 
+            <h1 class= "mt-5 mb-5">success payment</h1>
+            <a class="dropdown-item " href="{% url 'request:user_requests_view' %}">Back to your order</a>
+            
+     </div>
+</div>
+
+
+
+{% endblock %}

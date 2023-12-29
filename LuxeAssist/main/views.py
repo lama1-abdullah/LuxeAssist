@@ -45,7 +45,7 @@ def payment_view(request: HttpRequest ,requests_id):
     if request.method=="POST":
         new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
         new_payment.save()
-        return redirect("main:home_view")
+        return redirect("main:success_payment_view")
   #except:
         #return render(request, "main/user_not_found.html")
 
@@ -86,3 +86,7 @@ def search_view(request: HttpRequest):
 def admin_page_view(request: HttpRequest):
 
     return render(request,"main/admin_page.html")
+
+def success_payment_view(request: HttpRequest):
+
+    return render(request, "main/success_payment.html")

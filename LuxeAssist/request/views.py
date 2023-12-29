@@ -52,27 +52,31 @@ def admin_requests_view(request: HttpRequest):
    
 
 def request_details_view(request: HttpRequest,requsets_id):
-    
     requests = Request.objects.get(id =requsets_id)
 
-    if request.method == "POST":
-        new_Request = RequestComment(user = request.user, requests = requests, comment = request.POST["comment"])
-        new_Request.save()
-    requestComment=RequestComment.objects.filter(requests = requests)
-
-
+    try:
+       
+        if request.method == "POST":
+            new_Request = RequestComment(user = request.user, requests = requests, comment = request.POST["comment"])
+            new_Request.save()
+        requestComment=RequestComment.objects.filter(requests = requests)
+       
+    except Exception as e:
+        return redirect("main:home_view")
+        
     return render(request ,"request/request_details_view.html", {"requests":requests , "requestComment": requestComment})
 
+     
 
 def cancel_request_view(request: HttpRequest, requset_id):
-    ## try:
-    requests = Request.objects.get(id = requset_id)
-    requests.delete()
-    return redirect("main:home_view")
+    try:
+        requests = Request.objects.get(id = requset_id)
+        requests.delete()
+        return redirect("main:home_view")
         
-     ##except  Exception as e:
+    except  Exception as e:
 
-        ## return render(request, "")
+        return render(request, "main/user_not_found.html")
 
 def update_price_view(request:HttpRequest, requests_id):
 
