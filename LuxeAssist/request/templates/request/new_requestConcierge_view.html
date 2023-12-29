@@ -8,15 +8,15 @@
 <h1>All Requests</h1>
 <div class="container">
 
-    <div class="row">
-        <div class="col-4">
+    <div class="row mt-5">
+        <div class="col-6">
 
             
             
             <a href="{% url 'request:request_details_view' requests.id %}" >{{requests.service.title}}</a>
-                {{requests.date}}
-                {{requests.request_price}} 
-                {{requests.note}}   
+                <h3>{{requests.date}}</h3>
+                <h3>{{requests.request_price}} </h3>
+                <h3>{{requests.note}} </h3>  
                 
            
 

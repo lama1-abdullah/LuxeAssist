@@ -23,11 +23,13 @@
 <br>
 
 <div class="container row">
+
     <div class="col-3">
         <a class="btn btn-primary" href="{% url 'services:add_typeService_view' %}"> Add Service</a>
     </div> 
     <h4 class="text-1">All Our services</h4>
     <br><br>
+  
     {% for service in typeServices %}
     <section id="card1" class="card_service col-5">
         <img class="image h-40 w-40" src="{{service.image.url}}" alt="Card image cap">

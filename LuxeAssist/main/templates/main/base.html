@@ -38,9 +38,26 @@
               <a class="nav-link text-white" href="{% url 'main:contact_view' %}">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">none</a>
+              <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Consierge 
+              </a> 
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'services:conceirge_services_view'%}">All services</a></li>
+                <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All Order</a></li>
+                <li><a class="dropdown-item" href="">New Order</a></li>
+                <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add Service</a></li>
+                {% if request.user.is_staff %}
+                <li><a class="dropdown-item" href=""></a></li>
+                {%endif%}
+              </ul>
             </li>
           </ul>
+          
+          
           {% if request.user.is_authenticated %}
           <div>
             <img class="rounded-circle avatar p-2" width="50px" src="{{ request.user.profile.avatar.url }}" />
@@ -54,7 +71,7 @@
               <li><a class="dropdown-item" href="{% url 'accounts:user_profile_page_view' user.id %}">Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:update_profile_page_view' %}">Update Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
-              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All request consierge</a></li>
+              
               <li><a class="dropdown-item" href="{%url 'accounts:logout_page_view' %}">LogOut</a></li>
         {% else %}
               <li><a class="dropdown-item" href="{% url 'accounts:login_page_view' %}">Sign Up</a></li>

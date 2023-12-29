@@ -26,7 +26,7 @@
                 <label>Initial price</label>
                 <input class="form-control" name="initial_price" type="text" required />
                 
-
+                <label>Service categories</label>
                 <select class="form-select" name="type">
                     {% for type in service_types %}
                         <option value="{{ type.id }}">{{type.title}}</option>

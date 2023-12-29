@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block title %} admin page {% endblock %}
+{% block content %}
+
+
+<section class="container p-3 mt-5">
+    <div class="row">
+    <h4> Admin Page </h4>
+        <div class="col-5">
+            <ul class="list-group">
+                <a href="{% url 'services:all_servicesProvider_view' %}"><li class="list-group-item btn btn-primary">All Consierge page</li></a>
+                <a href="{% url 'services:all_services_admin_view' %}"><li class="list-group-item btn btn-primary">All concierge services page </li></a>
+                <a href="{% url 'request:admin_requests_view' %}"><li class="list-group-item btn btn-primary">All user order page </li></a>
+                <a href="{% url 'main:display_all_contacts_view' %}"><li class="list-group-item btn btn-primary">All Contacts page </li></a>
+                <a href="{% url 'services:add_typeService_view' %}"><li class="list-group-item btn btn-primary"> Add Service categories</li></a>
+                
+               
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock%}

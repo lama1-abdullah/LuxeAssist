@@ -7,12 +7,12 @@
 {% block content %}
 {% for services in all_services %}
 <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{{service.image.url}}" alt="Card image cap">
+    <img class="card-img-top" src="{{services.image.url}}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title"><a href="{#}">{{services.title}}</a></h5>
+      <h5 class="card-title"><a href="{% url 'services:details_service_view' services.id %}">{{services.title}}</a></h5>
       <p class="card-text"> {{services.description}}</p>
-      <h6 class="card-subtitle mb-2 text-muted">{{services.price}}</h6>
-      <a href="{% url 'services:delete_services_admin_views' service.id %}" class="card-link">Delete</a>
+      <h6 class="card-subtitle mb-2 text-muted"> Price {{services.initial_price}}</h6>
+      <a href="{% url 'services:delete_services_admin_views' services.id %}" class="card-link">Delete</a>
     </div>
   </div>
    
