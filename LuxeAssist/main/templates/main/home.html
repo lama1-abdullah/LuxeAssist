@@ -2,40 +2,43 @@
 {% block title %} home {% endblock %}
 {% block content %}
 
-<section class="container">
-   
-    <h1>Contact</h1>
-    
-    <div class="card">
-        <h1>Phrase</h1> 
-         <h4>WHAT ARE YOU LOOKING FOR? </h4>
+<div class="homepage">
+
+    <div class="row">
+        <div class="title col">
+         <h1>Phrase</h1> 
+        <p>introduction</p>
+         <h5>WHAT ARE YOU LOOKING FOR? </h5>
           <div class="input-group rounded w-50">
              <form role="search" action="{% url 'main:search_view' %}" method="GET">  
                  <input name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
              </form>
          </div>
-          <h3>introduction</h3>
+         
     </div>
+</div>  
+
+</div>  
+     
+<br>
 
 <div class="container row">
     <div class="col-3">
         <a class="btn btn-primary" href="{% url 'services:add_typeService_view' %}"> Add Service</a>
     </div> 
-    <h4>All Our services</h4>
+    <h4 class="text-1">All Our services</h4>
+    <br><br>
     {% for service in typeServices %}
-        <div class="card1"style="width:16rem;">
-            <div class="card-img" style="width:15rem;">
-                <img class="card-img-top" src="{{service.image.url}}" alt="Card image cap">
-            </div>
-                <div class="card-body">
-                    <a href="{% url 'services:details_typeService_view' service.id %}" ><p class="card-text">{{service.title}}</p></a>
-                    <p>{{service.description}}</p>
-                </div>
+    <section id="card1" class="card_service col-5">
+        <img class="image h-40 w-40" src="{{service.image.url}}" alt="Card image cap">
+        <div class="card__content">
+           <a href="{% url 'services:details_typeService_view' service.id %}" ><p class="card__title">{{service.title}}</p></a>
+          <p class="card__description">{{service.description}}.</p>
         </div>
+      </section>
     {% endfor %}
 </div>
      
-</section>      
+   
 
 {% endblock %}
-

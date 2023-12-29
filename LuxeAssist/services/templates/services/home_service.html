@@ -5,21 +5,28 @@
 
 
 {% block content %}
-
-<section class="container">
-
-    <h4>All services</h4>
-    <div class="row">
-        <div class="col-5">
+<br><br><br>
+    <h1>All services</h1>
+    
+            <div class="col">
+                
             {% for service in typeService %}
-                <img src="{{service.image.url}}"/>
-                <a href="{% url 'services:details_typeService_view' service.id %}" ><h4>{{service.title}}</h4></a>
-                <h4>{{service.description}}</h4>
+                <div class="service-card d-flex flex-column gap-2 p-0 border border-1 rounded-4 shadow h-100 overflow-hidden justify-content-start ">
+                    <img class="poster" src="{{service.image.url}}" />
+                    <div class=" d-flex justify-content-between align-items-center">
+                        
+                    <div class="p-3 d-flex flex-column">
+                        <a class=" text-decoration-none" href="{% url 'services:details_typeService_view' service.id %}" ><h6>{{service.title}}</h6></a>
+                        <h6>{{service.description}}</h6>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
+       
         </div>
-    </div>
-</section>
-
-
 
 {% endblock %}
+
+
+
+
