@@ -15,7 +15,7 @@ class Payment(models.Model):
    number_card= models.PositiveIntegerField()
    expiration_date =models.DateField()
    cvv=models.PositiveIntegerField()
-
+   
   
    def __str__(self):
      
