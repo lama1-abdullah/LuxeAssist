@@ -17,6 +17,7 @@ def add_typeService_view(request:HttpRequest):
     return render(request,"services/add_typeService.html")
 
 
+
 def details_typeService_view(request:HttpRequest, typeService_id):
 
     typeServices=TypeService.objects.get(id=typeService_id)
