@@ -21,7 +21,7 @@
               </label>
             </div>
         {% endfor %}
-        <input class="btn btn-primary mt-2" type="submit" value=" Send" />
+        <input class="btn btn-primary mt-2" type="submit" data-bs-toggle="modal" data-bs-target="#content" value=" Send" />
  
       </form>
     </div> 
@@ -29,6 +29,24 @@
   </div> 
 </div>
 </section>
+<!-- modal -->
+<div class="modal" tabindex="1" id="content">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Contact Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>We have received your contact. We will respond to you within 24 hours. Follow your email</p>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

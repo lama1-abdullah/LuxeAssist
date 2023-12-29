@@ -20,7 +20,7 @@
             {% for contact in contacts %}
                 <tr>
                     <td>{{ contact.user.username }}</td>
-                    <td>{{ contact.user.email }}</td>
+                    <td><a href="mailto:{{ contact.user.email }}">{{ contact.user.email }}</a></td>
                     <td>{{ contact.type }}</td>
                     <td>{{ contact.content }}</td>
                 </tr>
