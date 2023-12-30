@@ -7,16 +7,16 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-8">
-            <img src="{{typeService.image.url}}"  width="600px" height="400px"/>
-            <h2>{{typeService.title}}</h2>
-            <h5>{{typeService.description}}</h5>
+        <div class="details col-7">
+            <img class= "img-details" src="{{typeService.image.url}}" width="633px" height="400px"/>
+            <h2 >{{typeService.title}}</h2>
+            <h5 >{{typeService.description}}</h5>
         </div>
     </div>
 
 
-    <div class="dropdown p-2">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="button-edit dropdown p-2">
+      <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Edit  
       </button>
       <ul class="dropdown-menu">
@@ -27,22 +27,33 @@
     </div>
     
 
-    <div class="row">
-        <div class="col-5">
+    <div class="card-d row row-cols-1 row-cols-md-2">
+      <div class="col ">
+        <!-- Card -->
+        <div class="card">
             {% for services in services %}
-            <img class="avatar mt-3" src="{{ user.profile.avatar.url }}"  width="60px" class="rounded-circle" />
-            <h5> Consierge {{services.user.first_name}} {{services.user.last_name}}</h5>
-            
-            <img src="{{services.image.url}}"/>
-                <a href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
-                <h4>{{services.description}}</h4>
-                <h5>{{services.initial_price}}</h5>
+            <div class="view overlay">
+              <img class="card-img-top " src="{{services.image.url}}"
+                alt="Card image cap">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+               <!--Title-->
+               <img class="avatar mt-3" src="{{ user.profile.avatar.url }}"  width="60px" class="rounded-circle" />
+               <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
+               <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
+              <!--Text-->
+              <h6>{{services.description}}</h6>
+              <h6>{{services.initial_price}}</h6>
+              
             {% endfor %}
 
 
         </div>
     </div>
-</div>
-
 
 {% endblock %}
+
+
