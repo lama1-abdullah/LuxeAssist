@@ -17,7 +17,7 @@ urlpatterns = [
     path('activate/user/<user_id>/',views.activate_conceirge_viwe, name = "activate_conceirge_viwe"),
     path('deactivate/user/<user_id>/',views.deactivate_conceirge_viwe, name = "deactivate_conceirge_viwe"),
     path('all/services/admin/', views.all_services_admin_view , name="all_services_admin_view"),
-    path('delete/services/admin/', views.delete_services_admin_views , name="delete_services_admin_views"),
+    path('delete/services/admin/<service_id>/', views.delete_services_admin_views , name="delete_services_admin_views"),
     path('all/service/concierge/', views.conceirge_services_view, name = "conceirge_services_view" ),
 
 ]

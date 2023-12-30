@@ -20,9 +20,14 @@
             {% for request in requests %}
             <hr>
                 <div class="col-5 p-3">
-                 <a href="{% url 'services:details_service_view' request.service.id %}" ><h4> service {{request.service.title}}</h4></a>
-                  <h4>user: {{request.user.first_name}} {{request.user.last_name}}</h4>
+                <h4> Title service<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h4>
+                 
+                <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
+                  
+                 <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                  <h4>By user: {{request.user.first_name}} {{request.user.last_name}}</h4>
                   <h4>Note: {{request.note}}</h4>
+                  <h4>Price: {{request.request_price}}</h4>
                   <h4> Date Time :{{request.date}}</h4>
                   <h4> Status :{{request.status}}</h4>
                   <a href="{% url 'request:delete_request_admin_view' request.id %}" class="btn btn-primary">Delete</a>

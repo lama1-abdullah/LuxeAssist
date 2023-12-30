@@ -31,10 +31,10 @@ def user_requests_view(request: HttpRequest):
 
 def concierge_requests_view(request: HttpRequest): 
    # try:
-        
-       requests = Request.objects.filter(user = request.user)
-
-       return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
+    services=Service.objects.filter(user=request.user)
+    requests = Request.objects.filter(service__in= services)
+    
+    return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
     #except Exception as e:
 
        # return render(request, "")

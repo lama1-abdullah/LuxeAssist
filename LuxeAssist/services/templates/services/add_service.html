@@ -9,7 +9,11 @@
 <div class="container">
 
     <div class="row mt-5">
-
+        {% if msg %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
         <div class="col-5">
             <form action="{% url 'services:add_service_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                 {% csrf_token %}

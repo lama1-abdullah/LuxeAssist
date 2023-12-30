@@ -6,13 +6,18 @@
 
 {% block content %}
 <div class="container">
+   {% if msg %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
     <div class="row">
+
         <div class="details col-7 gap-2 p-3 border border-1 rounded-2 ">
             <img class= "img-details" src="{{typeService.image.url}}" width="628px" height="400px"/>
             <h2 >{{typeService.title}}</h2>
             <h5 >{{typeService.description}}</h5>
         </div>
-    </div>
 
 
     <div class="button-edit dropdown p-2">
@@ -26,6 +31,7 @@
       </ul>
     </div>
     
+
     <div class="col-4">
       <div class="d-flex flex-column">
           <div class="card-body gap-2 p-3 border border-1 rounded-2 ">
@@ -43,7 +49,7 @@
               </div>
               {% endfor %}
           </div>
-        </div>
+
 
 {% endblock %}
 
