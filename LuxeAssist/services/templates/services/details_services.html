@@ -6,8 +6,17 @@
 
 {% block content %}
 <div class="container">
+  {% if msg %}
+    <div class="alert alert-danger" role="alert">
+        {{ msg }}
+    </div>
+  {% endif %}
     <div class="row">
         <div class="col-8">
+          <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
+            <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
+            <h5> <h6 style="color: rgb(87, 3, 3);">Consierge </h6>{{service.user.first_name}} {{service.user.last_name}}</h5>
+          </div>
             <img src="{{service.image.url}}"  width="600px" height="400px"/>
             <h2>{{service.title}}</h2>
             <h5>{{service.description}}</h5>
@@ -20,16 +29,7 @@
     <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
 
 
-    <div class="dropdown p-2">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Edit  
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete service consierge</a></li>
-        <li><a class="dropdown-item" href="{% url 'services:update_service_view' service.id %}">Update service consierge</a></li>
-        
-      </ul>
-    </div>
+    
     
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

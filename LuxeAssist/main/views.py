@@ -29,7 +29,8 @@ def contact_view(request: HttpRequest):
         contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
         contact.save()
 
-        return redirect("main:home_view")
+        return redirect("main:contact_view")
+    
     user_contact= Contact.objects.filter(user= request.user)
     
     return render(request, "main/contact.html", {"categories": Contact.categories ,"user_contact" : user_contact}) 

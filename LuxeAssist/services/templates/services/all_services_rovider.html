@@ -5,16 +5,25 @@
 
 
 {% block content %}
+<div>
+  {% if msg %}
+  <div class="alert alert-danger" role="alert">
+      {{ msg }}
+  </div>
+  {% endif %}
+
 {% for user in coceirge_users %}
- <div class="card" style="width: 18rem;">
+ <div class="card" style="width: 20rem;">
    <div class="card-body">
       {% if user.is_active %} <h3>Active</h3> {% else %} <h3>Not Active</h3> {% endif %}
      <h5 class="card-title">Name:{{user.first_name}} {{user.last_name}}</h5>
-     <h5 class="card-title">Email:{{user.email}}</h5>
-     <h5 class="card-title">Phone Number: {{user.profile.phone_number}}</h5>
+     <a href="mailto:{{ user.email }}"><h5 class="card-title">Email:{{user.email}}</h5></a>
+     <a href="tel:{{user.profile.phone_number}}"><h5 class="card-title">Phone Number: {{user.profile.phone_number}}</h5></a>
      <a href="{% url 'services:activate_conceirge_viwe' user.id %}" class="btn btn-primary">Activate</a>
      <a href="{% url 'services:deactivate_conceirge_viwe' user.id %}" class="btn btn-primary">Deactivate</a>
    </div>
  </div>
+ 
  {% endfor %}
+</div>
 {% endblock %}

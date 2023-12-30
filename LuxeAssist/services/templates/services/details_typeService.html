@@ -7,6 +7,11 @@
 {% block content %}
 <div class="container">
     <div class="row">
+      {% if msg %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
         <div class="col-8">
             <img src="{{typeService.image.url}}"  width="600px" height="400px"/>
             <h2>{{typeService.title}}</h2>
@@ -30,8 +35,10 @@
     <div class="row">
         <div class="col-5">
             {% for services in services %}
-            <img class="avatar mt-3" src="{{ user.profile.avatar.url }}"  width="60px" class="rounded-circle" />
-            <h5> Consierge {{services.user.first_name}} {{services.user.last_name}}</h5>
+            <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
+              <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
+              <h5> <h6 style="color: rgb(87, 3, 3);">Consierge </h6>{{services.user.first_name}} {{services.user.last_name}}</h5>
+            </div>
             
             <img src="{{services.image.url}}"/>
                 <a href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>

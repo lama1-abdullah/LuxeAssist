@@ -5,16 +5,29 @@
 
 
 {% block content %}
+<div>
+  {% if msg %}
+  <div class="alert alert-danger" role="alert">
+      {{ msg }}
+  </div>
+  {% endif %}
+
 {% for services in all_services %}
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 22rem;">
     <img class="card-img-top" src="{{services.image.url}}" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title"><a href="{% url 'services:details_service_view' services.id %}">{{services.title}}</a></h5>
-      <p class="card-text"> {{services.description}}</p>
+      <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
+        <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
+        <h5> <h6 style="color: rgb(87, 3, 3);">Consierge </h6>{{services.user.first_name}} {{services.user.last_name}}</h5>
+      </div>
+      <h5 class="card-title">Servise title:<a href="{% url 'services:details_service_view' services.id %}">{{services.title}}</a></h5>
+      <h6 class="card-subtitle text-muted">Category:<a href="{% url 'services:details_typeService_view' services.type_service.id %}">{{services.type_service.title}}</a></h6>
+      <p class="card-text" style="color: black;"> {{services.description}}</p>
       <h6 class="card-subtitle mb-2 text-muted"> Price {{services.initial_price}}</h6>
-      <a href="{% url 'services:delete_services_admin_views' services.id %}" class="card-link">Delete</a>
+      <a href="{% url 'services:delete_services_admin_views' services.id %}" class="btn btn-primary">Delete</a>
     </div>
   </div>
+</div>
    
 
 {%endfor%}

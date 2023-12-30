@@ -8,42 +8,54 @@ from accounts.models import Profile
 
 
 def add_typeService_view(request:HttpRequest):
-
+    msg=None
     if request.method=="POST":
-        new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
-        new_service.save()
-        return redirect("main:home_view")
+        try:
+            new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
+            new_service.save()
+            return redirect("main:home_view")
+        except Exception as e:
+            msg = f"An error occured, please fill in all fields and try again . {e}"
         
-    return render(request,"services/add_typeService.html")
+    return render(request,"services/add_typeService.html" ,{"msg":msg})
 
 
 
 def details_typeService_view(request:HttpRequest, typeService_id):
+    msg=None
+    try:
+        typeServices=TypeService.objects.get(id=typeService_id)
+        services=Service.objects.filter(type_service=typeServices)
 
-    typeServices=TypeService.objects.get(id=typeService_id)
-    services=Service.objects.filter(type_service=typeServices)
-    return render(request , "services/details_typeService.html",{"typeService":typeServices , "services":services})
+    except Exception as e:
+        msg=f"Sorry, something went wrong. Try again later {e}"
+
+    return render(request , "services/details_typeService.html",{"typeService":typeServices , "services":services ,"msg":msg})
 
 
 
 
 
 def update_typeService_view(request:HttpRequest,typeService_id):
-   
+    msg=None
     typeService= TypeService.objects.get(id=typeService_id)
 
     if request.method=="POST":
+        try:
         
-        typeService.title=request.POST["title"]
-        typeService.description=request.POST["description"]
-        typeService.image=request.FILES["image"]
-        typeService.save()
+            typeService.title=request.POST["title"]
+            typeService.description=request.POST["description"]
+            if "image" in request.FILES:
+                typeService.image=request.FILES["image"]
+            typeService.save()
 
-        return redirect("services:details_typeService_view",typeService_id=typeService.id) 
+            return redirect("services:details_typeService_view",typeService_id=typeService.id) 
+        except Exception as e:
+            msg = f"An error occured, please fill in all fields and try again . {e}"
         
 
         
-    return render(request,"services/update_typeServices.html",{"typeService":typeService })
+    return render(request,"services/update_typeServices.html",{"typeService":typeService ,"msg":msg})
 
 
 
@@ -55,65 +67,77 @@ def delete_services_views(request:HttpRequest, typeService_id):
     return redirect("main:home_view")
 
 def add_service_view(request:HttpRequest):
-
-
+    msg=None
 
     service_types = TypeService.objects.all()
 
     if request.method== "POST":
-        typeservices=TypeService.objects.get(id=request.POST["type"])
-        new_service=Service(user=request.user, type_service=typeservices , title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"] , initial_price=request.POST["initial_price"])
-        new_service.save()
+        try:
+            typeservices=TypeService.objects.get(id=request.POST["type"])
+            new_service=Service(user=request.user, type_service=typeservices , title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"] , initial_price=request.POST["initial_price"])
+            new_service.save()
 
-        return redirect("services:details_typeService_view", typeService_id=typeservices.id)
+            return redirect("services:details_typeService_view", typeService_id=typeservices.id)
+        except Exception as e:
+            msg=f"An error occured, please fill in all fields and try again . {e}"
 
     
-    return render(request , "services/add_service.html", { "service_types" : service_types})
+    return render(request , "services/add_service.html", { "service_types" : service_types ,"msg": msg})
 
 def details_service_view(request:HttpRequest, service_id):
-
+    msg=None
     service=Service.objects.get(id=service_id)
     if request.method=="POST":
-        reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
-        reviews.save()
+        try:
+            reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
+            reviews.save()
+        except Exception as e:
+            msg=f"Sorry, something went wrong. Try again later {e}"
 
     reviews=Review.objects.filter(services=service)
    
-    return render(request , "services/details_services.html",{"service":service , "reviews":reviews})
+    return render(request , "services/details_services.html",{"service":service , "reviews":reviews ,"msg":msg})
 
 
 
 def update_service_view(request:HttpRequest, service_id):
-
+    msg=None
     service=Service.objects.get(id=service_id)
 
     
     if request.method=="POST":
+        try:
 
-        service.title=request.POST["title"]
-        service.description=request.POST["description"]
-        service.image=request.FILES["image"] 
-        service.initial_price=request.POST["initial_price"]
-        service.save()
+            service.title=request.POST["title"]
+            service.description=request.POST["description"] 
+            if "image" in request.FILES:
+                service.image=request.FILES["image"]
+            service.initial_price=request.POST["initial_price"]
+            service.save()
 
-        return redirect("services:details_service_view",service_id=service.id)
+            return redirect("services:conceirge_services_view")
+        except Exception as e:
+            msg=f"An error occured, please fill in all fields and try again . {e}"
+        
     
-    return render(request,"services/update_service.html",{"service": service })
+    return render(request,"services/update_service.html",{"service": service,"msg":msg })
 
 def delete_servicesConcierge_views(request:HttpRequest, service_id):
 
     service=Service.objects.get(id=service_id)
     service.delete()
-    return redirect("main:home_view")
+    return redirect("services:conceirge_services_view")
 
 
 def all_servicesProvider_view (request:HttpRequest):
+    msg=None
+    try:
+        coceirge_users = User.objects.filter(groups__name="conceirge")
+    except Exception as e:
+        msg=f"Sorry, something went wrong. Try again later {e}"
 
 
-    coceirge_users = User.objects.filter(groups__name="conceirge")
-
-
-    return render(request,"services/all_services_rovider.html", {"coceirge_users": coceirge_users})
+    return render(request,"services/all_services_rovider.html", {"coceirge_users": coceirge_users,"msg":msg})
 
 
 def activate_conceirge_viwe(request:HttpRequest,user_id):
@@ -135,9 +159,13 @@ def deactivate_conceirge_viwe(request:HttpRequest,user_id):
 
 
 def all_services_admin_view(request:HttpRequest):
-    all_services = Service.objects.all()
+    msg=None
+    try:
+        all_services = Service.objects.all()
+    except Exception as e:
+        msg=f"Sorry, something went wrong. Try again later {e}"
 
-    return render (request,"services/all_services_admin.html",{"all_services":all_services})
+    return render (request,"services/all_services_admin.html",{"all_services":all_services,"msg":msg})
 
 
 def delete_services_admin_views(request:HttpRequest, service_id):
@@ -150,6 +178,13 @@ def delete_services_admin_views(request:HttpRequest, service_id):
 
 
 def conceirge_services_view(request:HttpRequest):
-    service = Service.objects.filter(user = request.user)
-    return render(request , 'services/conceirge_services.html', {"service":service})
+    msg=None
+    try:
+        service = Service.objects.filter(user = request.user)
+    except Exception as e:
+        msg=f"Sorry, something went wrong. Try again later {e}"
+
+
+
+    return render(request , 'services/conceirge_services.html', {"service":service ,"msg":msg})
 

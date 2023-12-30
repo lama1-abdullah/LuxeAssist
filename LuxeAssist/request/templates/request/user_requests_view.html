@@ -15,15 +15,19 @@
             
         <section class="container">
 
-            <h4>All services</h4>
+            <h4>All Order</h4>
             <div class="row">
                 <div class="col-5">
                     {% for request in requests %}
                     <hr>
                         <h4> {{request.user.first_name}} {{request.user.last_name}}</h4>
-                        <a href="{% url 'request:request_details_view' request.id %}" ><h4> {{request.service.title}}</h4></a>
+                        <h4>Service:<a href="{% url 'request:request_details_view' request.id %}" >{{request.service.title}}</a> </h4>
+                        <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                        <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
                         <h4>{{request.service.description}}</h4>
-                        <h4> {{request.status}}</h4>
+                        <h6> Date: {{request.date }}</h6>
+                        <h6>status: {{request.status}}</h6>
+
                     {% endfor %}
                 </div>
             </div>

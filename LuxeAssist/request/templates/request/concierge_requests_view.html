@@ -5,33 +5,29 @@
 {% block content  %}
 
    
-      <h1>All Requests</h1>
-        <div class="row ">
+      
+        <div class="row  mt-5">
+            <h1>All Requests</h1>
             {% if requests.count == 0 %}
              <div class="alert alert-info">No order yet.</div>
             {% endif %}
              
         </div>
-            
-           
-              
-              
-              
+
+            <div class="mt-2"> 
               {% for request in requests %}
             
-                  {{request.service.title}}
-                  {{request.service.description}}
-                  {{request.user.first_name}} {{request.user.last_name}}
-                  {{request.status}}
+                <h4>Service Title:<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h4>
+                <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                <h4>{{request.service.description}}</h4>
+                <h4> by user: {{request.user.first_name}} {{request.user.last_name}}</h4>
+                <h4>note:{{request.note}}</h4>
+                <h4>Price by user:{{request.request_price}}</h4>
+                <h4>status:{{request.status}}</h4>
                   
                 
               {% endfor %}
-            
-     
-       
-   
+            </div> 
 
-
-    
 
 {% endblock %}
