@@ -3,40 +3,6 @@
 {% block title %} About {% endblock %}
 {% block content %}
 
-<div class="row row-cols-1 row-cols-md-2">
-    <div class="col mb-4">
-      <!-- Card -->
-      <div class="card">
-  
-        <!--Card image-->
-        <div class="view overlay">
-          <img class="card-img-top" src="{{services.image.url}}"
-            alt="Card image cap">
-            <a href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!--Card content-->
-        <div class="card-body">
-  
-          <!--Title-->
-          <img class="avatar mt-3" src="{{ user.profile.avatar.url }}"  width="60px" class="rounded-circle" />
-          <h4 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h4>
-          <!--Text-->
-          <a class="card-text" href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
-          <h4>{{services.description}}</h4>
-          <h5>{{services.initial_price}}</h5>
-          
-  
-        </div>
-  
-      </div>
+
 {% endblock %}
 
-<img class="avatar mt-3" src="{{ user.profile.avatar.url }}"  width="60px" class="rounded-circle" />
-<h5> Consierge {{services.user.first_name}} {{services.user.last_name}}</h5>
-
-<img src="{{services.image.url}}"/>
-    <a class="card-text" href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
-    <h4>{{services.description}}</h4>
-    <h5>{{services.initial_price}}</h5>

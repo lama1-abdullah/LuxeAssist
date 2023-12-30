@@ -5,19 +5,19 @@
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <img src="{{service.image.url}}"  width="600px" height="400px"/>
+<div class="col-6">
+    <div class="d-flex flex-column">
+        <div class="card-body gap-2 p-3 border border-1 rounded-2 ">
+            <img src="{{service.image.url}}" width="633px" height="400px">
+            
             <h2>{{service.title}}</h2>
             <h5>{{service.description}}</h5>
             <h5>initial price: {{service.initial_price}}</h5>
             <h5>category: {{service.type_service.title}}</h5>
+            <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
         </div>
     </div>
-
-    
-    <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
+</div>
 
 
     <div class="dropdown p-2">
