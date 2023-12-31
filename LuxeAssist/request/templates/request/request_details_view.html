@@ -23,7 +23,9 @@
                 {% csrf_token %}
                
                 <input TYPE="submit" Name="status" Value="Approve">
+                {% if requests.status == "pending"%}
                 <input TYPE="submit" Name="status" Value="Reject">
+                {% endif %}
                 
         
                     
@@ -33,10 +35,14 @@
     {% else %}
         <div class = "row">
             <div class = "col-4">
+                {% if requests.status == "pending" %}
                 <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
+                {% endif %}
             </div>
             <div class = "col-4">
+                {% if requests.status == "pending" %}
                 <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
+                {% endif %}
             </div>
 
             <div class = "col-4">
@@ -64,8 +70,12 @@
                         <input type="submit" value="Update Price" class="btn btn-dark mt-2"/>
                 </form>
                 </div>
+                
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                   
+                    
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                   
                 
                 </div>
             </div>

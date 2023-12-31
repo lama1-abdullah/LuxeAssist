@@ -28,6 +28,9 @@
                         <h4>{{request.service.description}}</h4>
                         <h6> Date: {{request.date }}</h6>
                         <h6>status: {{request.status}}</h6>
+                        {% if request.status == "Approve" %}
+                        <h4>Payed : {% if request.has_payment  %} <div class="bg-success p-2 text-white">Payed</div> {% else %} <div class="bg-danger p-2 text-white">Not Payed</div> {% endif %}</h4>
+                        {% endif %}
                         
 
                     {% endfor %}

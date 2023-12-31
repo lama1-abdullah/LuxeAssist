@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from .models import Request 
 from services.models import Service
 from .models import RequestComment 
+from main.models import Payment
 
 
 
@@ -23,6 +24,10 @@ def user_requests_view(request: HttpRequest):
         
         requests = Request.objects.filter(user= request.user)
 
+        for index, r in enumerate(requests):
+            requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
+
         return render(request, 'request/user_requests_view.html', {"requests" : requests})
     except Exception as e:
 
@@ -33,11 +38,36 @@ def concierge_requests_view(request: HttpRequest):
    try:
         services=Service.objects.filter(user=request.user)
         requests = Request.objects.filter(service__in= services)
+
+
+        for index, r in enumerate(requests):
+            requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
     
         return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
    except Exception as e:
 
         return render(request, "main/user_not_found.html")
+
+def cheke_isPayment_view(request: HttpRequest):
+    
+    requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
+    for index, r in enumerate(requests):
+        requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
+    return render(request, 'request/cheke_payment.html', {"requests" : requests})
+
+
+def cheke_unPayment_view(request: HttpRequest):
+    
+    requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
+
+    for index, r in enumerate(requests):
+        requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
+    return render(request, 'request/cheke_unPayment.html', {"requests" : requests})
+
+
     
 
 def admin_requests_view(request: HttpRequest):
@@ -71,7 +101,8 @@ def request_details_view(request: HttpRequest,requsets_id):
 def cancel_request_view(request: HttpRequest, requset_id):
     try:
         requests = Request.objects.get(id = requset_id)
-        requests.delete()
+        requests.status = "Cancle"
+        requests.save()
         return redirect("main:home_view")
         
     except  Exception as e:

@@ -25,6 +25,9 @@
                 <h4>note:{{request.note}}</h4>
                 <h4>Price by user:{{request.request_price}}</h4>
                 <h4>status:{{request.status}}</h4>
+                {% if request.status == "Approve" %}
+                <h4>Payed : {% if request.has_payment  %} <div class="bg-success p-2 text-white">Payed</div> {% else %} <div class="bg-danger p-2 text-white">Not Payed</div> {% endif %}</h4>
+                {% endif %}
                   
                 
               {% endfor %}
