@@ -112,7 +112,7 @@ align-items: center;
 display: flex;
 justify-content: center;
 align-items: center;
-margin: 40px auto;
+margin: 30px 10px;
 }
 
 
@@ -155,13 +155,18 @@ margin: 40px auto;
 .img-details{
 	border-radius: 10px;
 }
-.button-edit{
-	margin-left: 180vh;	
-	
-} 
+ 
 .card-d{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 40px auto;
 }
+
+.card-body{
+	margin: 40px auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+

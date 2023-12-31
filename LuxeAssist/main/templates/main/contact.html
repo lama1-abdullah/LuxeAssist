@@ -69,16 +69,16 @@
 
 
 
-<h4>All contact</h4>
 <div class="row ">
-    {% if user_contact.count == 0 %}
-     <div class="alert alert-info">No contact yet.</div>
-    {% endif %}
-     
+  {% if user_contact.count == 0 %}
+  <div class="alert alert-info">No contact yet.</div>
+  {% endif %}
+  
 </div>
-    
-<section class="container">
 
+<section class="container">
+  <h4>All contact</h4>
+  
     <div class="row">
         <div class="col-5">
             {% for contact in user_contact %}

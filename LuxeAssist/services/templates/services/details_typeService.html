@@ -13,7 +13,7 @@
         {% endif %}
     <div class="row">
 
-        <div class="details col-7 gap-2 p-3 border border-1 rounded-2 ">
+        <div class="details col-7 gap-2 p-3 border border-1 rounded-2  " style="background-color: #e5c4a07a;">
             <img class= "img-details" src="{{typeService.image.url}}" width="628px" height="400px"/>
             <h2 >{{typeService.title}}</h2>
             <h5 >{{typeService.description}}</h5>
@@ -33,21 +33,22 @@
     
 
     <div class="col-4">
-      <div class="d-flex flex-column">
-          <div class="card-body gap-2 p-3 border border-1 rounded-2 ">
-              {% for services in services %}
-              
+      {% for services in services %}
+        <div class="d-flex flex-row gap-2">
+            <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+                
+                
               <img src="{{services.image.url}}" height="200px" width="330px">
-               <div class="d-flex gap-1">
+                <div class="d-flex gap-1">
                 <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
-               </div>
-               <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
-               <br>
-               <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
-               <h6>{{services.description}}</h6>
-               <h6>{{services.initial_price}}</h6>
+                </div>
+                <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
+                <br>
+                <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
+                <h6>{{services.description}}</h6>
+                <h6>{{services.initial_price}}</h6>
               </div>
-              {% endfor %}
+        {% endfor %}
           </div>
 
 
