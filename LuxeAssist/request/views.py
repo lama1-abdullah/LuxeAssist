@@ -9,9 +9,7 @@ from main.models import Payment
 
 
 def add_Request_view(request:HttpRequest, service_id):
-    if not request.user.is_authenticated:
-        return render(request, "main/not_authorized.html", status=401)
-        
+   
     service = Service.objects.get(id = service_id)  
     if request.method == "POST":
         newRequest = Request(user = request.user, service = service, note = request.POST["note"], date = request.POST["date"], request_price = request.POST["request_price"])
@@ -35,36 +33,46 @@ def user_requests_view(request: HttpRequest):
     
 
 def concierge_requests_view(request: HttpRequest): 
-   try:
+   #try:
         services=Service.objects.filter(user=request.user)
         requests = Request.objects.filter(service__in= services)
 
 
         for index, r in enumerate(requests):
             requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+        # if "Paid" in request.GET and request.GET["Paid"]=="isPaid":
+        #     pay_requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
+        # else:
+        #     pay_requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
+
+        
 
     
         return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
-   except Exception as e:
+#    except Exception as e:
 
         return render(request, "main/user_not_found.html")
 
+
+
+
 def cheke_isPayment_view(request: HttpRequest):
+    
     
     requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
     for index, r in enumerate(requests):
         requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
-
+   
     return render(request, 'request/cheke_payment.html', {"requests" : requests})
 
 
 def cheke_unPayment_view(request: HttpRequest):
-    
+   
     requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
-
     for index, r in enumerate(requests):
         requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
 
+    
     return render(request, 'request/cheke_unPayment.html', {"requests" : requests})
 
 
@@ -145,3 +153,9 @@ def delete_request_admin_view(request: HttpRequest, requset_id):
     
 
 
+def requests_status_viwe(request:HttpRequest,item):
+    
+    requests_status= Request.objects.filter(status=item)
+   
+    
+    return render(request, "request/concierge_requests_view.html", {"requestsStatus":requests_status})
