@@ -40,15 +40,33 @@ def concierge_requests_view(request: HttpRequest):
 
         for index, r in enumerate(requests):
             requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
+        # if "status" in request.GET and request.GET["status"] =="Approve":
+        #    status = Request.objects.filter(status__contains ="Approve")
+
+        # elif "status" in request.GET and request.GET["status"] =="Pending":
+        #    status = Request.objects.filter(status__contains ="Pending")
+
+        # elif "status" in request.GET and request.GET["status"] =="Reject":
+        #    status = Request.objects.filter(status__contains ="Reject")
+        
+        # elif "status" in request.GET and request.GET["status"] =="Cancle":
+        #    status = Request.objects.filter(status__contains ="Cancle")
+        # else:
+        #    status = Request.objects.all()
         # if "Paid" in request.GET and request.GET["Paid"]=="isPaid":
         #     pay_requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
         # else:
         #     pay_requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
 
         
+        if "status" in request.GET :
+          status =Request.objects.filter(status=request.GET["status"])
+        else:
+          status =Request.objects.all()
 
     
-        return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
+        return render(request, 'request/concierge_requests_view.html', {"requests" : requests , "status":status})
 #    except Exception as e:
 
         return render(request, "main/user_not_found.html")
