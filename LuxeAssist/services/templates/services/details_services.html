@@ -25,11 +25,11 @@
         </div>
     </div>
 
-    
-    <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
+    {% if user.is_authenticated and not user.groups.exists and not request.user.is_superuser %}
+      <a class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
+    {% endif %}
 
 
-    
     
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -15,7 +15,7 @@
 
     </div>
     
-    {% if perms.services.add_service %}
+    {% if user.groups.exists %}
     <div class = "row">
         <div class="col-2">
             

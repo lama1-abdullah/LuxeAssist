@@ -10,6 +10,8 @@ from accounts.models import Profile
 def add_typeService_view(request:HttpRequest):
     msg=None
     if request.method=="POST":
+        if  not request.user.is_superuser and request.user.is_staff :
+            return render(request,"main/user_not_found.html", status=401)
         try:
             new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
             new_service.save()
@@ -41,6 +43,8 @@ def update_typeService_view(request:HttpRequest,typeService_id):
     typeService= TypeService.objects.get(id=typeService_id)
 
     if request.method=="POST":
+        if  not request.user.is_superuser and request.user.is_staff :
+            return render(request,"main/user_not_found.html", status=401)
         try:
         
             typeService.title=request.POST["title"]
@@ -62,6 +66,9 @@ def update_typeService_view(request:HttpRequest,typeService_id):
 
 def delete_services_views(request:HttpRequest, typeService_id):
 
+    if  not request.user.is_superuser :
+            return render(request,"main/user_not_found.html", status=401)
+
     typeService= TypeService.objects.get(id = typeService_id)
     typeService.delete()
     return redirect("main:home_view")
@@ -72,6 +79,8 @@ def add_service_view(request:HttpRequest):
     service_types = TypeService.objects.all()
 
     if request.method== "POST":
+        if  not request.user.groups.exists:
+            return render(request,"main/user_not_found.html", status=401)
         try:
             typeservices=TypeService.objects.get(id=request.POST["type"])
             new_service=Service(user=request.user, type_service=typeservices , title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"] , initial_price=request.POST["initial_price"])
@@ -106,6 +115,8 @@ def update_service_view(request:HttpRequest, service_id):
 
     
     if request.method=="POST":
+        if  not request.user.groups.exists:
+            return render(request,"main/user_not_found.html", status=401)
         try:
 
             service.title=request.POST["title"]
@@ -123,14 +134,19 @@ def update_service_view(request:HttpRequest, service_id):
     return render(request,"services/update_service.html",{"service": service,"msg":msg })
 
 def delete_servicesConcierge_views(request:HttpRequest, service_id):
-
+    if  not request.user.groups.exists:
+            return render(request,"main/user_not_found.html", status=401)
+    
     service=Service.objects.get(id=service_id)
     service.delete()
     return redirect("services:conceirge_services_view")
 
 
 def all_servicesProvider_view (request:HttpRequest):
+
     msg=None
+    if  not request.user.is_superuser and request.user.is_staff :
+            return render(request,"main/user_not_found.html", status=401)
     try:
         coceirge_users = User.objects.filter(groups__name="conceirge")
     except Exception as e:
@@ -160,6 +176,8 @@ def deactivate_conceirge_viwe(request:HttpRequest,user_id):
 
 def all_services_admin_view(request:HttpRequest):
     msg=None
+    if  not request.user.is_superuser and request.user.is_staff :
+            return render(request,"main/user_not_found.html", status=401)
     try:
         all_services = Service.objects.all()
     except Exception as e:
@@ -170,6 +188,9 @@ def all_services_admin_view(request:HttpRequest):
 
 def delete_services_admin_views(request:HttpRequest, service_id):
 
+    if  not request.user.is_superuser :
+            return render(request,"main/user_not_found.html", status=401)
+
     service=Service.objects.get(id=service_id)
     service.delete()
     return redirect("services:all_services_admin_view")
@@ -179,6 +200,8 @@ def delete_services_admin_views(request:HttpRequest, service_id):
 
 def conceirge_services_view(request:HttpRequest):
     msg=None
+    if  not request.user.groups.exists:
+        return render(request,"main/user_not_found.html", status=401)
     try:
         service = Service.objects.filter(user = request.user)
     except Exception as e:

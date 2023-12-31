@@ -19,17 +19,25 @@
         </div>
     </div>
 
-
+  
     <div class="dropdown p-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Edit  
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'services:delete_services_views' typeService.id %}">Delete Service categories</a></li>
-        <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' typeService.id %}">Update Service categories</a></li>
+        {% if request.user.is_superuser %}
+          <li><a class="dropdown-item" href="{% url 'services:delete_services_views' typeService.id %}">Delete Service categories</a></li>
+        {%endif%}
+        {% if request.user.is_superuser and request.user.is_staff %}
+          <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' typeService.id %}">Update Service categories</a></li>
+        {%endif%}
+        {% if user.groups.exists%}
         <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add consierge services</a></li>
+        {%endif%}
       </ul>
     </div>
+  
+    
     
 
     <div class="row">
