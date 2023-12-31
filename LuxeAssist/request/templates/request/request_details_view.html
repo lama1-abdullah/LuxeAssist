@@ -4,17 +4,18 @@
 {% block title %} detail  {% endblock %}
 {% block content  %}
 
-<div class = "container mt-5">
-    <div class = "row">
-        <div class = "col">
-            {{requests.service.title}}
-            {{requests.date}}
-            {{requests.note}}
-            {{requests.request_price}}
+<div class = "container ">
+<div class="col-4">
+    <div class="d-flex flex-row gap-2">
+      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+            <h6>{{requests.service.title}}</h6>
+            <h6>{{requests.date}}</h6> 
+            <h6>{{requests.note}}</h6>
+            <h6>{{requests.request_price}}</h6>
+        
         </div>
-
     </div>
-    
+  </div> 
     {% if perms.services.add_service %}
     <div class = "row">
         <div class="col-2">
@@ -32,14 +33,14 @@
         
     {% else %}
         <div class = "row">
-            <div class = "col-4">
-                <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
+            <div class = "col-2">
+                <a class="btn btn-success mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
             </div>
-            <div class = "col-4">
-                <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
+            <div class = "col-2">
+                <a class="btn btn-danger mb-3 " style="margin-right:150px;" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
             </div>
 
-            <div class = "col-4">
+            <div class = "col-2">
                 {% if requests.status == "Approve" %}
                 <a class="dropdown-item" href="{% url 'main:payment_view' requests.id %}">Payment</a>
                 {% endif %}
