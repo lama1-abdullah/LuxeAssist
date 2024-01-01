@@ -32,8 +32,6 @@ def user_requests_view(request: HttpRequest):
     
 
 def concierge_requests_view(request: HttpRequest): 
-    if  not request.user.is_authenticated and not request.user.groups.exists :
-        return render(request,"main/user_not_found.html", status=401)
    # try:
     services=Service.objects.filter(user=request.user)
     requests = Request.objects.filter(service__in= services)
