@@ -31,7 +31,7 @@
     <section id="card1 " class="card_service col-3 ms-1 ">
         <img class="image h-40 w-40" src="{{service.image.url}}" alt="Card image cap">
         <div class="card__content">
-           <a href="{% url 'services:details_typeService_view' service.id %}" ><p class="card__title">{{service.title}}</p></a>
+           <a style="color: white;" href="{% url 'services:details_typeService_view' service.id %}" ><p class="card__title">{{service.title}}</p></a>
           <p class="card__description">{{service.description}}.</p>
         </div>
       </section>

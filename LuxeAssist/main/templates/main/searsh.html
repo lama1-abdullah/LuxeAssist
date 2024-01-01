@@ -12,15 +12,28 @@
     
         <div class="container row">
             
-        {%for service in services %}
-          <div class="card1"style="width:  16rem;">
-           <div class="card-img" style="width:15rem;">
-            <img class="card-img-top" src="{{service.image.url}}" alt="Card image cap">
+        {%for services in services %}
+        <div class="col-4 g-2">
+      
+      
+            <div class="d-flex flex-row gap-3">
+                <div class="card-body gap-3 p-3 rounded-2 " style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
+                    
+                    
+                  <img src="{{services.image.url}}" height="200px" width="100%">
+                    <div class="d-flex gap-1">
+                    <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
+                    </div>
+                    <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
+                    <br>
+                    <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
+                    <h6>{{services.description}}</h6>
+                    <h6>Price {{services.initial_price}}</h6>
+                </div>
+            
+              </div>
+              
             </div>
-            <div class="card-body">
-            <p class="card-text">{{service.title}}</p>
-        </div> 
-    </div>
     {% endfor %}
     </div>
     </div>

@@ -4,19 +4,30 @@
 {% block title %} detail  {% endblock %}
 {% block content  %}
 
-<div class = "container ">
-<div class="col-4" >
-    <div class="d-flex flex-row gap-2 align-items-center" >
-      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;" >
-            <h6>{{requests.service.title}}</h6>
-            <h6>{{requests.date}}</h6> 
+<div class = "container p-5 ">
+<div class="row" >
+    <div class="mt-3 p-3" style="background-color: rgba(255, 228, 196, 0.395);" >
+            <h6>service {{requests.service.title}}</h6> 
             <h6>{{requests.note}}</h6>
-            <h6>{{requests.request_price}}</h6>
+            <div class="d-flex flex-row gap-2">
+            <span style="color: rgba(255, 0, 0, 0.625);" class="material-symbols-outlined">
+                payments
+                </span> 
+            <h6>{{requests.request_price}} Riyal</h6>
+            </div>
+            <div class="d-flex flex-row g-2">
+                <span style="color: rgba(255, 0, 0, 0.605);" class="material-symbols-outlined">
+                    calendar_month
+                    </span>
+                <h6>{{requests.date}}</h6>
+            </div>
         
-        </div>
     </div>
+</div>
+</div> 
+    {% if perms.services.add_service %}
 
-    <div class = "row">
+    <div class = "row p-3">
         <div class="col-2">
             
             <form class="d-flex flex-column gap-1"action="{% url 'request:add_status_view' requests.id %}" method="POST">
@@ -33,7 +44,7 @@
         </div>
         
     {% else %}
-        <div class = "row">
+        <div class = "row p-4">
 
             <div class = "col-4">
                 {% if requests.status == "pending" %}
@@ -88,14 +99,14 @@
 
     <hr>
     <section class="p-3 ">
-        <div clss="row ">
+        <div class="row">
             <h2>Comments</h2>
-            <div class="col-4 d-flex flex-column gap-2 ">
+            <div class="col-4">
                 {% for comment in requestComment %}
-                <div class="review d-flex flex-column gap-2 border border-1 p-2 ">
-                    <h4 id="name">{{comment.user.username}}</h4>
+            
+                <h4 id="name">{{comment.user.username}}</h4>
+                <div class="p-3" style="  width: 100%; border-radius: 20px; background-color: rgba(255, 228, 196, 0.395);">
                     <p>{{comment.comment}}</p>
-                    <h6>{{comment.request.date}}</h6>
                 </div>
                 {% endfor %}
   
@@ -127,7 +138,7 @@
         </div>
     </div>
 
-</div>  
+ 
 
 
 {% endblock %}

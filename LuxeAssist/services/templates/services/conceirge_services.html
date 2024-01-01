@@ -6,25 +6,47 @@
 
 {% block content %}
 
-<div class="container d-flex justify-content-center align-items-center" style="margin: 0px auto; ">
+<div style="margin: 0px auto; ">
+    <h2>All Service </h2>
     {% if msg %}
     <div class="alert alert-danger" role="alert">
         {{ msg }}
     </div>
     {% endif %}
     <div class="row">
+        {% for service in service %}
+        <div class="col-4 g-2 p-4">
+            <div>
+                <div class="p-3" style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
+                    
+                    
+                  <img src="{{service.image.url}}" height="200px" width="100%">
+                    <a href="{% url 'services:details_service_view' service.id %}" ><h2>{{service.title}}</h2></a>
+                    <h6>Category:<a href="{% url 'services:details_typeService_view' service.type_service.id %}">{{service.type_service.title}}</a></h6> 
+                    <h6>{{service.description}}</h6>
+                    <div class="d-flex flex-row gap-2">
+                      <span style="color: rgba(255, 0, 0, 0.625);" class="material-symbols-outlined">
+                          payments
+                          </span> 
+                      <h6>{{service.initial_price}} Riyal</h6>
+                      </div>
+                      <div class="d-flex flex-row justify-content-between">
+                        <a class="btn btn-primary" href="{% url 'services:update_service_view' service.id %}">Update </a>
+                        <a class="btn btn-primary" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete</a>
+                      </div>
+                </div>
+            
+              </div>
 
-      <div class="details col-7 gap-2 p-2 border border-1 " style="background-color: #ffffff7a;">
+              
+              
+            </div>
         
-       {% for service in service %}
-        <img class= "img-details" src="{{service.image.url}}" width="462px" height="250px"/>
-        <h4>Service : <a href="{%url 'services:details_service_view' service.id%}">{{service.title}}</a></h4>
-        <h6>Category:<a href="{% url 'services:details_typeService_view' service.type_service.id %}">{{service.type_service.title}}</a></h6> 
-        <h5>{{service.description}}</h5>
-        <h5>initial price: {{service.initial_price}}</h5>
 
-          </div>
-        </div>
+
+
+
+        {% endfor %}
 
       
 

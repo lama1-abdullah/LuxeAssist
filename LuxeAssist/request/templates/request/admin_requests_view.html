@@ -24,8 +24,19 @@
                  <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
                   <h4>By user: {{request.user.first_name}} {{request.user.last_name}}</h4>
                   <h4>Note: {{request.note}}</h4>
-                  <h4>Price: {{request.request_price}}</h4>
-                  <h4> Date Time :{{request.date}}</h4>
+                  <div class="d-flex flex-row gap-2">
+                    <span style="color: rgba(255, 0, 0, 0.34);" class="material-symbols-outlined">
+                        payments
+                        </span> 
+                        <h4>{{request.request_price}} Riyal</h4>
+                    </div>
+                    <div class="d-flex flex-row g-2">
+                        <span style="color: rgba(255, 0, 0, 0.396);" class="material-symbols-outlined">
+                            calendar_month
+                            </span>
+                         <h6>{{request.date }}</h6>
+                    </div>
+                  
                   <h4> Status :{{request.status}}</h4>
                   <a href="{% url 'request:delete_request_admin_view' request.id %}" class="btn btn-primary">Delete</a>
                 </div>    
