@@ -73,7 +73,7 @@
           <h2>Reviews</h2>
           <div class="col-12 d-flex flex-column gap-2 ">
               {% for review in reviews %}
-              <div class="review d-flex flex-column gap-2 border border-1 p-2 ">
+              <div class=" d-flex flex-column gap-2 p-2 ">
                   <h3 id="name">{{review.user.username}}</h3>
                   <h3>{{review.rating}} <span class="material-symbols-outlined">grade</span></h>
                   <p>{{review.comment}}</p>
@@ -92,18 +92,18 @@
           <h5> Add Review</h5>
           <form action="{% url 'services:details_service_view' service.id %}"method="post">
               {% csrf_token %}
-              <div class="rate ">
-                <input type="radio" id="star5" name="rating" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" />
-                <label for="star1" title="text">1 star</label>
-            </div>
+          <div class="rate ">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
           
           <label>Comment</label>
           <input class="form-control mb-4" type="text" name="comment"/>
