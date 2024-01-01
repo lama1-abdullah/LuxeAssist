@@ -16,6 +16,8 @@ urlpatterns = [
     path('new/request/<requset_id>/', views.new_requestConcierge_view, name="new_requestConcierge_view"),
     path('delete/request/admin/<requset_id>/',views.delete_request_admin_view, name="delete_request_admin_view"),
     path('request/payment/', views.cheke_isPayment_view, name="cheke_isPayment_view"),
-    path('request/unpayment/',views.cheke_unPayment_view, name="cheke_unPayment_view")
+    path('request/unpayment/',views.cheke_unPayment_view, name="cheke_unPayment_view"),
+    path('request/user/payment/', views.chekeUser_isPayment_view, name="chekeUser_isPayment_view"),
+    path('request/user/unpayment/',views.chekeUser_unPayment_view, name="chekeUser_unPayment_view")
     
 ]

@@ -35,11 +35,14 @@ def user_requests_view(request: HttpRequest):
 def concierge_requests_view(request: HttpRequest): 
    #try:
         services=Service.objects.filter(user=request.user)
-        requests = Request.objects.filter(service__in= services)
+        requests = Request.objects.filter(service__in= services).order_by("-date")
+
 
 
         for index, r in enumerate(requests):
             requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+
+        
         # if "Paid" in request.GET and request.GET["Paid"]=="isPaid":
         #     pay_requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
         # else:
@@ -57,8 +60,7 @@ def concierge_requests_view(request: HttpRequest):
 
 
 def cheke_isPayment_view(request: HttpRequest):
-    
-    
+
     requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
     for index, r in enumerate(requests):
         requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
@@ -68,13 +70,29 @@ def cheke_isPayment_view(request: HttpRequest):
 
 def cheke_unPayment_view(request: HttpRequest):
    
-    requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
+    requests = Request.objects.filter(service__user=request.user).exclude(payment__requests__service__user=request.user) #only not payed payments
     for index, r in enumerate(requests):
         requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
 
     
     return render(request, 'request/cheke_unPayment.html', {"requests" : requests})
+def chekeUser_isPayment_view(request: HttpRequest):
+    
+    
+    requests = Request.objects.filter(payment__user=request.user) #only payed payments
+    for index, r in enumerate(requests):
+        requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+   
+    return render(request, 'request/cheke_payment.html', {"requests" : requests})
 
+
+def chekeUser_unPayment_view(request: HttpRequest):
+   
+    
+    requests = Request.objects.filter(user=request.user).exclude(payment__user=request.user)
+
+    
+    return render(request, 'request/cheke_unPayment.html', {"requests" : requests})
 
     
 

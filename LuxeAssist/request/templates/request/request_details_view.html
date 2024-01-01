@@ -43,13 +43,13 @@
             </div>
             <div class = "col-4">
                 {% if requests.status == "pending" %}
-                <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
+                <a class="btn btn-primary" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
                 {% endif %}
             </div>
 
             <div class = "col-2">
                 {% if requests.status == "Approve" %}
-                <a class="dropdown-item" href="{% url 'main:payment_view' requests.id %}">Payment</a>
+                <a class="btn btn-primary" href="{% url 'main:payment_view' requests.id %}">Payment</a>
                 {% endif %}
             </div>
             
