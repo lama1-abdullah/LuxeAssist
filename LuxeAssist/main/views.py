@@ -17,15 +17,14 @@ def home_view(request: HttpRequest):
     return render(request, "main/home.html" , {"typeServices":typeServices})
 
 
+
 def about_view(request: HttpRequest):
 
     return render(request, "main/about.html")
 
 
-def contact_view(request: HttpRequest):
 
-    if  not request.user.is_authenticated :
-        return render(request,"main/user_not_found.html", status=401)
+def contact_view(request: HttpRequest):
 
     if request.method=="POST":
 
@@ -40,11 +39,10 @@ def contact_view(request: HttpRequest):
 
 
 
-
 def payment_view(request: HttpRequest ,requests_id):
 
-    # if request.user.is_authenticated or not request.user.groups.exists or not request.user.is_superuser or not request.user.is_staff :
-    #     return render(request,"main/user_not_found.html", status=401)
+    if not request.user.is_authenticated and request.user.groups.exists and request.user.is_superuser and request.user.is_staff :
+        return render(request,"main/user_not_found.html", status=401)
 
   #try:
     requests=Request.objects.get(id=requests_id)
@@ -89,16 +87,17 @@ def search_view(request: HttpRequest):
     print(services)
     return render(request, "main/searsh.html", {"services" : services })
 
+
+
 def admin_page_view(request: HttpRequest):
      
-    # if request.user.is_authenticated or not request.user.groups.exists or not request.user.is_superuser or not request.user.is_staff :
-    #     return render(request,"main/user_not_found.html", status=401)
+    if not request.user.is_superuser :
+        return render(request,"main/user_not_found.html", status=401)
 
     return render(request,"main/admin_page.html")
 
+
+
 def success_payment_view(request: HttpRequest):
-
-    # if request.user.is_authenticated or not request.user.groups.exists or not request.user.is_superuser or not request.user.is_staff :
-    #     return render(request,"main/user_not_found.html", status=401)
-
+    
     return render(request, "main/success_payment.html")

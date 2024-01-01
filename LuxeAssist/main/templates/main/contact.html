@@ -21,7 +21,12 @@
               </label>
             </div>
         {% endfor %}
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#content" >send</button>
+
+        {% if request.user.is_authenticated %}
+           <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#content" >send</button>
+        {%else%}
+           <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#content" disabled >send</button>
+        {%endif%}
 
         <div class="modal" tabindex="1" id="content">
           <div class="modal-dialog">
