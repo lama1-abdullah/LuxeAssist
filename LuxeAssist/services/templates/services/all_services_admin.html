@@ -12,24 +12,29 @@
   </div>
   {% endif %}
 
-{% for services in all_services %}
-<div class="card" style="width: 22rem;">
-    <img class="card-img-top" src="{{services.image.url}}" alt="Card image cap">
-    <div class="card-body">
-      <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
-        <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
-        <h5> <h6 style="color: rgb(87, 3, 3);">Consierge </h6>{{services.user.first_name}} {{services.user.last_name}}</h5>
+  <div class="row p-4" style="margin-top:100px;">
+    <h2 style="align-content: center;"> All Sservice consierge</h2>
+  {% for services in all_services %}
+ <div class="col-4 g-3 ">
+  <div class="d-flex flex-row gap-2 col-4">
+  <div class="card-body border border-1 rounded-2 p-4 " style="background-color: #dfdddc5b;">
+      
+    <img src="{{services.image.url}}" height="200px" width="360px">
+      <div class="d-flex gap-1">
+      <img class="avatar mt-4" src="{{ user.profile.avatar.url }}" width="50px" style="border-radius:50%" class="rounded-circle" />
+      <h5 class="card-title  mt-5" style="color: rgb(87, 3, 3);"> Consierge:  {{services.user.first_name}} {{services.user.last_name}}</h5>
       </div>
-      <h5 class="card-title">Servise title:<a href="{% url 'services:details_service_view' services.id %}">{{services.title}}</a></h5>
-      <h6 class="card-subtitle text-muted">Category:<a href="{% url 'services:details_typeService_view' services.type_service.id %}">{{services.type_service.title}}</a></h6>
-      <p class="card-text" style="color: black;"> {{services.description}}</p>
-      <h6 class="card-subtitle mb-2 text-muted"> Price {{services.initial_price}}</h6>
+      <br>
+      <h5 class="title-1">Servise title: <a href="{% url 'services:details_service_view' services.id %}" >{{services.title}}</a></h5>
+      <h5 >Category: <a href="{% url 'services:details_typeService_view' services.type_service.id %}">{{services.type_service.title}}</a></h5>
+      <h6 style="color: black;"> {{services.description}}</h6>
+      <h6> Price {{services.initial_price}}</h6>
+      <h6>{{services.initial_price}}</h6>
       <a href="{% url 'services:delete_services_admin_views' services.id %}" class="btn btn-primary">Delete</a>
     </div>
   </div>
 </div>
-   
 
-{%endfor%}
-
+  {% endfor %}
+    </div>
 {% endblock %}

@@ -20,19 +20,24 @@ def home_view(request: HttpRequest):
     return render(request, "main/home.html" , {"typeServices":typeServices})
 
 
+
 def about_view(request: HttpRequest):
 
     return render(request, "main/about.html")
 
 
+
 def contact_view(request: HttpRequest):
 
+   #try:
     if request.method=="POST":
 
         contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
         contact.save()
 
         return redirect("main:contact_view")
+    #except:
+        #return render(request, "main/user_not_found.html")
     
     user_contact= Contact.objects.filter(user= request.user)
     
@@ -40,8 +45,10 @@ def contact_view(request: HttpRequest):
 
 
 
-
 def payment_view(request: HttpRequest ,requests_id):
+
+    if not request.user.is_authenticated and request.user.groups.exists and request.user.is_superuser and request.user.is_staff :
+        return render(request,"main/user_not_found.html", status=401)
 
   #try:
     requests=Request.objects.get(id=requests_id)
@@ -71,13 +78,12 @@ def not_found_view(request: HttpRequest):
 
 
 def display_all_contacts_view(request:HttpRequest):
-    # message = None
-    # if request.user.is_staff:
+
+    if  not request.user.is_superuser and not request.user.is_staff  :
+            return render(request,"main/user_not_found.html", status=401)
+
     contacts = Contact.objects.all()
     return render(request, "main/display_all_contacts.html", {"contacts": contacts})
-    # else:
-        # User is not a staff 
-        # return render(request, "main/user_not_found.html")
   
 
 
@@ -95,10 +101,16 @@ def search_view(request: HttpRequest):
     print(services)
     return render(request, "main/searsh.html", {"services" : services })
 
+
+
 def admin_page_view(request: HttpRequest):
+     
+    if not request.user.is_superuser :
+        return render(request,"main/user_not_found.html", status=401)
 
     return render(request,"main/admin_page.html")
 
-def success_payment_view(request: HttpRequest):
 
+def success_payment_view(request: HttpRequest):
+    
     return render(request, "main/success_payment.html")

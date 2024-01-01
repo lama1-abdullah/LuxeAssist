@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class = "wrapper pages-content">
-<div class="row content d-flex flex-column align-items-center">
+    <section class="container content d-flex flex-column align-items-center ">
+        <br>
     <h1>Register Page</h1>
     <h3>Sign Up</h3>
     {% if message %}
@@ -12,8 +13,9 @@
     {{ message }}
     </div>
     {% endif %}
-    <div class="col-6">
-       
+    <div class="d-flex flex-row gap-1 col-9">
+        <div class="card-body gap-2 p-3 border border-1 rounded-2 col-12" style="background-color: #dfdddc85;">
+        <div class="row">
 
         <form class="d-flex flex-column gap-1"  action="{% if 'user' in request.GET %}{% url 'accounts:register_page_view' %}?user=coneirge{% else %}{% url 'accounts:register_page_view' %}{%endif%}" method="POST" enctype="multipart/form-data" >
             {% csrf_token %}
@@ -51,5 +53,8 @@
     </div>
 
 </div>
+</div>
+</div>
+</section>
 </div>
 {% endblock %}

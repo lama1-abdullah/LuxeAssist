@@ -5,10 +5,13 @@ from .models import TypeService , Service, Review
 from accounts.models import Profile
 # Create your views here.
 
-
+### Type Service View
 
 def add_typeService_view(request:HttpRequest):
     msg=None
+    if  not request.user.is_superuser and not request.user.is_staff :
+            return render(request,"main/user_not_found.html", status=401)
+    
     if request.method=="POST":
         try:
             new_service=TypeService(title=request.POST["title"],description=request.POST["description"], image=request.FILES["image"])
@@ -20,9 +23,9 @@ def add_typeService_view(request:HttpRequest):
     return render(request,"services/add_typeService.html" ,{"msg":msg})
 
 
-
 def details_typeService_view(request:HttpRequest, typeService_id):
     msg=None
+    
     try:
         typeServices=TypeService.objects.get(id=typeService_id)
         services=Service.objects.filter(type_service=typeServices)
@@ -33,11 +36,11 @@ def details_typeService_view(request:HttpRequest, typeService_id):
     return render(request , "services/details_typeService.html",{"typeService":typeServices , "services":services ,"msg":msg})
 
 
-
-
-
 def update_typeService_view(request:HttpRequest,typeService_id):
     msg=None
+    if  not request.user.is_superuser and not request.user.is_staff :
+        return render(request,"main/user_not_found.html", status=401)
+    
     typeService= TypeService.objects.get(id=typeService_id)
 
     if request.method=="POST":
@@ -58,18 +61,24 @@ def update_typeService_view(request:HttpRequest,typeService_id):
     return render(request,"services/update_typeServices.html",{"typeService":typeService ,"msg":msg})
 
 
-
-
 def delete_services_views(request:HttpRequest, typeService_id):
+
+    if  not request.user.is_superuser and not request.user.is_staff :
+        return render(request,"main/user_not_found.html", status=401)
 
     typeService= TypeService.objects.get(id = typeService_id)
     typeService.delete()
     return redirect("main:home_view")
 
+
+### Service View
+
 def add_service_view(request:HttpRequest):
     msg=None
-
     service_types = TypeService.objects.all()
+
+    if not request.user.has_perm("services.add_service"): #not work with admin 
+        return render(request,"main/user_not_found.html", status=401) 
 
     if request.method== "POST":
         try:
@@ -86,26 +95,30 @@ def add_service_view(request:HttpRequest):
 
 def details_service_view(request:HttpRequest, service_id):
     msg=None
-    service=Service.objects.get(id=service_id)
-    if request.method=="POST":
-        try:
-            reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
-            reviews.save()
-        except Exception as e:
-            msg=f"Sorry, something went wrong. Try again later {e}"
+    try:
+        service=Service.objects.get(id=service_id)
+        if request.method=="POST":
+            try:
+                reviews=Review(services=service,user=request.user,rating=request.POST["rating"],comment=request.POST["comment"])
+                reviews.save()
+            except Exception as e:
+                msg=f"Sorry, something went wrong. Try again later {e}"
 
-    reviews=Review.objects.filter(services=service)
-   
-    return render(request , "services/details_services.html",{"service":service , "reviews":reviews ,"msg":msg})
+        reviews=Review.objects.filter(services=service)
 
+        return render(request , "services/details_services.html",{"service":service , "reviews":reviews ,"msg":msg})
+    except Exception as e:
+        return redirect("main:not_found_view")
 
 
 def update_service_view(request:HttpRequest, service_id):
     msg=None
     service=Service.objects.get(id=service_id)
 
-    
+    if  not request.user.has_perm("services.change_service"):#not work with admin
+        return render(request,"main/user_not_found.html", status=401)   
     if request.method=="POST":
+
         try:
 
             service.title=request.POST["title"]
@@ -123,14 +136,19 @@ def update_service_view(request:HttpRequest, service_id):
     return render(request,"services/update_service.html",{"service": service,"msg":msg })
 
 def delete_servicesConcierge_views(request:HttpRequest, service_id):
-
+    if  not request.user.has_perm("services.delete_service"):#not work with admin
+        return render(request,"main/user_not_found.html", status=401) 
+    
     service=Service.objects.get(id=service_id)
     service.delete()
     return redirect("services:conceirge_services_view")
 
 
 def all_servicesProvider_view (request:HttpRequest):
+
     msg=None
+    if  not request.user.is_superuser and not request.user.is_staff:
+            return render(request,"main/user_not_found.html", status=401)
     try:
         coceirge_users = User.objects.filter(groups__name="conceirge")
     except Exception as e:
@@ -141,6 +159,8 @@ def all_servicesProvider_view (request:HttpRequest):
 
 
 def activate_conceirge_viwe(request:HttpRequest,user_id):
+    if  not request.user.is_superuser :
+        return render(request,"main/user_not_found.html", status=401)
     
     user =  User.objects.get(id = user_id)
     user.is_active = True
@@ -150,6 +170,8 @@ def activate_conceirge_viwe(request:HttpRequest,user_id):
 
 
 def deactivate_conceirge_viwe(request:HttpRequest,user_id):
+    if  not request.user.is_superuser :
+        return render(request,"main/user_not_found.html", status=401)
     
     user =  User.objects.get(id = user_id)
     user.is_active = False
@@ -160,6 +182,8 @@ def deactivate_conceirge_viwe(request:HttpRequest,user_id):
 
 def all_services_admin_view(request:HttpRequest):
     msg=None
+    if  not request.user.is_superuser and not request.user.is_staff  :
+            return render(request,"main/user_not_found.html", status=401)
     try:
         all_services = Service.objects.all()
     except Exception as e:
@@ -170,6 +194,9 @@ def all_services_admin_view(request:HttpRequest):
 
 def delete_services_admin_views(request:HttpRequest, service_id):
 
+    if  not request.user.is_superuser :
+            return render(request,"main/user_not_found.html", status=401)
+
     service=Service.objects.get(id=service_id)
     service.delete()
     return redirect("services:all_services_admin_view")
@@ -179,6 +206,8 @@ def delete_services_admin_views(request:HttpRequest, service_id):
 
 def conceirge_services_view(request:HttpRequest):
     msg=None
+    if not request.user.has_perm("services.add_service"): #not work with admin 
+        return render(request,"main/user_not_found.html", status=401)
     try:
         service = Service.objects.filter(user = request.user)
     except Exception as e:

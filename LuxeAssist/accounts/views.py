@@ -69,6 +69,8 @@ def logout_page_view(request: HttpRequest):
     
 
 def user_profile_page_view(request: HttpRequest , user_id):
+    if  not request.user.is_authenticated :
+        return render(request,"main/user_not_found.html", status=401)
     try:
       user = User.objects.get(id = user_id)
       user_reviews = Review.objects.filter(user = request.user)
@@ -81,6 +83,9 @@ def user_profile_page_view(request: HttpRequest , user_id):
 
 def update_profile_page_view(request: HttpRequest):
    message = None
+
+   if  not request.user.is_authenticated :
+        return render(request,"main/user_not_found.html", status=401)
 
    if request.method == "POST": 
     try:

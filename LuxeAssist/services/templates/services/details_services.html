@@ -5,6 +5,22 @@
 
 
 {% block content %}
+
+<div class="start1">
+  <img src="{{service.image.url}}" width="100%" height="520vh" style="z-index: -1;"/>
+  <div class="d-flex flex-column justify-content-center align-items-start" style="margin-top: -19rem; color: white; ">
+    <div class="card-body gap-2 p-3 rounded-2 col-8" style="background-color: #4b351979;" >
+      <h2 class="contant">Service {{service.title}}</h2>
+      <h5>category: {{service.type_service.title}}</h5>
+    <div class="d-flex flex-row gap-1">
+      <h4> <h5 style="color: rgb(250, 250, 250);">Consierge </h5>{{service.user.first_name}} {{service.user.last_name}}</h4>
+    </div>  
+    <h5>{{service.description}}</h5>
+    <h5>initial price: {{service.initial_price}}</h5>
+    
+    <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
+   </div>
+</div>
 <div class="container">
   <div class="row">
   {% if msg %}
@@ -13,27 +29,13 @@
     </div>
   {% endif %}
   
-<div class="col-6">
-    <div class="d-flex flex-column">
-        <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
-            <img src="{{service.image.url}}" width="500px" height="400px">
-          <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
-            <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
-            <h5> <h6 style="color: rgb(250, 250, 250);">Consierge </h6>{{service.user.first_name}} {{service.user.last_name}}</h5>
-          </div>
-            <h2>{{service.title}}</h2>
-            <h5>{{service.description}}</h5>
-            <h5>initial price: {{service.initial_price}}</h5>
-            <h5>category: {{service.type_service.title}}</h5>
-            <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
-        </div>
-    </div>
-</div>
+
   </div>
   </div>
 
 
-    
+
+
     
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -66,25 +68,29 @@
         </div>
         </div>
     </div>
+</div>
+<div style="background-color:#f0ebd6; margin-top: -5rem;">
+  <section class="p-3 ">
+    <div clss="row ">
+        <h2>Reviews</h2>
+        <div class="col-12 d-flex flex-column gap-2 ">
+            {% for review in reviews %}
+            <hr>
+            <div class="review d-flex flex-column gap-2">
+                <h3 id="name">{{review.user.username}}</h3>
+                <h5  class="text-muted">{{review.rating}} <span class="material-symbols-outlined">grade</span></h>
+                <p style="color: black;">{{review.comment}}</p>
+                <h6 class="text-muted" >{{review.created_at}}</h6>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+  
+</section>
 
   <hr>
-  <section class="p-3 ">
-      <div clss="row ">
-          <h2>Reviews</h2>
-          <div class="col-12 d-flex flex-column gap-2 ">
-              {% for review in reviews %}
-              <div class=" d-flex flex-column gap-2 p-2 ">
-                  <h3 id="name">{{review.user.username}}</h3>
-                  <h3>{{review.rating}} <span class="material-symbols-outlined">grade</span></h>
-                  <p>{{review.comment}}</p>
-                  <h7>{{review.created_at}}</h7>
-              </div>
-              {% endfor %}
 
-          </div>
-      </div>
-    
-  </section>
  
 
     <div class="row add_rev p-3">
@@ -124,6 +130,7 @@
       </div>
   </div>
 </div>
+
 
 
 

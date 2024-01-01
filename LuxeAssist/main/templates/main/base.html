@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css" />
    </head>
   <body>
      <!-- Navbar  -->
-     <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-mb-5">
+     <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-mb-5 " style="background-color: #745e43;">
       <div class="container">
         <a class="navbar-brand" href="#">LuxeAssist</a>
         <button
@@ -34,14 +35,19 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'main:about_view' %}">About</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'main:contact_view' %}">Contact</a>
             </li>
+            {%endif%}
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
+              {% if request.user.is_superuser %}
+                  <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
+              {%endif%}   
             </li>
-
+        
             <li class="nav-item dropdown">
+            {% if user.is_authenticated and user.groups.exists %}
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Consierge 
               </a> 
@@ -50,10 +56,8 @@
                 <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All Order</a></li>
                 <li><a class="dropdown-item" href="">New Order</a></li>
                 <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add Service</a></li>
-                {% if request.user.is_staff %}
-                <li><a class="dropdown-item" href=""></a></li>
-                {%endif%}
               </ul>
+            {%endif%}
             </li>
           </ul>
           
@@ -70,7 +74,9 @@
           
               <li><a class="dropdown-item" href="{% url 'accounts:user_profile_page_view' user.id %}">Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:update_profile_page_view' %}">Update Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
+              {% if user.is_authenticated and not user.groups.exists %}
+                 <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
+              {% endif %}
               
               <li><a class="dropdown-item" href="{%url 'accounts:logout_page_view' %}">LogOut</a></li>
         {% else %}

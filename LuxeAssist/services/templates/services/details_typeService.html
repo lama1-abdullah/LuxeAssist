@@ -5,37 +5,43 @@
 
 
 {% block content %}
+
+
+<div class="start1">
+  <img src="{{typeService.image.url}}" width="100%" height="600vh" style="z-index: -1;"/>
+
+  <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: -15rem; color: white; ">
+    <h2 class="contant">{{typeService.title}}</h2>
+    <h5 class="contant">{{typeService.description}}</h5>
+   </div>
+</div>
+
+<div class="button-edit dropdown p-2">
+  <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Edit  
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{% url 'services:delete_services_views' typeService.id %}">Delete Service categories</a></li>
+    <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' typeService.id %}">Update Service categories</a></li>
+    <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add consierge services</a></li>
+  </ul>
+</div>
+
+
 <div class="container">
    {% if msg %}
         <div class="alert alert-danger" role="alert">
             {{ msg }}
         </div>
         {% endif %}
-    <div class="row">
 
-        <div class="details col-7 gap-2 p-3 border border-1 rounded-2  " style="background-color: #e5c4a07a;">
-            <img class= "img-details" src="{{typeService.image.url}}" width="628px" height="400px"/>
-            <h2 >{{typeService.title}}</h2>
-            <h5 >{{typeService.description}}</h5>
-        </div>
-
-
-    <div class="button-edit dropdown p-2">
-      <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Edit  
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'services:delete_services_views' typeService.id %}">Delete Service categories</a></li>
-        <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' typeService.id %}">Update Service categories</a></li>
-        <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add consierge services</a></li>
-      </ul>
-    </div>
-    
-
-    <div class="col-4">
+    <div class="row" style="margin-top:100px;">
       {% for services in services %}
-        <div class="d-flex flex-row gap-2">
-            <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+    <div class="col-4 g-2">
+      
+      
+        <div class="d-flex flex-row gap-3">
+            <div class="card-body gap-3 p-3 rounded-2 " style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
                 
                 
               <img src="{{services.image.url}}" height="200px" width="330px">
@@ -46,10 +52,14 @@
                 <br>
                 <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
                 <h6>{{services.description}}</h6>
-                <h6>{{services.initial_price}}</h6>
-              </div>
-        {% endfor %}
+                <h6>Price {{services.initial_price}}</h6>
+            </div>
+        
           </div>
+          
+        </div>
+    {% endfor %}
+    </div>
 
 
 {% endblock %}

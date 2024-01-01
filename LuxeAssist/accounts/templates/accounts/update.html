@@ -4,18 +4,20 @@
 
 
 {% block content %}
-<div class = "wrapper pages-content">
-<section class="container content d-flex flex-column align-items-center ">
-    <h1>Update your profile</h1>
+<div class = "wrapper pages-contentt " >
 
+<section class="container content d-flex flex-column align-items-center ">
+    <br>
+    <h2 style="color: aliceblue;">Update your profile</h2>
     {% if message %}
         <div class="alert alert-danger" role="alert">
         {{ message }}
         </div>
     {% endif %}
-    <div class="row">
-    
-        <div class="col-6">
+    <div class="d-flex flex-row gap-1">
+        <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc85;">
+        <div class="row">
+        <div class="col-12">
 
             <form class="d-flex flex-column gap-1" action="{% url 'accounts:update_profile_page_view' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -66,7 +68,8 @@
         </div>
 
     </div>
-
+</div>
+</div>
 </section>
 </div>
 
