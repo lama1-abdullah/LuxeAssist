@@ -5,14 +5,14 @@
 
 
 {% block content %}
-<div>
+<div class="wrapper ">
   {% if msg %}
   <div class="alert alert-danger " role="alert">
       {{ msg }}
   </div>
   {% endif %}
 
-<div class="row p-4" style="margin-top:100px; ">
+<div class="row p-4 justify-content-center" style="margin-top:100px; ">
 {% for user in coceirge_users %}
 <div class=" ard_service col-3 ms-1">
  <div class="card " style="width: 20rem; height:25rem ;  margin: 40px auto; background-color: #ffffff7a; " >
@@ -28,5 +28,6 @@
  </div>
 </div>
  {% endfor %}
+</div>
 </div>
 {% endblock %}

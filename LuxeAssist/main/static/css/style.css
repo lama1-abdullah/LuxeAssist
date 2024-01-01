@@ -219,8 +219,11 @@ margin: 40px auto;
 .pages-contentt {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	overflow:hidden;
+	object-fit:contain;
 	background-image:linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)) ,url('/static/images/img12.jpg') ;
+	background-repeat:no-repeat;
+	background-size:cover;
 }
 
 .pages-content {
