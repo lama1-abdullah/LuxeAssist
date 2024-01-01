@@ -53,10 +53,10 @@ def payment_view(request: HttpRequest ,requests_id):
 
         message = f'Hi {User.username}, thank you for registering in geeksforgeeks.'
 
-        email_from = settings.EMAIL_HOST_USER
+        from_email = settings.EMAIL_HOST_USER
 
         recipient_list = [User.email ]
-        send_mail( subject, message, email_from, recipient_list )
+        send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
         return redirect("main:success_payment_view")
   #except:
         #return render(request, "main/user_not_found.html")
