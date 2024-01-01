@@ -22,13 +22,13 @@
      
 <br>
 
-<div class="container row">
+<div class="container row d-flex justify-content-center align-items-center" style="margin: 0px auto;">
  
     <h4 class="text-1">All Our services</h4>
     <br><br>
   
     {% for service in typeServices %}
-    <section id="card1" class="card_service col-5">
+    <section id="card1 " class="card_service col-3 ms-1 ">
         <img class="image h-40 w-40" src="{{service.image.url}}" alt="Card image cap">
         <div class="card__content">
            <a href="{% url 'services:details_typeService_view' service.id %}" ><p class="card__title">{{service.title}}</p></a>

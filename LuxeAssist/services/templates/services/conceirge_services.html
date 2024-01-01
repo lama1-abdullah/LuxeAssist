@@ -13,28 +13,26 @@
     </div>
     {% endif %}
   
-    <div class="row mt-5">
-       {% for service in service %}
-       <img src="{{service.image.url}}"  width="600px" height="400px"/>
-       <h4>Service : <a href="{%url 'services:details_service_view' service.id%}">{{service.title}}</a></h4>
-       <h6>Category:<a href="{% url 'services:details_typeService_view' service.type_service.id %}">{{service.type_service.title}}</a></h6> 
-       <h5>{{service.description}}</h5>
-       <h5>initial price: {{service.initial_price}}</h5>
-       
-    </div>
+    <div class="row">
+        {% for service in service %}
+            <div class="details col-6 gap-2 p-3 border border-1  " style="background-color: #e5c4a07a;">
+                <img class= "img-details" src="{{service.image.url}}" width="628px" height="400px"/>
+                <h4>Service : <a href="{%url 'services:details_service_view' service.id%}">{{service.title}}</a></h4>
+                <h6>Category:<a href="{% url 'services:details_typeService_view' service.type_service.id %}">{{service.type_service.title}}</a></h6> 
+                <h5>{{service.description}}</h5>
+                <h5>initial price: {{service.initial_price}}</h5>
 
-    <div class="dropdown p-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Edit  
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete</a></li>
-          <li><a class="dropdown-item" href="{% url 'services:update_service_view' service.id %}">Update</a></li>
-        </ul>
-      </div>
+                <div class="d-flex flex-row justify-content-center gap-5">
+                    <a class="btn btn-primary" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'services:update_service_view' service.id %}">Update</a></li>
+                </div>
+            </div>
+        
+
       {% endfor %}
       
 
+</div>
 </div>
 
 {% endblock %}

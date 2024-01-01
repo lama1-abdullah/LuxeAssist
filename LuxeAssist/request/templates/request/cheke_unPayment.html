@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %} All Requests  {% endblock %}
+{% block content  %}
+
+<h1>All Requests</h1>
+<div class="row ">
+    {% if requests.count == 0 %}
+     <div class="alert alert-info">No order yet.</div>
+    {% endif %}
+     
+</div>
+    
+<section class="container">
+
+    <h4>All Order</h4>
+    <div class="row">
+        <div class="col-5">
+            {% for request in requests %}
+            <hr>
+                <h4> {{request.user.first_name}} {{request.user.last_name}}</h4>
+                <h4> Service:<a href="{% url 'services:details_service_view' request.service.id%}" >{{request.service.title}}</a> </h4>
+                <h4> Your order details:<a href="{% url 'request:request_details_view' request.id %}" >here</a> </h4>
+                <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
+                <h4>{{request.service.description}}</h4>
+                <h6> Date: {{request.date }}</h6>
+                <h6>status: {{request.status}}</h6>
+                <h4>Payed : {% if request.has_payment  %} <div class="bg-success p-2 text-white">Payed</div> {% else %} <div class="bg-danger p-2 text-white">Not Payed</div> {% endif %}</h4>
+                
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+   
+      
+
+
+{% endblock %}

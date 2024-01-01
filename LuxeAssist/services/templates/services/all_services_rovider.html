@@ -13,9 +13,10 @@
   {% endif %}
 
 {% for user in coceirge_users %}
- <div class="card" style="width: 20rem;">
-   <div class="card-body">
+ <div class="card " style="width: 20rem;  margin: 40px auto; background-color: bisque; " >
+   <div class="card-body" >
       {% if user.is_active %} <h3>Active</h3> {% else %} <h3>Not Active</h3> {% endif %}
+     <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="40px" style="border-radius:50%" class="rounded-circle" />
      <h5 class="card-title">Name:{{user.first_name}} {{user.last_name}}</h5>
      <a href="mailto:{{ user.email }}"><h5 class="card-title">Email:{{user.email}}</h5></a>
      <a href="tel:{{user.profile.phone_number}}"><h5 class="card-title">Phone Number: {{user.profile.phone_number}}</h5></a>
