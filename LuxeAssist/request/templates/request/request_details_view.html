@@ -5,9 +5,9 @@
 {% block content  %}
 
 <div class = "container ">
-<div class="col-4">
-    <div class="d-flex flex-row gap-2">
-      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+<div class="col-4" >
+    <div class="d-flex flex-row gap-2 align-items-center" >
+      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;" >
             <h6>{{requests.service.title}}</h6>
             <h6>{{requests.date}}</h6> 
             <h6>{{requests.note}}</h6>
@@ -91,12 +91,12 @@
     <section class="p-3 ">
         <div clss="row ">
             <h2>Comments</h2>
-            <div class="col-12 d-flex flex-column gap-2 ">
+            <div class="col-4 d-flex flex-column gap-2 ">
                 {% for comment in requestComment %}
                 <div class="review d-flex flex-column gap-2 border border-1 p-2 ">
-                    <h3 id="name">{{comment.user.username}}</h3>
+                    <h4 id="name">{{comment.user.username}}</h4>
                     <p>{{comment.comment}}</p>
-                    <h7>{{comment.request.date}}</h7>
+                    <h6>{{comment.request.date}}</h6>
                 </div>
                 {% endfor %}
   
