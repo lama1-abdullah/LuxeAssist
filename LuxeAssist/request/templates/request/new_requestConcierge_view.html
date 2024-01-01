@@ -13,10 +13,12 @@
 
             
             
-            <a href="{% url 'request:request_details_view' requests.id %}" >{{requests.service.title}}</a>
-                <h3>{{requests.date}}</h3>
-                <h3>{{requests.request_price}} </h3>
-                <h3>{{requests.note}} </h3>  
+            
+            <h4>Service :<a href="{% url 'services:details_service_view' requests.service.id %}" >{{requests.service.title}}</a></h4>
+            <h4> Your order details:<a href="{% url 'request:request_details_view' requests.id %}" >here</a> </h4>
+            <h3>{{requests.date}}</h3>
+            <h3>{{requests.request_price}} </h3>
+            <h3>{{requests.note}} </h3>  
                 
            
 

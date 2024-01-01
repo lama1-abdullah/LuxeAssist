@@ -6,22 +6,23 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-      {% if msg %}
+   {% if msg %}
         <div class="alert alert-danger" role="alert">
             {{ msg }}
         </div>
         {% endif %}
-        <div class="col-8">
-            <img src="{{typeService.image.url}}"  width="600px" height="400px"/>
-            <h2>{{typeService.title}}</h2>
-            <h5>{{typeService.description}}</h5>
-        </div>
-    </div>
+    <div class="row">
 
-  
-    <div class="dropdown p-2">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="details col-7 gap-2 p-3 border border-1 rounded-2  " style="background-color: #e5c4a07a;">
+            <img class= "img-details" src="{{typeService.image.url}}" width="628px" height="400px"/>
+            <h2 >{{typeService.title}}</h2>
+            <h5 >{{typeService.description}}</h5>
+        </div>
+
+
+
+    <div class="button-edit dropdown p-2">
+      <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Edit  
       </button>
       <ul class="dropdown-menu">
@@ -40,24 +41,26 @@
     
     
 
-    <div class="row">
-        <div class="col-5">
-            {% for services in services %}
-            <div class=" d-flex flex-row gap-1 justify-content-start align-items-center">
-              <img  src="{{ user.profile.avatar.url }}" class="rounded-circle avatar p-2" width="70px" />
-              <h5> <h6 style="color: rgb(87, 3, 3);">Consierge </h6>{{services.user.first_name}} {{services.user.last_name}}</h5>
-            </div>
-            
-            <img src="{{services.image.url}}"/>
-                <a href="{% url 'services:details_service_view' services.id %}" ><h4>{{services.title}}</h4></a>
-                <h4>{{services.description}}</h4>
-                <h5>{{services.initial_price}}</h5>
-            {% endfor %}
-
-
-        </div>
-    </div>
-</div>
+    <div class="col-4">
+      {% for services in services %}
+        <div class="d-flex flex-row gap-2">
+            <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+                
+                
+              <img src="{{services.image.url}}" height="200px" width="330px">
+                <div class="d-flex gap-1">
+                <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
+                </div>
+                <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
+                <br>
+                <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
+                <h6>{{services.description}}</h6>
+                <h6>{{services.initial_price}}</h6>
+              </div>
+        {% endfor %}
+          </div>
 
 
 {% endblock %}
+
+

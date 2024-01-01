@@ -14,20 +14,51 @@
              
         </div>
 
-            <div class="mt-2"> 
+
+        <div class="dropdown mb-3 d-flex justify-content-between ">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </button>
+          <ul class="dropdown-menu ">
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Approve">Approve</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=pending">Pending</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Reject">Reject</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Cancle">Cancle</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:cheke_isPayment_view' %}">Paid orders</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:cheke_unPayment_view' %}">Unpaid orders</a></li>
+          </ul>
+         
+        </div>
+
+      
+
+
+        <div class="col-4">
               {% for request in requests %}
-            
-                <h4>Service Title:<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h4>
-                <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
-                <h4>{{request.service.description}}</h4>
-                <h4> by user: {{request.user.first_name}} {{request.user.last_name}}</h4>
-                <h4>note:{{request.note}}</h4>
-                <h4>Price by user:{{request.request_price}}</h4>
-                <h4>status:{{request.status}}</h4>
-                  
+          
+              <div class="d-flex flex-row">
+                <div class="card-body gap-2 p-2 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+                      <h6>Service<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h6>
+                      <h4> Your order details:<a href="{% url 'request:request_details_view' request.id %}" >here</a> </h4>
+                      <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                      <h6>{{request.service.description}}</h6>
+                      <h6> by user: {{request.user.first_name}} {{request.user.last_name}}</h6>
+                      <h6>note:{{request.note}}</h6>
+                      <h6>Price by user:{{request.request_price}}</h6>
+                      <h6>status:{{request.status}}</h6>
+                      {% if request.status == "Approve" %}
+                         <h4>Payed : {% if request.has_payment  %} <div class="bg-success p-2 text-white">Payed</div> {% else %} <div class="bg-danger p-2 text-white">Not Payed</div> {% endif %}</h4>
+                      {% endif %}
+                    </div>
+                  </div>
+    
                 
               {% endfor %}
+
+              
+
             </div> 
 
 
 {% endblock %}
+

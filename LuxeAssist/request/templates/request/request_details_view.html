@@ -4,18 +4,18 @@
 {% block title %} detail  {% endblock %}
 {% block content  %}
 
-<div class = "container mt-5">
-    <div class = "row">
-        <div class = "col">
-            {{requests.service.title}}
-            {{requests.date}}
-            {{requests.note}}
-            {{requests.request_price}}
+<div class = "container ">
+<div class="col-4">
+    <div class="d-flex flex-row gap-2">
+      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+            <h6>{{requests.service.title}}</h6>
+            <h6>{{requests.date}}</h6> 
+            <h6>{{requests.note}}</h6>
+            <h6>{{requests.request_price}}</h6>
+        
         </div>
-
     </div>
-    
-    {% if user.groups.exists %}
+
     <div class = "row">
         <div class="col-2">
             
@@ -23,7 +23,9 @@
                 {% csrf_token %}
                
                 <input TYPE="submit" Name="status" Value="Approve">
+                {% if requests.status == "pending"%}
                 <input TYPE="submit" Name="status" Value="Reject">
+                {% endif %}
                 
         
                     
@@ -32,16 +34,21 @@
         
     {% else %}
         <div class = "row">
-            <div class = "col-4">
-                <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
-            </div>
-            <div class = "col-4">
-                <a class="dropdown-item" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
-            </div>
 
             <div class = "col-4">
+                {% if requests.status == "pending" %}
+                <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#priceModal">Update Price</a><br>
+                {% endif %}
+            </div>
+            <div class = "col-4">
+                {% if requests.status == "pending" %}
+                <a class="btn btn-primary" href="{% url 'request:cancel_request_view' requests.id %}">Cancel</a>
+                {% endif %}
+            </div>
+
+            <div class = "col-2">
                 {% if requests.status == "Approve" %}
-                <a class="dropdown-item" href="{% url 'main:payment_view' requests.id %}">Payment</a>
+                <a class="btn btn-primary" href="{% url 'main:payment_view' requests.id %}">Payment</a>
                 {% endif %}
             </div>
             
@@ -64,8 +71,12 @@
                         <input type="submit" value="Update Price" class="btn btn-dark mt-2"/>
                 </form>
                 </div>
+                
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                   
+                    
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                   
                 
                 </div>
             </div>

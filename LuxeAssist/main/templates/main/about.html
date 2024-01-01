@@ -1,9 +1,24 @@
 {% extends 'main/base.html' %}
+
 {% block title %} About {% endblock %}
+
 {% block content %}
 
+<div class="col-4">
+    <div class="d-flex flex-row gap-2">
+      <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+            <h6>{{requests.service.title}}</h6>
+            <h6>{{requests.date}}</h6> 
+            <h6>{{requests.note}}</h6>
+            <h6>{{requests.request_price}}</h6>
+            
+          </div>
+        </div>
+        
+      
 
-<h2>Chat</h2>
+  </div> 
 
 
 {% endblock %}
+
