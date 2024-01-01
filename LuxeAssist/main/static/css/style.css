@@ -5,8 +5,9 @@
 }
 
 body{
+
  background-color: #745e43;
-  
+
 }
 .h1, h2, h3, h4, h5,h6,p{
 	font-family: 'Libre Baskerville', serif;
@@ -116,7 +117,7 @@ align-items: center;
 display: flex;
 justify-content: center;
 align-items: center;
-margin: 30px 10px;
+margin: 40px auto;
 }
 
 
@@ -160,7 +161,10 @@ margin: 30px 10px;
 .img-details{
 	border-radius: 10px;
 }
- 
+.button-edit{
+	margin-left: 180vh;	
+	
+} 
 .card-d{
 	display: flex;
 	justify-content: center;
@@ -200,4 +204,7 @@ a{
 	border-color: #4d381e;
 }
 
+
+
+}
 
