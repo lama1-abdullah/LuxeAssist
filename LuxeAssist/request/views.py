@@ -101,12 +101,12 @@ def admin_requests_view(request: HttpRequest):
 
     if not request.user.is_superuser :
        return render(request,"main/user_not_found.html", status=401)
-   try: 
+    try: 
       requests = Request.objects.order_by('-date')
      
      
       return render(request ,"request/admin_requests_view.html" , {"requests" : requests})
-   except Exception as e:
+    except Exception as e:
       return render(request, "main/user_not_found.html")
    
 
