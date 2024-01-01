@@ -3,18 +3,20 @@
 {% block content %}
 
 
-<section class="container p-3 mt-5">
-    <div class="row">
-    <h4> Admin Page </h4>
-        <div class="col-5">
+<section class="container-admin p-5 mb-5 ">
+    <div class="row d-flex justify-content-center">
+        <br>
+        <br>
+        <br>
+    <h4 style="color: white;"> Admin Page </h4>
+        <div class="col-6 mb-5" style="margin-bottom: -20rem;">
             <ul class="list-group">
-                <a href="{% url 'services:all_servicesProvider_view' %}"><li class="list-group-item btn btn-primary">All Consierge page</li></a>
-                <a href="{% url 'services:all_services_admin_view' %}"><li class="list-group-item btn btn-primary">All concierge services page </li></a>
-                <a href="{% url 'request:admin_requests_view' %}"><li class="list-group-item btn btn-primary">All user order page </li></a>
-                <a href="{% url 'main:display_all_contacts_view' %}"><li class="list-group-item btn btn-primary">All Contacts page </li></a>
-                <a href="{% url 'services:add_typeService_view' %}"><li class="list-group-item btn btn-primary"> Add Service categories</li></a>
-                
-               
+                <a href="{% url 'services:all_servicesProvider_view' %}"><li class="list-group-item btn btn-dark" style="background-color:rgba(204, 182, 163, 0.473)">All Consierge page</li></a>
+                <a href="{% url 'services:all_services_admin_view' %}"><li class="list-group-item btn btn-dark"  style="background-color:rgba(204, 182, 163, 0.473)">All concierge services page </li></a>
+                <a href="{% url 'request:admin_requests_view' %}"><li class="list-group-item btn btn-dark" style="background-color:rgba(204, 182, 163, 0.473)">All user order page </li></a>
+                <a href="{% url 'main:display_all_contacts_view' %}"><li class="list-group-item btn btn-dark" style="background-color:rgba(204, 182, 163, 0.473)">All Contacts page </li></a>
+                <a href="{% url 'services:add_typeService_view' %}"><li class="list-group-item btn btn-dark" style="background-color:rgba(204, 182, 163, 0.473)"> Add Service categories</li></a>   
+                <a href="{% url 'services:all_serviceType_admin_viwe' %}"><li class="list-group-item btn btn-dark" style="background-color:rgba(204, 182, 163, 0.473)"> All Service categories</li></a>  
             </ul>
         </div>
     </div>

@@ -4,41 +4,25 @@
 
 {% block content %}
 
-<div class="col-4">
-  {% for services in services %}
-    <div class="d-flex flex-row gap-2">
-        <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
-            
-      
-            <div class="d-flex gap-1">
-            <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
-            </div>
-            <h6 class="card-title" style="color: rgb(87, 3, 3);"> Consierge:  {{services.user.first_name}} {{services.user.last_name}}</h6>
-            <br>
-            <h2 class="title-1">Servise title: <a href="{% url 'services:details_service_view' services.id %}" >{{services.title}}</a></h2>
-            <h6 >Category:<a href="{% url 'services:details_typeService_view' services.type_service.id %}">{{services.type_service.title}}</a></h6>
-            <p style="color: black;"> {{services.description}}</p>
-            <h6> Price {{services.initial_price}}</h6>
-            <h6>{{services.initial_price}}</h6>
-            <a href="{% url 'services:delete_services_admin_views' services.id %}" class="btn btn-primary">Delete</a>
-          </div>
-    {% endfor %}
-      </div>
+
+<div class ="container p-5">
+    <h1 style="color: rgb(67, 40, 9);">About Us</h1>
+    <p style="font-size: 20px;">Welcome to LuxeAssist, a distinguished provider of premier personal and professional services, strategically positioned to alleviate the challenges associated with time management, effort, and lifestyle organization. Our commitment is unwavering - to enhance the quality of life for our esteemed clients through meticulous attention to their needs, offering unparalleled precision and efficiency.</p>
+
+    <h5 style="color:rgb(77, 45, 9);">Our Distinctive Approach: A Strategic Investment in Time</h5>
+
+    <p style="font-size: 20px;">
+        LuxeAssist distinguishes itself as an unparalleled service, endowing our members with the invaluable resource of time. Beyond the conventional, we unlock gates to comfort and luxury, offering an expansive suite of personal and professional services catering to life's fundamental necessities, desires, and exigencies. LuxeAssist is not merely about today; it's a commitment to curating a complete luxury lifestyle that transcends the present.</p>
+
+
+        <p style="font-size: 20px;">LuxeAssist stands firmly behind the Vision 2030 exhibition, aligning seamlessly with the endeavor to provide visitors with an immersive and distinctive experience, underscored by our exceptional services.</p>
+
+
+
+
+</div>
 
 
 
 {% endblock %}
-
-<div class="col-5 p-3">
-  <h4> Title service<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h4>
-   
-  <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
-    
-   <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
-    <h4>By user: {{request.user.first_name}} {{request.user.last_name}}</h4>
-    <h4>Note: {{request.note}}</h4>
-    <h4>Price: {{request.request_price}}</h4>
-    <h4> Date Time :{{request.date}}</h4>
-    <h4> Status :{{request.status}}</h4>
-    <a href="{% url 'request:delete_request_admin_view' request.id %}" class="btn btn-primary">Delete</a>
-  </div>    
+  

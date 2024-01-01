@@ -19,5 +19,6 @@ urlpatterns = [
     path('all/services/admin/', views.all_services_admin_view , name="all_services_admin_view"),
     path('delete/services/admin/<service_id>/', views.delete_services_admin_views , name="delete_services_admin_views"),
     path('all/service/concierge/', views.conceirge_services_view, name = "conceirge_services_view" ),
+    path('all/serviceType/admin/',views.all_serviceType_admin_viwe,name="all_serviceType_admin_viwe")
 
 ]

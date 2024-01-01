@@ -35,6 +35,11 @@ def details_typeService_view(request:HttpRequest, typeService_id):
 
     return render(request , "services/details_typeService.html",{"typeService":typeServices , "services":services ,"msg":msg})
 
+def all_serviceType_admin_viwe(request:HttpRequest):
+
+    typeServices=TypeService.objects.all()
+
+    return render(request , "services/all_serviceType_admin.html",{"typeService":typeServices})
 
 def update_typeService_view(request:HttpRequest,typeService_id):
     msg=None
@@ -52,7 +57,7 @@ def update_typeService_view(request:HttpRequest,typeService_id):
                 typeService.image=request.FILES["image"]
             typeService.save()
 
-            return redirect("services:details_typeService_view",typeService_id=typeService.id) 
+            return redirect("services:all_serviceType_admin_viwe") 
         except Exception as e:
             msg = f"An error occured, please fill in all fields and try again . {e}"
         
@@ -68,7 +73,7 @@ def delete_services_views(request:HttpRequest, typeService_id):
 
     typeService= TypeService.objects.get(id = typeService_id)
     typeService.delete()
-    return redirect("main:home_view")
+    return redirect("services:all_serviceType_admin_viwe")
 
 
 ### Service View

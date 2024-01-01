@@ -117,8 +117,9 @@
                                 <label for="star1" title="text">1 star</label>
                             </div>
           
-          <label>Comment</label>
-          <input class="form-control mb-4" type="text" name="comment"/>
+
+          
+          <input class="form-control mb-4" type="text" name="comment" placeholder="comment"/>
           {% if request.user.is_authenticated %}
           <button  class="btn btn-primary mp-4" type="submit"> Add Review </button> 
           {% else %}

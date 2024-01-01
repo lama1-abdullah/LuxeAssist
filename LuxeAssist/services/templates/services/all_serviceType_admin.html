@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} All Services Admin Page {% endblock %}
+
+
+{% block content %}
+<div>
+  {% if msg %}
+  <div class="alert alert-danger" role="alert">
+      {{ msg }}
+  </div>
+  {% endif %}
+
+  <div class="row p-4" style="margin-top:100px;">
+    <h2 style="align-content: center;"> All Sservice Category</h2>
+  {% for services in typeService %}
+ <div class="col-4 g-3 ">
+  
+  <div class="p-4 " style="background-color: #dfdddc5b; border-radius: 20px;">
+      
+    <img src="{{services.image.url}}" height="200px" width="360px">
+      <h5 >{{services.title}}</h5>
+      <h6 style="color: black;"> {{services.description}}</h6>
+
+    
+    </div>
+
+  
+</div>
+<div class="button-edit dropdown p-2">
+    <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Edit  
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'services:delete_services_views' services.id %}">Delete Service categories</a></li>
+      <li><a class="dropdown-item" href="{% url 'services:update_typeService_view' services.id %}">Update Service categories</a></li>
+      
+    </ul>
+  </div>
+
+  {% endfor %}
+    </div>
+{% endblock %}
