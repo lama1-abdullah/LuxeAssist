@@ -40,7 +40,7 @@ def user_requests_view(request: HttpRequest):
 def concierge_requests_view(request: HttpRequest): 
    # try:
     services=Service.objects.filter(user=request.user)
-    requests = Request.objects.filter(service__in= services)
+    requests = Request.objects.filter(service__in= services).order_by("-date")
 
 
     if "status" in request.GET :

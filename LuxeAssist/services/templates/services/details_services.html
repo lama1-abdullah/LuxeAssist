@@ -7,16 +7,22 @@
 {% block content %}
 
 <div class="start1">
-  <img src="{{service.image.url}}" width="100%" height="520vh" style="z-index: -1;"/>
-  <div class="d-flex flex-column justify-content-center align-items-start" style="margin-top: -19rem; color: white; ">
-    <div class="card-body gap-2 p-3 rounded-2 col-8" style="background-color: #4b351979;" >
+  <img src="{{service.image.url}}" style="z-index: -1; width: 100%; height: 80vh;" />
+  <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: -15vh; color: white; ">
+    <div class="card-body gap-2 p-3 rounded-2 col-8" style="background-color: #4b3519e8;" >
       <h2 class="contant">Service {{service.title}}</h2>
       <h5>category: {{service.type_service.title}}</h5>
     <div class="d-flex flex-row gap-1">
       <h4> <h5 style="color: rgb(250, 250, 250);">Consierge </h5>{{service.user.first_name}} {{service.user.last_name}}</h4>
     </div>  
     <h5>{{service.description}}</h5>
-    <h5>initial price: {{service.initial_price}}</h5>
+    <div class="d-flex flex-row gap-2">
+      <span style="color: rgba(255, 0, 0, 0.625);" class="material-symbols-outlined">
+          payments
+          </span> 
+      <h6>{{service.initial_price}} Riyal</h6>
+      </div>
+    
     
     <a class="btn btn-dark mb-3 "  data-bs-toggle="modal" data-bs-target="#orderModal">Order</a>
    </div>
@@ -45,7 +51,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Do you want to request this service? {{ service.name }}
+              Do you want to request this service? {{service.title}}
 
             <form action="{% url 'request:add_Request_view' service.id %}" method="POST" >
                 {% csrf_token %}
@@ -69,8 +75,8 @@
         </div>
     </div>
 </div>
-<div style="background-color:#f0ebd6; margin-top: -5rem;">
-  <section class="p-3 ">
+<div style="background-color:#f0ebd6;">
+  <section class="p-3 mt-3">
     <div clss="row ">
         <h2>Reviews</h2>
         <div class="col-12 d-flex flex-column gap-2 ">

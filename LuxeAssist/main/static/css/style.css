@@ -8,6 +8,7 @@ body{
 
  background-color: #745e43;
 
+
 }
 .h1, h2, h3, h4, h5,h6,p{
 	font-family: 'Libre Baskerville', serif;
@@ -213,7 +214,7 @@ margin: 40px auto;
     color: #c59b08;
 }
 
-}
+
 
 
 .pages-contentt {
@@ -240,7 +241,11 @@ margin: 40px auto;
 
 a{
 	text-decoration: none;
-	color:white;
+	color:rgb(15, 14, 14);
+}
+a:hover{
+    color: blue;
+
 }
 .border
 {
@@ -249,5 +254,6 @@ a{
 
 
 
-}
+
+
 

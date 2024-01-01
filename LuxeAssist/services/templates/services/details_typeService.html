@@ -44,7 +44,7 @@
             <div class="card-body gap-3 p-3 rounded-2 " style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
                 
                 
-              <img src="{{services.image.url}}" height="200px" width="330px">
+              <img src="{{services.image.url}}" height="200px" width="100%">
                 <div class="d-flex gap-1">
                 <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
                 </div>
@@ -52,7 +52,13 @@
                 <br>
                 <a href="{% url 'services:details_service_view' services.id %}" ><h2>{{services.title}}</h2></a>
                 <h6>{{services.description}}</h6>
-                <h6>Price {{services.initial_price}}</h6>
+                <div class="d-flex flex-row gap-2">
+                  <span style="color: rgba(255, 0, 0, 0.625);" class="material-symbols-outlined">
+                      payments
+                      </span> 
+                  <h6>{{services.initial_price}} Riyal</h6>
+                  </div>
+              
             </div>
         
           </div>

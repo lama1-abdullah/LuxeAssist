@@ -4,46 +4,59 @@
 {% block title %} All Requests  {% endblock %}
 {% block content  %}
 
-        <div class="row ">
+        <div class="row p-4 ">
+            <h4 style="color:white; font-size: 50px;">All Order</h4>
             {% if requests.count == 0 %}
              <div class="alert alert-info">No order yet.</div>
             {% endif %}
              
         </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filter 
+        <div class="dropdown mb-3 d-flex justify-content-between p-3 ">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Category
             </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'request:chekeUser_isPayment_view' %}">Paid orders</a></li>
-                <li><a class="dropdown-item" href="{% url 'request:chekeUser_unPayment_view' %}">Unpaid orders</a></li>
-
+            <ul class="dropdown-menu ">
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Approve">Approve</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=pending">Pending</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Reject">Reject</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Cancle">Cancle</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:cheke_isPayment_view' %}">Paid orders</a></li>
+              <li><a class="dropdown-item" href="{% url 'request:cheke_unPayment_view' %}">Unpaid orders</a></li>
             </ul>
-        </div>
-            
-        <section class="container mt-3 4rem">
            
-            <div class="row ">
-                <div class="col-8">
-                    <h4 style="color:white; font-size: 50px;">All Order</h4>
-                    {% for request in requests %}
+          </div>
+            
+        <section class="containert">
+           
+            <div class="row p-3">
+                {% for request in requests %}
+                <div class="col-4">
+                    
+                    
                     <hr>
-                        <div class="details  gap-2 p-2 border border-1 " style="background-color: #ffffff7a;">
-                        <h4> {{request.user.first_name}} {{request.user.last_name}}</h4>
-                        <h4> Service:<a href="{% url 'services:details_service_view' request.service.id%}" >{{request.service.title}}</a> </h4>
-                        <h4> Your order details:<a href="{% url 'request:request_details_view' request.id %}" >here</a> </h4>
-                        <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
-                        <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
-                        <h4>{{request.service.description}}</h4>
-                        <h6> Date: {{request.date }}</h6>
+                        <div class="p-3" style="background-color: #ffffff7a;">
+                        <h6> {{request.user.first_name}} {{request.user.last_name}}</h6>
+                        <h6 style="font-size: 13px;" class="text-muted">Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
+                        <h6> Service:<a href="{% url 'services:details_service_view' request.service.id%}" >{{request.service.title}}</a> </h6>
+                        <h6 style="font-size: 13px;" class="text-muted">Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
+                        <h6> Your order details:<a href="{% url 'request:request_details_view' request.id %}" >here</a> </h6>
+                        <h5> Your note  {{request.note}}</h5>
+                        <div class="d-flex flex-row g-2">
+                            <span style="color: rgba(255, 0, 0, 0.605);" class="material-symbols-outlined">
+                                calendar_month
+                                </span>
+                             <h6>{{request.date }}</h6>
+                        </div>
                         <h6>status: {{request.status}}</h6>
                         {% if request.status == "Approve" %}
                         <h4>Payed : {% if request.has_payment  %} <div class="bg-success p-2 text-white">Payed</div> {% else %} <div class="bg-danger p-2 text-white">Not Payed</div> {% endif %}</h4>
                         {% endif %}
                     </div>
 
-                    {% endfor %}
+                    
                 </div>
+                {% endfor %}
             </div>
         </section>
            
