@@ -5,14 +5,14 @@
 
 {% block content %}
 <div class = "wrapper pages-content">
-    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
-        <div class="card p-4"> 
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center "> 
+        <div class="card p-4 "> 
             <div class="image d-flex flex-column justify-content-center align-items-center"> 
-                <button class="btn btn-secondary  ">
+                <button class="btn btn-secondary ">
                     <img src="{{ user.profile.avatar.url }}" height="100" width="100"  class="avatar rounded-circle" />
                 </button>
-                <div class="d-flex flex-row justify-content-center align-items-center gap-2">
-                <span class="name mt-3"><h6> Name:{{ user.first_name }} {{ user.last_name }}</span></h6>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2 ">
+                <span class="name mt-3 "><h6> Name:{{ user.first_name }} {{ user.last_name }}</span></h6>
                 <span class="idd"><h6>Email: <a href="mailto:{{ user.email }}">{{user.email}}</h6></a></span>
                     <span class="idd1"><h6>Address: {{user.profile.address}}</span> </h6>
                     <span class="idd1"><h6>City: {{user.profile.city}}</span> </h6>
@@ -38,7 +38,7 @@
 
 
     <div class="container">
-        <h4>All Review </h4>
+        <h4 style="color: rgb(99, 100, 100);">All Review </h4>
         <div class="row mt-5">
             <div class="col-4">
                 {% for review in reviews %}

@@ -5,7 +5,7 @@ from request.models import  Request
 
 
 class Payment(models.Model):
-   categories= models.TextChoices("categories", ["Bank Card" ,"pay made ","App pay"])
+   categories= models.TextChoices("categories", ["Bank Card" ,"pay made "])
 
 
    user=models.ForeignKey(User, on_delete=models.CASCADE)

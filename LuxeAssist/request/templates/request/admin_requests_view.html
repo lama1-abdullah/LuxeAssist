@@ -12,14 +12,11 @@
             {% endif %}
              
         </div>
-            
-           
-              
-           
-              
+        <div class=" d-flex flex-row  gap-2">
             {% for request in requests %}
-            <hr>
-                <div class="col-5 p-3">
+            <div class="col-4 p-4 ">
+               <div class="card-body gap-2 p-4 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+                     
                 <h4> Title service<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h4>
                  
                 <h6>Consierge:{{request.service.user.first_name}} {{services.user.last_name}}</h6>
@@ -32,11 +29,11 @@
                   <h4> Status :{{request.status}}</h4>
                   <a href="{% url 'request:delete_request_admin_view' request.id %}" class="btn btn-primary">Delete</a>
                 </div>    
-                
+            </div> 
             {% endfor %}
-            
+        </div>
      
-       
+        
    
 
 

@@ -29,12 +29,15 @@ def about_view(request: HttpRequest):
 
 def contact_view(request: HttpRequest):
 
+   #try:
     if request.method=="POST":
 
         contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
         contact.save()
 
         return redirect("main:contact_view")
+    #except:
+        #return render(request, "main/user_not_found.html")
     
     user_contact= Contact.objects.filter(user= request.user)
     
@@ -106,7 +109,6 @@ def admin_page_view(request: HttpRequest):
         return render(request,"main/user_not_found.html", status=401)
 
     return render(request,"main/admin_page.html")
-
 
 
 def success_payment_view(request: HttpRequest):
