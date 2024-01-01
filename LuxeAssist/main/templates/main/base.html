@@ -35,14 +35,19 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'main:about_view' %}">About</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'main:contact_view' %}">Contact</a>
             </li>
+            {%endif%}
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
+              {% if request.user.is_superuser %}
+                  <a class="nav-link text-white" href="{% url 'main:admin_page_view'%}">Admin</a>
+              {%endif%}   
             </li>
-
+        
             <li class="nav-item dropdown">
+            {% if user.is_authenticated and user.groups.exists %}
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Consierge 
               </a> 
@@ -51,10 +56,8 @@
                 <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}">All Order</a></li>
                 <li><a class="dropdown-item" href="">New Order</a></li>
                 <li><a class="dropdown-item" href="{% url 'services:add_service_view' %}">Add Service</a></li>
-                {% if request.user.is_staff %}
-                <li><a class="dropdown-item" href=""></a></li>
-                {%endif%}
               </ul>
+            {%endif%}
             </li>
           </ul>
           
@@ -71,7 +74,9 @@
           
               <li><a class="dropdown-item" href="{% url 'accounts:user_profile_page_view' user.id %}">Profile</a></li>
               <li><a class="dropdown-item" href="{% url 'accounts:update_profile_page_view' %}">Update Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
+              {% if user.is_authenticated and not user.groups.exists %}
+                 <li><a class="dropdown-item" href="{% url 'request:user_requests_view' %}">All Order</a></li>
+              {% endif %}
               
               <li><a class="dropdown-item" href="{%url 'accounts:logout_page_view' %}">LogOut</a></li>
         {% else %}

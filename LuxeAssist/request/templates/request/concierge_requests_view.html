@@ -14,11 +14,30 @@
              
         </div>
 
+
+        <div class="dropdown mb-3 d-flex justify-content-between ">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Category
+          </button>
+          <ul class="dropdown-menu ">
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Approve">Approve</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=pending">Pending</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Reject">Reject</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:concierge_requests_view' %}?status=Cancle">Cancle</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:cheke_isPayment_view' %}">Paid orders</a></li>
+            <li><a class="dropdown-item" href="{% url 'request:cheke_unPayment_view' %}">Unpaid orders</a></li>
+          </ul>
+         
+        </div>
+
+      
+
+
         <div class="col-4">
               {% for request in requests %}
           
-              <div class="d-flex flex-row gap-2">
-                <div class="card-body gap-2 p-3 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
+              <div class="d-flex flex-row">
+                <div class="card-body gap-2 p-2 border border-1 rounded-2 " style="background-color: #dfdddc5b;">
                       <h6>Service<a href="{% url 'services:details_service_view' request.service.id %}" >{{request.service.title}}</a></h6>
                       <h4> Your order details:<a href="{% url 'request:request_details_view' request.id %}" >here</a> </h4>
                       <h6>Category:<a href="{% url 'services:details_typeService_view' request.service.type_service.id %}">{{request.service.type_service.title}}</a></h6> 
@@ -35,6 +54,9 @@
     
                 
               {% endfor %}
+
+              
+
             </div> 
 
 

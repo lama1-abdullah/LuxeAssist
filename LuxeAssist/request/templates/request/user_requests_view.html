@@ -10,6 +10,16 @@
             {% endif %}
              
         </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter 
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'request:chekeUser_isPayment_view' %}">Paid orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'request:chekeUser_unPayment_view' %}">Unpaid orders</a></li>
+
+            </ul>
+        </div>
             
         <section class="container mt-3 4rem">
            

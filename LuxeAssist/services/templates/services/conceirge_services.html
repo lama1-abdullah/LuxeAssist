@@ -13,6 +13,7 @@
     </div>
     {% endif %}
     <div class="row">
+
       <div class="details col-7 gap-2 p-2 border border-1 " style="background-color: #ffffff7a;">
         
        {% for service in service %}
@@ -25,16 +26,6 @@
           </div>
         </div>
 
-    <div class="dropdown p-2">
-        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Edit  
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'services:delete_servicesConcierge_views' service.id %}">Delete</a></li>
-          <li><a class="dropdown-item" href="{% url 'services:update_service_view' service.id %}">Update</a></li>
-        </ul>
-      </div>
-      {% endfor %}
       
 
 
