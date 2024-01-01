@@ -4,6 +4,9 @@ from.models import Payment , Contact
 from request.models import Request
 from services.models import Service
 from services.models import TypeService
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 
@@ -46,6 +49,14 @@ def payment_view(request: HttpRequest ,requests_id):
     if request.method=="POST":
         new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
         new_payment.save()
+        subject = 'welcome to GFG world'
+
+        message = f'Hi {User.username}, thank you for registering in geeksforgeeks.'
+
+        email_from = settings.EMAIL_HOST_USER
+
+        recipient_list = [User.email ]
+        send_mail( subject, message, email_from, recipient_list )
         return redirect("main:success_payment_view")
   #except:
         #return render(request, "main/user_not_found.html")
