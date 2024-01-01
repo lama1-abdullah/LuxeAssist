@@ -33,28 +33,25 @@ def user_requests_view(request: HttpRequest):
     
 
 def concierge_requests_view(request: HttpRequest): 
-   #try:
-        services=Service.objects.filter(user=request.user)
-        requests = Request.objects.filter(service__in= services).order_by("-date")
+
+   
+    services=Service.objects.filter(user=request.user)
+    requests = Request.objects.filter(service__in= services)
+
+
+    if "status" in request.GET :
+        requests =Request.objects.filter(status=request.GET["status"])
+        print(request.GET['status'])
+    else:
+        requests =Request.objects.all()
+
+    for index, r in enumerate(requests):
+         requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
 
 
 
-        for index, r in enumerate(requests):
-            requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
+    return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
 
-        
-        # if "Paid" in request.GET and request.GET["Paid"]=="isPaid":
-        #     pay_requests = Request.objects.filter(payment__requests__service__user=request.user) #only payed payments
-        # else:
-        #     pay_requests = Request.objects.exclude(payment__requests__service__user=request.user) #only not payed payments
-
-        
-
-    
-        return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
-#    except Exception as e:
-
-        return render(request, "main/user_not_found.html")
 
 
 
