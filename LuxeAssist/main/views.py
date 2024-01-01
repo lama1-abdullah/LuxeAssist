@@ -29,17 +29,19 @@ def about_view(request: HttpRequest):
 
 def contact_view(request: HttpRequest):
 
-   #try:
+   
     if request.method=="POST":
+       try:
 
-        contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
-        contact.save()
+          contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
+          contact.save()
+          user_contact= Contact.objects.filter(user= request.user)
 
-        return redirect("main:contact_view")
-    #except:
-        #return render(request, "main/user_not_found.html")
+          return redirect("main:contact_view")
+       except:
+        return render(request, "main/user_not_found.html")
     
-    user_contact= Contact.objects.filter(user= request.user)
+       
     
     return render(request, "main/contact.html", {"categories": Contact.categories ,"user_contact" : user_contact}) 
 
