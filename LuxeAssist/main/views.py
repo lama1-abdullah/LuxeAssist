@@ -51,10 +51,11 @@ def payment_view(request: HttpRequest ,requests_id):
     if not request.user.is_authenticated and request.user.groups.exists and request.user.is_superuser and request.user.is_staff :
         return render(request,"main/user_not_found.html", status=401)
 
-  #try:
+
     requests=Request.objects.get(id=requests_id)
     
     if request.method=="POST":
+       try:
         new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
         new_payment.save()
         subject = 'welcome to LuxeAssist world'
@@ -66,8 +67,8 @@ def payment_view(request: HttpRequest ,requests_id):
         recipient_list = [request.user.email]
         send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
         return redirect("main:success_payment_view")
-  #except:
-        #return render(request, "main/user_not_found.html")
+       except:
+        return render(request, "main/user_not_found.html")
 
     return render(request, "main/payment.html",{"requests": requests , "categories": Payment.categories}) 
 
