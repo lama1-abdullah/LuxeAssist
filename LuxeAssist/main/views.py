@@ -31,13 +31,13 @@ def contact_view(request: HttpRequest):
 
    
     if request.method=="POST":
-        try:
+        #try:
 
             contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
             contact.save()
 
             return redirect("main:contact_view")
-        except:
+        #except:
             return render(request, "main/user_not_found.html")
     
     user_contact= Contact.objects.filter(user= request.user)
@@ -50,7 +50,6 @@ def payment_view(request: HttpRequest ,requests_id):
     msg=None
     if not request.user.is_authenticated and request.user.groups.exists and request.user.is_superuser and request.user.is_staff :
         return render(request,"main/user_not_found.html", status=401)
-
  
     requests=Request.objects.get(id=requests_id)
     
@@ -63,6 +62,7 @@ def payment_view(request: HttpRequest ,requests_id):
             message = f'Hi {request.user.first_name} {request.user.last_name}, Thank you for trusting us, your payment was completed successfully.\n Your order details:\nTitle:{requests.service.title}\nDescription:{requests.service.description}\nDate:{requests.date}\nPrice:{requests.request_price}\nSee you soon, dont forget to visit us again.'
 
             from_email = settings.EMAIL_HOST_USER
+
 
             recipient_list = [request.user.email]
             send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
