@@ -12,11 +12,11 @@
 
   <div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: -15rem; color: white; ">
     <h2 class="contant">{{typeService.title}}</h2>
-    <h5 class="contant">{{typeService.description}}</h5>
+    <h5 class="contant" style="font-size: 23px; width: 60%;">{{typeService.description}}</h5>
    </div>
 </div>
 
-<div class="container p-3">
+<div class="container p-3 mt-3">
    {% if msg %}
         <div class="alert alert-danger" role="alert">
             {{ msg }}
@@ -28,13 +28,13 @@
     <div class="col-4 g-4">
       
       
-        <div class="d-flex flex-row gap-3">
-            <div class="card-body gap-3 p-3 rounded-2 " style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
+        <div class="d-flex flex-row gap-3" style="height:100%;">
+            <div class="gap-3 p-3 rounded-2 " style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
                 
                 
               <img src="{{services.image.url}}" height="200px" width="100%">
                 <div class="d-flex gap-1">
-                <img class="avatar mt-3" src="{{ user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
+                <img class="avatar mt-3" src="{{ services.user.profile.avatar.url }}" width="60px" style="border-radius:50%" class="rounded-circle" />
                 </div>
                 <h6 class="card-title"> Consierge {{services.user.first_name}} {{services.user.last_name}}</h6>
                 <br>
@@ -44,7 +44,7 @@
                   <span style="color: rgba(255, 0, 0, 0.625);" class="material-symbols-outlined">
                       payments
                       </span> 
-                  <h6>{{services.initial_price}} Riyal</h6>
+                  <h6>lnitial price {{services.initial_price}} Riyal</h6>
                   </div>
               
             </div>
