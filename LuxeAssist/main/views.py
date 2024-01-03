@@ -31,13 +31,13 @@ def contact_view(request: HttpRequest):
 
    
     if request.method=="POST":
-        try:
+        #try:
 
             contact = Contact(user=request.user, type=request.POST["type"], content=request.POST["content"])
             contact.save()
 
             return redirect("main:contact_view")
-        except:
+        #except:
             return render(request, "main/user_not_found.html")
     
     user_contact= Contact.objects.filter(user= request.user)
@@ -55,7 +55,7 @@ def payment_view(request: HttpRequest ,requests_id):
     requests=Request.objects.get(id=requests_id)
     
     if request.method=="POST":
-       try:
+       #try:
         new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
         new_payment.save()
         subject = 'welcome to LuxeAssist world'
@@ -67,7 +67,7 @@ def payment_view(request: HttpRequest ,requests_id):
         recipient_list = [request.user.email]
         send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
         return redirect("main:success_payment_view")
-       except:
+       #except:
         return render(request, "main/user_not_found.html")
 
     return render(request, "main/payment.html",{"requests": requests , "categories": Payment.categories}) 
