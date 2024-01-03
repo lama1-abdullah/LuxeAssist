@@ -7,7 +7,11 @@
     <h1>Add New Payment</h1>
 
     <div class="row">
-
+        {% if msg %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
     <div class="col-6">
     <form action="{% url 'main:payment_view' requests.id %}" method="POST">
         {% csrf_token %}  

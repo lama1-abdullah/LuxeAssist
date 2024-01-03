@@ -22,37 +22,37 @@ def add_Request_view(request:HttpRequest, service_id):
 
 def user_requests_view(request: HttpRequest):
 
-    if not request.user.is_authenticated :
-       return render(request,"main/user_not_found.html", status=401)
-    try:
+        if not request.user.is_authenticated :
+           return render(request,"main/user_not_found.html", status=401)
+    # try:
         requests = Request.objects.filter(user= request.user)
+        
+        if "status" in request.GET :
+            requests=Request.objects.filter(status=request.GET["status"])
+            print(request.GET['status'])
 
         for index, r in enumerate(requests):
             requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
 
 
         return render(request, 'request/user_requests_view.html', {"requests" : requests})
-    except Exception as e:
+    # except Exception as e:
 
-        return render(request, "main/user_not_found.html")
+        # return render(request, "main/user_not_found.html")
     
 
 def concierge_requests_view(request: HttpRequest): 
    # try:
     services=Service.objects.filter(user=request.user)
-    requests = Request.objects.filter(service__in= services).order_by("-date")
+    requests = Request.objects.filter(service__in=services).order_by("-date")
 
 
     if "status" in request.GET :
-        requests =Request.objects.filter(status=request.GET["status"])
+        requests =Request.objects.filter(service__in=services,status=request.GET["status"])
         print(request.GET['status'])
-    else:
-        requests =Request.objects.all()
 
     for index, r in enumerate(requests):
          requests[index].has_payment =  Payment.objects.filter(requests=r).exists()
-
-
 
     return render(request, 'request/concierge_requests_view.html', {"requests" : requests})
 

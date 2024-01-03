@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div style="margin: 0px auto; ">
+<div style="margin: 0px auto; " class="p-5">
     <h2>All Service </h2>
     {% if msg %}
     <div class="alert alert-danger" role="alert">
@@ -15,9 +15,9 @@
     {% endif %}
     <div class="row">
         {% for service in service %}
-        <div class="col-4 g-2 p-4">
+        <div class="col-4 g-2 p-4" style="height: 100%;">
             <div>
-                <div class="p-3" style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;">
+                <div class="p-3" style="background-color: #dfdddc5b; width: 100%; box-shadow: 0 3px 8px #000000;height: 100%;">
                     
                     
                   <img src="{{service.image.url}}" height="200px" width="100%">

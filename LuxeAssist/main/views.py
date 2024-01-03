@@ -47,29 +47,30 @@ def contact_view(request: HttpRequest):
 
 
 def payment_view(request: HttpRequest ,requests_id):
-
+    msg=None
     if not request.user.is_authenticated and request.user.groups.exists and request.user.is_superuser and request.user.is_staff :
         return render(request,"main/user_not_found.html", status=401)
 
-  #try:
+ 
     requests=Request.objects.get(id=requests_id)
     
     if request.method=="POST":
-        new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
-        new_payment.save()
-        subject = 'welcome to LuxeAssist world'
+        try:
+            new_payment=Payment( requests=requests ,user=request.user, method_card=request.POST["method_card"], full_name=request.POST["full_name"], number_card=request.POST["number_card"],expiration_date=request.POST["expiration_date"], cvv = request.POST["cvv"])
+            new_payment.save()
+            subject = 'welcome to LuxeAssist world'
 
-        message = f'Hi {request.user.first_name} {request.user.last_name}, Thank you for trusting us, your payment was completed successfully.\n Your order details:\nTitle:{requests.service.title}\nDescription:{requests.service.description}\nDate:{requests.date}\nPrice:{requests.request_price}\nSee you soon, dont forget to visit us again.'
+            message = f'Hi {request.user.first_name} {request.user.last_name}, Thank you for trusting us, your payment was completed successfully.\n Your order details:\nTitle:{requests.service.title}\nDescription:{requests.service.description}\nDate:{requests.date}\nPrice:{requests.request_price}\nSee you soon, dont forget to visit us again.'
 
-        from_email = settings.EMAIL_HOST_USER
+            from_email = settings.EMAIL_HOST_USER
 
-        recipient_list = [request.user.email]
-        send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
-        return redirect("main:success_payment_view")
-  #except:
-        #return render(request, "main/user_not_found.html")
+            recipient_list = [request.user.email]
+            send_mail( subject=subject, message=message, from_email=from_email, recipient_list=recipient_list )
+            return redirect("main:success_payment_view")
+        except Exception as e:
+            msg = f"An error occured, please fill in all fields and try again . {e}"
 
-    return render(request, "main/payment.html",{"requests": requests , "categories": Payment.categories}) 
+    return render(request, "main/payment.html",{"requests": requests , "categories": Payment.categories ,"msg":msg}) 
 
 
 def not_found_view(request: HttpRequest):
