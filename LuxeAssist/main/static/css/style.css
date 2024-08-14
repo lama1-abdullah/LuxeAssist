@@ -14,16 +14,16 @@ body{
 	font-family: 'Libre Baskerville', serif;
 }
 .homepage {
-background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) , url(/static/images/home22.jpg);
-width:100% ;
+background-image:linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)) , url(/static/images/SaudiArabia3.jpg);
+background-size: cover; /* يضمن أن الصورة تغطي كامل الخلفية */
+background-repeat: no-repeat; /* يمنع تكرار الصورة */
+background-position: center; /* يضبط الصورة في مركز العنصر */
+width: 100%;
 height: 90vh;
-background-position: center;
-
 padding-left: 8%;
 padding-right: 8%;
 box-sizing: border-box;
-object-fit:fill;
-
+object-fit: fill; /* لا يؤثر على الخلفية ولكن يمكن إزالته */
 
 }
 
@@ -250,6 +250,8 @@ margin: 40px auto;
 
 .contant{
     font-size:40px;
+	align-items: center;
+	
 }
 
 
